@@ -33,8 +33,6 @@ var formsRouter = require('./routes/forms');
 var insertRouter = require('./routes/insert');
 /* ---------------------------- */
 
-var index2Router = require('./routes/index2');
-
 var viewJob = require('./routes/viewJob')
 var app = express();
 
@@ -71,7 +69,7 @@ app.use('/select', selectRouter);
 /* --- V5: Adding Forms     --- */
 app.use('/forms', formsRouter);
 /* ---------------------------- */
-app.use('/index2',index2Router);
+
 /* --- V6: Modify Database  --- */
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());

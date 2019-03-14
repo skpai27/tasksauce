@@ -15,11 +15,7 @@ var sql_query = 'INSERT INTO users VALUES';
 //GET
 //for now, if user is authed, then go into index page.
 router.get('/', function(req, res, next) {
-    if (req.isAuthenticated()){
-        res.redirect('/index');
-    } else {
-        res.render('register', { title: 'Register', userData: req.user });
-    }
+    res.render('register', { title: 'Register', userData: req.user });
 });
 
 //POST (handles register)
