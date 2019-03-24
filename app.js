@@ -9,7 +9,8 @@ require('dotenv').config({path: __dirname + '/.env'})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 /* --- V2: Adding Web Pages --- */
 var aboutRouter = require('./routes/about');
@@ -32,8 +33,6 @@ var formsRouter = require('./routes/forms');
 var insertRouter = require('./routes/insert');
 /* ---------------------------- */
 
-var index2Router = require('./routes/index2');
-
 var viewJob = require('./routes/viewJob')
 var app = express();
 
@@ -55,6 +54,8 @@ app.use('/viewJob',viewJob);
 /* --- V2: Adding Web Pages --- */
 app.use('/about', aboutRouter);
 /* ---------------------------- */
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 
 /* --- V3: Basic Template   --- */
 app.use('/table', tableRouter);
@@ -68,7 +69,7 @@ app.use('/select', selectRouter);
 /* --- V5: Adding Forms     --- */
 app.use('/forms', formsRouter);
 /* ---------------------------- */
-app.use('/index2',index2Router);
+
 /* --- V6: Modify Database  --- */
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
