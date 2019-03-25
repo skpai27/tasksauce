@@ -16,5 +16,8 @@ CREATE TABLE job_request (
 INSERT INTO public.users (username, email, password)
 VALUES ('dummyuser1', 'dummy1@yahoo.com', 'dummy1');
 
+INSERT INTO public.users (username, email, password)
+VALUES ('asd', 'asd@yahoo.com', 'asd');
+
 INSERT INTO job_request ("job", "loc", "date", "var", "desc") 
 VALUES ('Babysitting', 'AMK', '2019-08-13', '05:30', 'Look after 4yo');

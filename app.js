@@ -12,33 +12,38 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 
-/* --- V2: Adding Web Pages --- */
-var aboutRouter = require('./routes/about');
-/* ---------------------------- */
-
-/* --- V3: Basic Template   --- */
-var tableRouter = require('./routes/table');
-var loopsRouter = require('./routes/loops');
-/* ---------------------------- */
-
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
 /* ---------------------------- */
 
-/* --- V5: Adding Forms     --- */
-var formsRouter = require('./routes/forms');
-/* ---------------------------- */
-
 /* --- V6: Modify Database  --- */
-var insertRouter = require('./routes/insert');
+var addJobRouter = require('./routes/addJob');
 /* ---------------------------- */
 
 var viewJob = require('./routes/viewJob')
 var app = express();
 
+/* --- Extra stuff for passport js ---*/
+var bodyParser = require('body-parser');
+var passport = require('passport'); //authentication middleware
+var session = require('express-session'); //helps manage everything session-related, incl cookies
+const LocalStrategy = require('passport-local').Strategy;
+
+
 app.use('/static',express.static(path.join(__dirname, 'public')));
 
 // view engine setup
+/* --- Extra stuff for passport js ---*/
+require('./auth').init(app); //is app needed as a parameter?
+app.use(require('cookie-parser')());
+app.use(session({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -51,30 +56,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/viewJob',viewJob);
-/* --- V2: Adding Web Pages --- */
-app.use('/about', aboutRouter);
-/* ---------------------------- */
+
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 
-/* --- V3: Basic Template   --- */
-app.use('/table', tableRouter);
-app.use('/loops', loopsRouter);
-/* ---------------------------- */
-
-/* --- V4: Database Connect --- */
+/* --- Create job page --- */
 app.use('/select', selectRouter);
 /* ---------------------------- */
 
-/* --- V5: Adding Forms     --- */
-app.use('/forms', formsRouter);
-/* ---------------------------- */
-
 /* --- V6: Modify Database  --- */
-var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/insert', insertRouter);
+app.use('/addJob', addJobRouter);
 /* ---------------------------- */
 
 // catch 404 and forward to error handler
