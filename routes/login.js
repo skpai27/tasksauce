@@ -10,21 +10,23 @@ const pool = new Pool({
 
 var sql_query = 'SELECT password FROM public.users where username=';
 
-// GET
-router.get('/', function(req, res, next) {
-    res.render('login', { title: 'Login', userData: req.user });
-});
+// // GET
+// router.get('/', function(req, res, next) {
+//     res.render('login', { title: 'Login', userData: req.user });
+// });
 
-//POST (handles login)
+// POST (handles login)
 router.post('/', function(req, res, next) {
-    var username = req.body.username;
-    var password = req.body.password;
+    var username = req.body.username_1;
+    var password = req.body.password_1;
 
     var check_query = sql_query + "'" + username + "'";
 
     pool.query(check_query, (err, data) => {
         if (err || password !== data.rows[0].password.trim()) {
-            res.redirect('/login');
+            res.redirect('/signuplogin');
+            // TODO: Link directly to Sign In tab, show "Wrong username/password" alert
+            // TODO: Detect invalid username
         } else {
             res.redirect('/insert');
         }

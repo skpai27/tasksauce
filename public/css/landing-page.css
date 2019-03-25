@@ -125,3 +125,36 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+/************** CSS for Tasks Page **************/
+.tasks {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.p-1 {
+  padding: ($spacer * .25) !important;
+}
+
+.px-2 {
+  padding-left: ($spacer * .5) !important;
+  padding-right: ($spacer * .5) !important;
+}
+
+.p-3 {
+  padding: $spacer !important;
+}
+
+.py-4 {
+  padding-top: ($spacer * 1.5) !important;
+  padding-bottom: ($spacer * 1.5) !important;
+}
+
+.p-5 {
+  padding: ($spacer * 3) !important;
+}
+
