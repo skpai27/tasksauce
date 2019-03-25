@@ -27,7 +27,7 @@ function findUser (username, callback) {
 		} else if(data.rows.length == 1) {
 			return callback(null, {
 				username    : data.rows[0].username,
-				password    : data.rows[0].password,
+				passwordHash    : data.rows[0].password,
 				email       : data.rows[0].email
 			});
 		} else {
@@ -61,7 +61,7 @@ function initPassport () {
           console.error('User not found');
           return done(null, false);
         }
-        if(err){
+        /*if(err){
           console.error("user found, but password error");
           return done(err);
         }
@@ -73,10 +73,10 @@ function initPassport () {
           return done(null, false);
         }
         console.log("authentication successful");
-        return done(null, user);
+        return done(null, user);*/
 
         // Always use hashed passwords and fixed time comparison
-        /*bcrypt.compare(password, user.passwordHash, (err, isValid) => {
+        bcrypt.compare(password, user.passwordHash, (err, isValid) => {
           if (err) {
             return done(err);
           }
@@ -84,7 +84,7 @@ function initPassport () {
             return done(null, false);
           }
           return done(null, user);
-        })*/
+        })
       })
     }
   ));
