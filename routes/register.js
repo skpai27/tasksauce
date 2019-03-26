@@ -39,7 +39,7 @@ router.post('/', function(req, res) {
 		if(err){
 			throw err;
 		}
-		res.redirect('/signupandlogin');
+		res.redirect('/login');
 		console.log("Successful");
 		
 	})
