@@ -41,78 +41,6 @@
     </div>
   </header>
 
-<!-- Tables Tasks -->
-  <!-- Tables side-by-side in one row -->
-  <section class="tasks text-center bg-light">
-    <div class="container mx-auto">
-      <div class="row py-4">
-        <div class="col-lg-6">
-          <h4>Extend a helping hand and gain good karma</h4>
-          <div class="card">
-            <div class="card-header">Tasks Requested</div>
-            <div class="card-body">
-              <div style="overflow-x:auto;">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Task</th>
-                      <th scope="col">Location</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Time</th>
-                      <th scope="col">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% for(var i=0; i<requests.length; i++) { %>
-                    <tr>
-                      <td><%= requests[i].job%></td>
-                      <td><%= requests[i].loc%></td>
-                      <td><%= requests[i].date.toDateString()%></td>
-                      <td><%= requests[i].var%></td>
-                      <td><%= requests[i].desc%></td>
-                    </tr>
-                    <% } %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h4>Ain't embarrassing to ask for help yo</h4>
-          <div class="card">
-            <div class="card-header">Tasks Offered</div>
-            <div class="card-body">
-              <div style="overflow-x:auto;">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Task</th>
-                      <th scope="col">Location</th>
-                      <th scope="col">Date</th>
-                      <th scope="col">Time</th>
-                      <th scope="col">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% for(var i=0; i<offers.length; i++) { %>
-                    <tr>
-                      <td><%= offers[i].job%></td>
-                      <td><%= offers[i].loc%></td>
-                      <td><%= offers[i].date.toDateString()%></td>
-                      <td><%= offers[i].var%></td>
-                      <td><%= offers[i].desc%></td>
-                    </tr>
-                    <% } %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Tables Tasks -->
   <section class="tasks text-center bg-light">
@@ -132,6 +60,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
+                    <th scope="col">View</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -142,6 +71,7 @@
                     <td><%= requests[i].date.toDateString()%></td>
                     <td><%= requests[i].var%></td>
                     <td><%= requests[i].desc%></td>
+                    <td><a href = "./viewJob/<%= requests[i].job_id %>"> View </a></td>
                   </tr>
                   <% } %>
                 </tbody>
@@ -164,6 +94,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
+                    <th scope="col">View</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -174,6 +105,8 @@
                     <td><%= offers[i].date.toDateString()%></td>
                     <td><%= offers[i].var%></td>
                     <td><%= offers[i].desc%></td>
+                    <td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+
                   </tr>
                   <% } %>
                 </tbody>

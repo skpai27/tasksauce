@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 	var loc = req.body.loc;
 	var date= req.body.date;
 	var time = req.body.time;
-	var desc = req.body.des;
+	var desc = req.body.desc;
 	
 	// Construct Specific SQL Query
 	var insert_query = sql_query + "('" + job + "','" + loc + "','" + date + "','" + time +  "','" + desc + "');";
