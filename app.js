@@ -11,23 +11,16 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
-<<<<<<< HEAD
 var dashboardRouter = require('./routes/dashboard');
 
-/* --- V2: Adding Web Pages --- */
-var aboutRouter = require('./routes/about');
 /* ---------------------------- */
 
 /* --- V3: Basic Template   --- */
-var tableRouter = require('./routes/table');
-var loopsRouter = require('./routes/loops');
 /* ---------------------------- */
-=======
 var signuploginRouter = require('./routes/signuplogin');
 var tasksRouter = require('./routes/tasks');
 var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
->>>>>>> cdbdae5827e29fda6a348144533ef29f03488cd5
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -73,14 +66,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/viewJob',viewJob);
-<<<<<<< HEAD
 app.use('/dashboard', dashboardRouter);
-/* --- V2: Adding Web Pages --- */
-app.use('/about', aboutRouter);
+/* --- V2: A3dding Web Pages --- */
 /* ---------------------------- */
-=======
 
->>>>>>> cdbdae5827e29fda6a348144533ef29f03488cd5
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
