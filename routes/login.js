@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
             // TODO: Link directly to Sign In tab, show "Wrong username/password" alert
             // TODO: Detect invalid username
         } else {
-            res.redirect('/insert');
+            res.redirect('/select');
         }
     })
 });
