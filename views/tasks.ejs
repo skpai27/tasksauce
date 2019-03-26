@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title><% title%></title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="static/css/landing-page.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <%- include navbar.ejs -%>
+
+  <!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Need some help?<br />Or happen to have a little spare time?</h1>
+          <h3 class="mb-5">Browse through our list of tasks offered and requested below!</h3>
+        </div>
+      </div> 
+    </div>
+  </header>
+
+<!-- Tables Tasks -->
+  <!-- Tables side-by-side in one row -->
+  <section class="tasks text-center bg-light">
+    <div class="container mx-auto">
+      <div class="row py-4">
+        <div class="col-lg-6">
+          <h4>Extend a helping hand and gain good karma</h4>
+          <div class="card">
+            <div class="card-header">Tasks Requested</div>
+            <div class="card-body">
+              <div style="overflow-x:auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Task</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i<requests.length; i++) { %>
+                    <tr>
+                      <td><%= requests[i].job%></td>
+                      <td><%= requests[i].loc%></td>
+                      <td><%= requests[i].date.toDateString()%></td>
+                      <td><%= requests[i].var%></td>
+                      <td><%= requests[i].desc%></td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <h4>Ain't embarrassing to ask for help yo</h4>
+          <div class="card">
+            <div class="card-header">Tasks Offered</div>
+            <div class="card-body">
+              <div style="overflow-x:auto;">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Task</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Time</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i<offers.length; i++) { %>
+                    <tr>
+                      <td><%= offers[i].job%></td>
+                      <td><%= offers[i].loc%></td>
+                      <td><%= offers[i].date.toDateString()%></td>
+                      <td><%= offers[i].var%></td>
+                      <td><%= offers[i].desc%></td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tables Tasks -->
+  <section class="tasks text-center bg-light">
+    <div class="container">
+
+      <!-- Tables in 2 rows -->
+      <div class="row py-4">
+        <div class="card mx-auto">
+          <div class="card-header">Tasks Requested</div>
+          <div class="card-body">
+            <div style="overflow-x:auto;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=0; i<requests.length; i++) { %>
+                  <tr>
+                    <td><%= requests[i].job%></td>
+                    <td><%= requests[i].loc%></td>
+                    <td><%= requests[i].date.toDateString()%></td>
+                    <td><%= requests[i].var%></td>
+                    <td><%= requests[i].desc%></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row py-4">
+        <div class="card mx-auto">
+          <div class="card-header">Tasks Offered</div>
+          <div class="card-body">
+            <div style="overflow-x:auto;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i=0; i<offers.length; i++) { %>
+                  <tr>
+                    <td><%= offers[i].job%></td>
+                    <td><%= offers[i].loc%></td>
+                    <td><%= offers[i].date.toDateString()%></td>
+                    <td><%= offers[i].var%></td>
+                    <td><%= offers[i].desc%></td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
+          <button class="btn btn-lg btn-primary" onclick="window.location.href='/signuplogin'">Sign up!</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include footer.ejs -%>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
