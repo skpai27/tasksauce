@@ -11,6 +11,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var signuploginRouter = require('./routes/signuplogin');
+var tasksRouter = require('./routes/tasks');
+var newrequestRouter = require('./routes/newrequest');
+var newofferRouter = require('./routes/newoffer');
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -59,6 +63,10 @@ app.use('/viewJob',viewJob);
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/signuplogin', signuploginRouter);
+app.use('/tasks', tasksRouter);
+app.use('/newrequest', newrequestRouter);
+app.use('/newoffer', newofferRouter);
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);

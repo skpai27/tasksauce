@@ -8,7 +8,7 @@ const salt  = bcrypt.genSaltSync(round);
 
 var app = express();
 
-const { Pool, Client } = require('pg')
+const { Pool, Client } = require('pg');
 
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
@@ -17,11 +17,11 @@ const pool = new Pool({
 /* SQL Query */
 var sql_query = 'INSERT INTO users VALUES';
 
-//GET
-//for now, if user is authed, then go into index page.
-router.get('/', function(req, res, next) {
-    res.render('register', { title: 'Register', userData: req.user });
-});
+// //GET
+// //for now, if user is authed, then go into index page.
+// router.get('/', function(req, res, next) {
+//     res.render('register', { title: 'Register', userData: req.user });
+// });
 
 //POST (handles register)
 router.post('/', function(req, res) {
@@ -39,7 +39,7 @@ router.post('/', function(req, res) {
 		if(err){
 			throw err;
 		}
-		res.redirect('/login');
+		res.redirect('/signupandlogin');
 		console.log("Successful");
 		
 	})
