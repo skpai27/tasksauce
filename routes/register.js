@@ -27,10 +27,10 @@ var sql_query = 'INSERT INTO users VALUES';
 router.post('/', function(req, res) {
     //not using bcrypt yet, also never check passwords r same, or that 
     console.log("in post method");
-	var newUsername = req.body.inputUsername4;
-	var newEmail = req.body.inputEmail4;
-	var newPassword = bcrypt.hashSync(req.body.inputPassword4, salt);
-	var repeatPassword = req.body.inputPassword5;
+	var newUsername = req.body.username;
+	var newEmail = req.body.email;
+	var newPassword = bcrypt.hashSync(req.body.password, salt);
+	var repeatPassword = req.body.confirm_password;
 
 	var register_query = sql_query + "('" + newUsername + "','" + newEmail + "','" + newPassword + "')";
 	
@@ -39,7 +39,7 @@ router.post('/', function(req, res) {
 		if(err){
 			throw err;
 		}
-		res.redirect('/signupandlogin');
+		res.redirect('/signuplogin');
 		console.log("Successful");
 		
 	})
