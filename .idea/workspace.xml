@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe36d659-8485-479a-bc2c-099899004f9e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/routes/newoffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/newoffer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/newrequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/newrequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/newoffer.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/newoffer.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/newrequest.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/newrequest.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/tasks.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/tasks.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasksauce.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tasksauce.sql" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,23 +26,13 @@
         <entry file="file://$PROJECT_DIR$/routes/newrequest.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+              <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/insert.ejs">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/loops.ejs">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
@@ -58,14 +45,9 @@
         <entry file="file://$PROJECT_DIR$/views/select.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="457">
-              <caret line="53" column="83" lean-forward="true" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="83" />
+              <caret line="53" column="83" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="83" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/table.ejs">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -77,13 +59,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/tasks.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="447">
               <caret line="107" column="55" selection-start-line="107" selection-start-column="55" selection-end-line="107" selection-end-column="55" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tasksauce.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="29" column="52" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -100,6 +96,7 @@
         <option value="$PROJECT_DIR$/routes/newrequest.js" />
         <option value="$PROJECT_DIR$/views/newrequest.ejs" />
         <option value="$PROJECT_DIR$/views/tasks.ejs" />
+        <option value="$PROJECT_DIR$/tasksauce.sql" />
       </list>
     </option>
   </component>
@@ -142,7 +139,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553568552073" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553569262062" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -173,15 +170,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553562429898</updated>
-      <workItem from="1553562434288" duration="2648000" />
+      <workItem from="1553562434288" duration="3470000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2648000" />
+    <option name="totallyTimeSpent" value="3470000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="925" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -281,7 +279,7 @@
     <entry file="file://$PROJECT_DIR$/routes/newrequest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="17" column="49" lean-forward="true" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -303,14 +301,24 @@
     <entry file="file://$PROJECT_DIR$/views/select.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="457">
-          <caret line="53" column="83" lean-forward="true" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="83" />
+          <caret line="53" column="83" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="83" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/tasks.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
+        <state relative-caret-position="447">
           <caret line="107" column="55" selection-start-line="107" selection-start-column="55" selection-end-line="107" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tasksauce.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="52" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
         </state>
       </provider>
     </entry>
