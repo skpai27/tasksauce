@@ -16,15 +16,15 @@ const pool = new Pool({
 /* SQL Query */
 var sql_query = 'INSERT INTO users VALUES';
 
-//GET
-//for now, if user is authed, then go into index page.
-router.get('/', function(req, res, next) {
-    if (req.isAuthenticated()){
-        res.redirect('/select');
-    } else {
-        res.render('login', { title: 'Login', userData: req.user });
-    }
-});
+// //GET
+// //for now, if user is authed, then go into index page.
+// router.get('/', function(req, res, next) {
+//     if (req.isAuthenticated()){
+//         res.redirect('/select');
+//     } else {
+//         res.render('signuplogin', { title: 'Login', userData: req.user });
+//     }
+// });
 
 //POST (handles login)
 router.post('/', passport.authenticate('local', {
