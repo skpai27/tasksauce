@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+/*--bcrypt Stuff--*/
+const bcrypt = require('bcrypt')
+const round = 10;
+const salt  = bcrypt.genSaltSync(round);
+
 var app = express();
 
 const { Pool, Client } = require('pg');
@@ -22,10 +27,10 @@ var sql_query = 'INSERT INTO users VALUES';
 router.post('/', function(req, res) {
     //not using bcrypt yet, also never check passwords r same, or that 
     console.log("in post method");
-	var newUsername = req.body.username;
-	var newEmail = req.body.email;
-	var newPassword = req.body.password;
-	var repeatPassword = req.body.confirm_password;
+	var newUsername = req.body.inputUsername4;
+	var newEmail = req.body.inputEmail4;
+	var newPassword = bcrypt.hashSync(req.body.inputPassword4, salt);
+	var repeatPassword = req.body.inputPassword5;
 
 	var register_query = sql_query + "('" + newUsername + "','" + newEmail + "','" + newPassword + "')";
 	

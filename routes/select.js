@@ -12,10 +12,14 @@ const pool = new Pool({
 var sql_query = 'SELECT * FROM job_request';
 
 router.get('/', function(req, res, next) {
-	pool.query(sql_query, (err, data) => {
-    console.log("hello");
-		res.render('select', { title: 'Database Connect', data: data.rows });
-	});
+	if(req.isAuthenticated()){
+		pool.query(sql_query, (err, data) => {
+			res.render('select', { title: 'Database Connect', data: data.rows });
+		})
+	}
+	else {
+		res.redirect('/login');
+	};
 });
 
 module.exports = router;
