@@ -28,7 +28,9 @@ CREATE TABLE job_offer (
 );
 
 INSERT INTO public.users (username, email, password)
-VALUES ('dummyuser1', 'dummy1@yahoo.com', 'dummy1');
+VALUES ('dummy1','dummy1@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuML5dCdlDYZoAEYfwVXu/ASZpKiAGPnS');
+ INSERT INTO public.users (username, email, password)
+VALUES ('dummy2','dummy2@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuDrC4GADX0PaHFJ8M08gTnAsBiE2LCwW');
 
 INSERT INTO job_request ("job", "loc", "date", "var", "desc") 
 VALUES ('Babysitting', 'AMK', '2019-08-13', '05:30', 'Look after 4yo');

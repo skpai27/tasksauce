@@ -22,10 +22,10 @@
 				<div class="form-right">
 					<div class="tab">
 						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Sign Up</button>
+							<button class="tablinks" onclick="openCity(event, 'sign-in')" id="defaultOpen">Sign In</button>
 						</div>
 						<div class="tab-inner">
-							<button class="tablinks" onclick="openCity(event, 'sign-in')">Sign In</button>
+							<button class="tablinks" onclick="openCity(event, 'sign-up')">Sign Up</button>
 						</div>
 					</div>
 					<form class="form-detail" action="register" method="post">
@@ -64,25 +64,25 @@
 							</div>
 						</div>
 					</form>
-					<form class="form-detail" action="login" method="post">
+					<form class="form-detail" action="login" role="form" method="post">
 						<div class="tabcontent" id="sign-in">
 							<div class="form-row">
 								<label class="form-row-inner">
-									<input type="text" name="username_1" id="username_1" class="input-text" required>
+									<input type="text" name="username" id="username" class="input-text" required>
 									<span class="label">Username</span>
 			  						<span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row">
 								<label class="form-row-inner">
-									<input type="password" name="password_1" id="password_1" class="input-text" required>
+									<input type="password" name="password" id="password" class="input-text" required>
 									<span class="label">Password</span>
 									<span class="border"></span>
 								</label>
 							</div>
 							<div class="form-row-last">
 								<button type="submit" class="register">Sign In</button>
-								<!-- <input type="submit" name="register" class="register" value="Sign In" onclick="show()"> -->
+								<!-- <input type="submit" name="register" class="register" value="Sign In"> -->
 							</div>
 						</div>
 					</form>

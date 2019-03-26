@@ -13,8 +13,6 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
-/* SQL Query */
-var sql_query = 'INSERT INTO users VALUES';
 
 // //GET
 // //for now, if user is authed, then go into index page.
@@ -22,14 +20,15 @@ var sql_query = 'INSERT INTO users VALUES';
 //     if (req.isAuthenticated()){
 //         res.redirect('/select');
 //     } else {
-//         res.render('signuplogin', { title: 'Login', userData: req.user });
+
+//         res.render('login', { title: 'Login', userData: req.user });
 //     }
 // });
 
 //POST (handles login)
 router.post('/', passport.authenticate('local', {
     successRedirect: '/select',
-    failureRedirect: '/login'
+    failureRedirect: '/signuplogin'
 }));
 
 module.exports = router;
