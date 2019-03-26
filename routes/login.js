@@ -25,7 +25,7 @@ const pool = new Pool({
 
 //POST (handles login)
 router.post('/', passport.authenticate('local', {
-    successRedirect: '/select',
+    successRedirect: '/dashboard',
     failureRedirect: '/signuplogin'
 }));
 
