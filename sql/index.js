@@ -25,8 +25,11 @@ sql.query = {
 	update_info: 'UPDATE username_password SET first_name=$2, last_name=$3 WHERE username=$1',
 	update_pass: 'UPDATE username_password SET password=$2 WHERE username=$1',
 	
-	// Search
-	search_game: 'SELECT * FROM game_list WHERE lower(gamename) LIKE $1',
+	// Query table
+	query_request: 'SELECT * FROM job_request',
+	query_offer: 'SELECT * FROM job_offer',
+	query_request_user: 'SELECT * FROM job_request WHERE job_request.user=$1',
+	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.user=$1'
 }
 
 module.exports = sql
