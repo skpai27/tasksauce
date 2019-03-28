@@ -22,11 +22,15 @@ var sql_query_offer = 'SELECT * FROM job_offer';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	pool.query(sql_query_request, (err, requests) => {
-		pool.query(sql_query_offer, (err, offers) => {
-			res.render('dashboard', { title: 'dashboard', requests: requests.rows, offers: offers.rows });
-		})
-	});
+	if (req.isAuthenticated()) {
+		pool.query(sql_query_request, (err, requests) => {
+			pool.query(sql_query_offer, (err, offers) => {
+				res.render('dashboard', { title: 'dashboard', requests: requests.rows, offers: offers.rows });
+			})
+		});
+	} else {
+		res.render('signuplogin', { title: 'login'});
+	}
 });
 
 module.exports = router;
