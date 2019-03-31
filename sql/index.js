@@ -27,6 +27,12 @@ sql.query = {
 	
 	// Search
 	search_game: 'SELECT * FROM game_list WHERE lower(gamename) LIKE $1',
+
+	// Load from job_request
+	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
+
+	// Load from job_offer
+	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
 }
 
 module.exports = sql
