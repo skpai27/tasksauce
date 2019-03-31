@@ -17,7 +17,8 @@ sql.query = {
 	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.user=$1',
 
 	// Query tasks on task name
-	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.user=$2'
+	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.user=$2',
+	query_offer_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.user=$2'
 }
 
 module.exports = sql
