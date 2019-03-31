@@ -11,6 +11,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var dashboardRouter = require('./routes/dashboard');
+
+/* ---------------------------- */
+
+/* --- V3: Basic Template   --- */
+/* ---------------------------- */
 var signuploginRouter = require('./routes/signuplogin');
 var tasksRouter = require('./routes/tasks');
 var newrequestRouter = require('./routes/newrequest');
@@ -60,6 +66,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/viewJob',viewJob);
+app.use('/dashboard', dashboardRouter);
+/* --- V2: A3dding Web Pages --- */
+/* ---------------------------- */
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);

@@ -41,7 +41,65 @@
             <li class="list-group-item"><b>Location:</b> <%= data[i].loc%></li>
           </ul>
           <div class="card-body">
-            <a href="#!" class="card-link">Take up this Job!!!!</a>
+              <b>View Current Bids</b>
+              <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Bid Price</th>
+                      <th scope="col">Bid User</th>
+                      <th scope ="col">Bid details</th>
+                      <% if (self){ %>
+                        <th scope = "col"> Accept Bid</th>
+                      <% } %>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                      <% for(var i=0; i<data2.length; i++){ %>
+                          <form method = 'POST' action = "/viewJob/accept/<%= data2[i].bid_id %>">
+                          <tr>
+                              <td><%= data2[i].bid_price%></td>
+                              <td><%= data2[i].bid_user%></td>
+                              <td><%= data2[i].bid_info%></td>
+                              <% if (self){ %>
+                              <td><button value ="Accept"></button></td>
+                              <% } %>
+                            </tr>
+                            </form>
+                      <% } %>
+                    </tbody>
+                    </table>
+            <b>Make a bid for  this job!!!!</b>
+            <% if (!auth) { %>
+              <b>Login to make a bid</b>
+            <% }else if(auth && !self){ %>
+
+            <form class="contact-form validate-form" method="POST" action="/viewJob/<%= jobId %>">
+
+                <div class="wrap-input validate-input" data-validate="Price is required">
+                  <span class="label-input">Price:</span>
+                  <input class="input" type="number" name="price" id="price">
+                  <span class="focus-input"></span>
+                </div>
+        
+                <div class="wrap-input validate-input" data-validate = "Additional Details are required">
+                  <span class="label-input">Additional Details:</span>
+                  <textarea  class="form-control input-lg" name="desc" id="desc" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                  <span class="focus-input"></span>
+                </div>
+        
+                <div class="container-contact-form-btn">
+                  <button class="contact-form-btn">
+                    <span>
+                      Submit
+                      <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+              </form>
+              <% } else {%>
+                <b>can't bid for your own jobs</b>
+                <%}%>
           </div>
         </div>
      
