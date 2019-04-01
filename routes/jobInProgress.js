@@ -21,9 +21,7 @@ var sql_query_getofferjob = sql_query.query.query_offer_job;
 var sql_query_get_bid_request = sql_query.query.query_bids_request;
 var sql_query_get_bid_offer = sql_query.query.query_bids_offer;
 var sql_query_insert_bids = sql_query.query.insert_request_bids;
-var sql_query_accept_request_bids = sql_query.query.update_request_bids;
-var sql_query_accept_offer_bids = sql_query.query.update_offer_bids;
-
+var sql_query_update_bids = sql_query.query.update_request_bids;
 
 router.get('/request/:jobId', function(req, res, next) {
 
@@ -95,13 +93,14 @@ router.post('/:jobId', function(req, res, next) {
   })
 })
 
-router.post('/accept/:bidId', function(req, res, next) {
-  pool.query(sql_query_accept_request_bids, [req.params.jobId, req.params.bidId], (err, data) => {
+router.post('/accept/:bidId', function(req,res,next){
+  var x = +req.params.bidId;
+  pool.query(sql_query_update_bids, [x, req.user.username], (err, data) => {
     if(err){
       console.log(sql_query);
       throw err;
     } 
-    res.redirect('/jobInProgress/$1', [req.params.jobId]);
+    res.redirect('/tasks');
    });
 
 
