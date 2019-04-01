@@ -32,7 +32,7 @@
 		  <!-- Tables in 2 rows -->
 		  <div class="row py-4">
 			<div class="card mx-auto">
-			  <div class="card-header">Tasks Requested</div>
+			  <h5 class="card-header">Tasks Requested</h5>
 			  <div class="card-body">
 				<div style="overflow-x:auto;">
 
@@ -68,14 +68,10 @@
 					</tbody>
 				  </table>
 				</div>
-			  </div>
-			</div>
-		  </div>
-	
-		  <div class="row py-4">
-			<div class="card mx-auto">
-			  <div class="card-header">Tasks Offered</div>
+				</div>
+				
 			  <div class="card-body">
+				<h6>In-Progress</h6>
 				<div style="overflow-x:auto;">
 				  <table class="table table-striped">
 					<thead>
@@ -106,6 +102,72 @@
 			  </div>
 			</div>
 		  </div>
+	
+		  <div class="row py-4">
+			<div class="card mx-auto">
+			  <h5 class="card-header">Tasks Offered</h5>
+			  <div class="card-body">
+				<div style="overflow-x:auto;">
+				  <table class="table table-striped">
+					<thead>
+					  <tr>
+						<th scope="col">Task</th>
+						<th scope="col">Location</th>
+						<th scope="col">Date</th>
+						<th scope="col">Time</th>
+						<th scope="col">Description</th>
+						<th scope="col">View</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <% for(var i=0; i<offers.length; i++) { %>
+					  <tr>
+						<td><%= offers[i].job%></td>
+						<td><%= offers[i].loc%></td>
+						<td><%= offers[i].date.toDateString()%></td>
+						<td><%= offers[i].var%></td>
+						<td><%= offers[i].desc%></td>
+						<td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+	
+					  </tr>
+					  <% } %>
+					</tbody>
+				  </table>
+				</div>
+				</div>
+				
+			  <div class="card-body">
+				<h6>In-Progress</h6>
+				<div style="overflow-x:auto;">
+				  <table class="table table-striped">
+					<thead>
+					  <tr>
+						<th scope="col">Task</th>
+						<th scope="col">Location</th>
+						<th scope="col">Date</th>
+						<th scope="col">Time</th>
+						<th scope="col">Description</th>
+						<th scope="col">View</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <% for(var i=0; i<offers.length; i++) { %>
+					  <tr>
+						<td><%= offers[i].job%></td>
+						<td><%= offers[i].loc%></td>
+						<td><%= offers[i].date.toDateString()%></td>
+						<td><%= offers[i].var%></td>
+						<td><%= offers[i].desc%></td>
+						<td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+	
+					  </tr>
+					  <% } %>
+					</tbody>
+				  </table>
+				</div>
+			  </div>
+			</div>
+			</div>
 		</div>
 	  </section>
 	  <%- include footer.ejs -%>
