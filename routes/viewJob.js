@@ -17,18 +17,20 @@ const pool = new Pool({
 });
 
 var sql_query_getrequestjob = sql_query.query.query_request_job;
-var sql_query_getjobbid = sql_query.query.query_bids_job;
+var sql_query_getofferjob = sql_query.query.query_offer_job;
+var sql_query_get_bid_request = sql_query.query.query_bids_request;
+var sql_query_get_bid_offer = sql_query.query.query_bids_offer;
 var sql_query_insert_bids = sql_query.query.insert_request_bids;
 var sql_query_update_bids = sql_query.query.update_request_bids;
 
-router.get('/:jobId', function(req, res, next) {
+router.get('/request/:jobId', function(req, res, next) {
 
     pool.query(sql_query_getrequestjob, [req.params.jobId], (err, data) => {
       if (err) {
         throw err;
       }
 
-      pool.query(sql_query_getjobbid, [req.params.jobId], (err2,data2) => {
+      pool.query(sql_query_get_bid_request, [req.params.jobId], (err2,data2) => {
 
         if (err2) {
           throw err2;
@@ -51,10 +53,40 @@ router.get('/:jobId', function(req, res, next) {
     
 });
 
-router.post('/:jobId', function(req,res,next){
+router.get('/offer/:jobId', function(req, res, next) {
+
+  pool.query(sql_query_getofferjob, [req.params.jobId], (err, data) => {
+    if (err) {
+      throw err;
+    }
+
+    pool.query(sql_query_get_bid_offer, [req.params.jobId], (err2,data2) => {
+
+      if (err2) {
+        throw err2;
+      }
+
+      if (req.isAuthenticated()) {
+
+        if (req.user.username.trim() === data.rows[0].user.trim()) {
+          res.render('viewJob', { auth:true, self:true ,title: 'Database Connect', jobId: req.params.jobId, data: data.rows, data2:data2.rows});
+        } else {
+          res.render('viewJob', { auth:true, self:false, title: 'Database Connect', jobId: req.params.jobId, data: data.rows, data2:data2.rows});
+        }
+    
+      } else {
+        res.render('viewJob', { auth:false, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
+      }
+    });
+
+  });
+  
+});
+
+router.post('/:jobId', function(req, res, next) {
   pool.query(sql_query_insert_bids, [req.params.jobId, req.user.username, req.body.price, req.body.desc], (err, data) => {
     console.log(sql_query_insert_bids);
-    if (err ){
+    if (err) {
         console.log(err);
     } 
     res.redirect('/viewJob/' + req.params.jobId);

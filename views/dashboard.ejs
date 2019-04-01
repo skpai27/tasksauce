@@ -55,14 +55,14 @@
 					  </tr>
 					</thead>
 					<tbody>
-					  <% for(var i=0; i<requests.length; i++) { %>
+					  <% for (var i=0; i < requests.length; i++) { %>
 					  <tr>
-						<td><%= requests[i].job%></td>
-						<td><%= requests[i].loc%></td>
-						<td><%= requests[i].date.toDateString()%></td>
-						<td><%= requests[i].var%></td>
-						<td><%= requests[i].desc%></td>
-						<td><a href = "./viewJob/<%= requests[i].job_id %>"> View </a></td>
+						<td><%= requests[i].job %></td>
+						<td><%= requests[i].loc %></td>
+						<td><%= requests[i].date.toDateString() %></td>
+						<td><%= requests[i].var %></td>
+						<td><%= requests[i].desc %></td>
+						<td><a href = "./viewJob/request/<%= requests[i].job_id %>"> View </a></td>
 					  </tr>
 					  <% } %>
 					</tbody>
@@ -85,14 +85,14 @@
 					  </tr>
 					</thead>
 					<tbody>
-					  <% for(var i=0; i<offers.length; i++) { %>
+					  <% for(var i=0; i < requests.length; i++) { %>
 					  <tr>
-						<td><%= offers[i].job%></td>
-						<td><%= offers[i].loc%></td>
-						<td><%= offers[i].date.toDateString()%></td>
-						<td><%= offers[i].var%></td>
-						<td><%= offers[i].desc%></td>
-						<td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+						<td><%= requests[i].job%></td>
+						<td><%= requests[i].loc%></td>
+						<td><%= requests[i].date.toDateString()%></td>
+						<td><%= requests[i].var%></td>
+						<td><%= requests[i].desc%></td>
+						<td><a href = "./viewJob/request/<%= requests[i].job_id %>"> View </a></td>
 	
 					  </tr>
 					  <% } %>
@@ -127,7 +127,7 @@
 						<td><%= offers[i].date.toDateString()%></td>
 						<td><%= offers[i].var%></td>
 						<td><%= offers[i].desc%></td>
-						<td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+						<td><a href = "./viewJob/offer/<%= offers[i].job_id %>"> View </a></td>
 	
 					  </tr>
 					  <% } %>
@@ -158,7 +158,7 @@
 						<td><%= offers[i].date.toDateString()%></td>
 						<td><%= offers[i].var%></td>
 						<td><%= offers[i].desc%></td>
-						<td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+						<td><a href = "./viewJob/offer/<%= offers[i].job_id %>"> View </a></td>
 	
 					  </tr>
 					  <% } %>
