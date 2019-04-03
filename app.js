@@ -31,6 +31,7 @@ var addJobRouter = require('./routes/addJob');
 /* ---------------------------- */
 
 var viewRequestJob = require('./routes/viewRequestJob')
+var viewOfferJob = require('./routes/viewOfferJob')
 var jobInProgress = require('./routes/jobInProgress')
 var app = express();
 
@@ -67,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/viewRequestJob', viewRequestJob);
+app.use('/viewOfferJob', viewOfferJob);
 app.use('/jobInProgress', jobInProgress);
 app.use('/dashboard', dashboardRouter);
 /* --- V2: A3dding Web Pages --- */
