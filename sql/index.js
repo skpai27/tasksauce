@@ -17,10 +17,10 @@ sql.query = {
 	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.user=$1',
 
 	// Query tasks on job id
-	query_request_job: 'SELECT * FROM job_request WHERE job_request.job_id=$1 AND $1 NOT IN (SELECT job_id FROM request_in_progress)',
-	query_offer_job: 'SELECT * FROM job_offer WHERE job_offer.job_id=$1 AND $1 NOT IN (SELECT job_id FROM offer_in_progress)',
-	query_bids_request: 'SELECT * from request_bids WHERE job_id=$1',
-	query_bids_offer: 'SELECT * from offer_bids WHERE job_id=$1',
+	query_request_job: 'SELECT * FROM job_request WHERE job_request.job_id=$1',
+	query_offer_job: 'SELECT * FROM job_offer WHERE job_offer.job_id=$1',
+	query_bids_request: 'SELECT * FROM request_bids WHERE job_id=$1',
+	query_bids_offer: 'SELECT * FROM offer_bids WHERE job_id=$1',
 
 	// Query tasks on task name
 	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.user=$2',
