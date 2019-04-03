@@ -54,13 +54,15 @@ CREATE TABLE offer_bids(
 -- relation set between job req and request bids
 CREATE TABLE request_in_progress(
 	"job_id" int references job_request(job_id),
-	"bid_id" int references request_bids(bid_id)
+	"bid_id" int references request_bids(bid_id),
+	primary key (job_id, bid_id)
 );
 
 -- relation set between job offer and offer bids
 CREATE TABLE offer_in_progress(
 	"job_id" int references job_offer(job_id),
 	"bid_id" int references offer_bids(bid_id)
+	primary key (job_id, bid_id)
 );
 
 INSERT INTO public.users (username, email, password)

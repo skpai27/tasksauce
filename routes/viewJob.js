@@ -95,7 +95,7 @@ router.post('/:jobId', function(req, res, next) {
   })
 })
 
-router.post('/accept/:bidId', function(req, res, next) {
+router.post('/request/:bidId', function(req, res, next) {
   pool.query(sql_query_accept_request_bids, [req.params.jobId, req.params.bidId], (err, data) => {
     if(err){
       console.log(sql_query);
@@ -103,7 +103,16 @@ router.post('/accept/:bidId', function(req, res, next) {
     } 
     res.redirect('/jobInProgress/$1', [req.params.jobId]);
    });
-
-
 });
+
+router.post('/offer/:bidId', function(req, res, next) {
+  pool.query(sql_query_accept_offer_bids, [req.params.jobId, req.params.bidId], (err, data) => {
+    if(err){
+      console.log(sql_query);
+      throw err;
+    } 
+    res.redirect('/jobInProgress/$1', [req.params.jobId]);
+   });
+});
+
 module.exports = router;
