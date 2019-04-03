@@ -1,7 +1,17 @@
   <!-- Navigation -->
-  <nav class="navbar navbar-light bg-light static-top">
-    <div class="container">
-      <a class="navbar-brand" href="/">TaskSauce</a>
-      <a class="btn btn-primary" href="/signuplogin">Sign In</a>
-    </div>
-  </nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/">TaskSaucing</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+		<ul class="navbar-nav mr-auto">
+			  <form class="form-inline">
+        <li><a class="btn btn-outline-info" href="/tasks" role="button">All tasks</a></li>
+			</form>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <form class="form-inline">
+				<a class="btn btn-outline-success" href="/register" role="button">Logout</a>		  
+    </form>
+  </ul>
+	</nav>

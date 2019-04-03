@@ -14,6 +14,9 @@
 		<script src="javascripts/registerScript.js"></script>
 	</head>
 	<body class="form">
+		<% if (locals.err){ %>
+			<%= err %>
+			<% } %>
 		<div class="page-content">
 			<div class="form-content">
 				<div class="form-left">

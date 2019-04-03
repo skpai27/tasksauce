@@ -19,7 +19,13 @@ var sql_query = 'INSERT INTO job_offer VALUES';
 
 // GET
 router.get('/', function(req, res, next) {
-	res.render('newoffer', { title: 'Make a Offer' });
+	if(req.isAuthenticated()){
+		console.log(req.isAuthenticated);
+		res.render('newoffer', { title: 'Make a Offer' });
+	}
+	else{
+		res.redirect('../signuplogin');
+	}
 });
 
 // POST
@@ -30,9 +36,10 @@ router.post('/', function(req, res, next) {
 	var date= req.body.date;
 	var time = req.body.time;
 	var desc = req.body.desc;
+	var user = req.user.username;
 	
 	// Construct Specific SQL Query
-	var insert_query = sql_query + "('" + job + "','" + loc + "','" + date + "','" + time +  "','" + desc + "');";
+	var insert_query = sql_query + "('" + job + "','" + loc + "','" + date + "','" + time +  "','" + desc + "','" + user +"');";
 	console.log(insert_query);
 	pool.query(insert_query, (err, data) => {
 		if(err)throw err;
