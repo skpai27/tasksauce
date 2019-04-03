@@ -55,7 +55,7 @@
                   <tbody>
 
                       <% for(var i=0; i<data2.length; i++){ %>
-                          <form method = 'POST' action = "/viewJob/request/<%= data2[i].bid_id %>">
+                          <form method = 'POST' action = "/accept/<%= data2[i].bid_id %>">
                           <tr>
                               <td><%= data2[i].bid_price%></td>
                               <td><%= data2[i].bid_user%></td>
@@ -73,8 +73,8 @@
               <b>Login to make a bid</b>
             <% } else if (auth && !self){ %>
             
-              <b>Make a bid for  this job!!</b>
-              <form class="contact-form validate-form" method="POST" action="/viewJob/<%= jobId %>">
+              <b>Make a bid for this job!!</b>
+              <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>">
 
                   <div class="wrap-input validate-input" data-validate="Price is required">
                     <span class="label-input">Price:</span>
