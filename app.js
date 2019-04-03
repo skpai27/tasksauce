@@ -10,6 +10,7 @@ require('dotenv').config({path: __dirname + '/.env'})
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
 
@@ -73,6 +74,7 @@ app.use('/dashboard', dashboardRouter);
 /* ---------------------------- */
 
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
 app.use('/tasks', tasksRouter);

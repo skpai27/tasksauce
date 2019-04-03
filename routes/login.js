@@ -13,12 +13,14 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
+
 // //GET
 // //for now, if user is authed, then go into index page.
 // router.get('/', function(req, res, next) {
 //     if (req.isAuthenticated()){
 //         res.redirect('/select');
 //     } else {
+
 //         res.render('login', { title: 'Login', userData: req.user });
 //     }
 // });

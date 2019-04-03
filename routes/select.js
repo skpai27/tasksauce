@@ -13,6 +13,7 @@ var sql_query = 'SELECT * FROM job_request';
 
 router.get('/', function(req, res, next) {
 	if(req.isAuthenticated()){
+		console.log(req.user);
 		pool.query(sql_query, (err, data) => {
 			res.render('select', { title: 'Database Connect', data: data.rows });
 		})
