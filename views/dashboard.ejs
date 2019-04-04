@@ -75,9 +75,10 @@
 				</div>
 				</div>
 				
+				<!-- Table for tasks in progress -->
 			  <div class="card-body">
-				<h5>Work In-Progress</h5>
 				<% if (requestsIP.length !== 0) { %>
+				<h5>Work In-Progress</h5>
 					<div style="overflow-x:auto;">
 						<table class="table table-striped">
 						<thead>
@@ -110,6 +111,7 @@
 			</div>
 		  </div>
 	
+			<!-- Table for tasks offers -->
 		  <div class="row py-4">
 			<div class="card mx-auto">
 			  <h4 class="card-header">Tasks Offered</h4>
@@ -148,6 +150,7 @@
 				</div>
 				</div>
 				
+				<!-- Table for tasks in progress -->
 				<% if (offersIP.length !== 0) { %>
 					<div class="card-body">
 					<h5>Work In-Progress</h5>
@@ -171,8 +174,7 @@
 								<td><%= offersIP[i].date.toDateString()%></td>
 								<td><%= offersIP[i].var%></td>
 								<td><%= offersIP[i].desc%></td>
-								<td><a href = "./viewJob/offer/<%= offers[i].job_id %>"> View </a></td>
-			
+								<td><a href = "./offerInProgress/<%= offersIP[i].job_id %>"> View </a></td>
 								</tr>
 								<% } %>
 							</tbody>
