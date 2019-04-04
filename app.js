@@ -35,6 +35,8 @@ var viewRequestJob = require('./routes/viewRequestJob')
 var viewOfferJob = require('./routes/viewOfferJob')
 var requestInProgress = require('./routes/requestInProgress')
 var offerInProgress = require('./routes/offerInProgress')
+var requestCompleted = require('./routes/requestCompleted')
+var offerCompleted = require('./routes/offerCompleted')
 var app = express();
 
 /* --- Extra stuff for passport js ---*/
@@ -84,6 +86,8 @@ app.use('/signuplogin', signuploginRouter);
 app.use('/tasks', tasksRouter);
 app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
+app.use('/requestCompleted', requestCompleted);
+app.use('/offerCompleted', offerCompleted);
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);
