@@ -27,6 +27,7 @@
 
   <!-- Navigation -->
   <%- include navbar.ejs -%>
+
   <div class="text-center lead">
       <% for(var i=0; i < data.length; i++) { %>
       <div class="card col-lg-8 offset-2" >
@@ -55,7 +56,7 @@
                   <tbody>
 
                       <% for(var i=0; i<data2.length; i++){ %>
-                          <form method = 'POST' action = "/accept/<%= data2[i].bid_id %>">
+                          <form method='POST' action="/viewRequestJob/accept/<%= data2[i].bid_id %>">
                           <tr>
                               <td><%= data2[i].bid_price%></td>
                               <td><%= data2[i].bid_user%></td>

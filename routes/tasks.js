@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const sql_query = require('../sql');
 
 const { Pool } = require('pg')
 /* --- V7: Using Dot Env ---
@@ -17,8 +18,8 @@ const pool = new Pool({
 
 
 /* SQL Query */
-var sql_query_request = 'SELECT * FROM job_request as j where not exists (select 1 from request_bids as b where j.job_id = b.job_id);';
-var sql_query_offer = 'SELECT * FROM job_offer;';
+var sql_query_request = sql_query.query.query_request_unbid;
+var sql_query_offer = sql_query.query.query_offer_unbid;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {

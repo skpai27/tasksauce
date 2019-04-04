@@ -32,7 +32,7 @@ router.get('/:jobId', function(req, res, next) {
       pool.query(sql_query_get_bid_request, [req.params.jobId], (err2,data2) => {
 
         if (err2) {
-          throw err2;
+         throw err;
         }
 
         if (req.isAuthenticated()) {

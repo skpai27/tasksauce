@@ -23,7 +23,7 @@ var sql_query_get_bid_offer = sql_query.query.query_bids_offer;
 var sql_query_insert_bids = sql_query.query.insert_request_bids;
 var sql_query_update_bids = sql_query.query.update_request_bids;
 
-router.get('/request/:jobId', function(req, res, next) {
+router.get('/:jobId', function(req, res, next) {
 
     pool.query(sql_query_getrequestjob, [req.params.jobId], (err, data) => {
       if (err) {
@@ -39,13 +39,13 @@ router.get('/request/:jobId', function(req, res, next) {
         if (req.isAuthenticated()) {
 
           if(req.user.username === data.rows[0].user){
-            res.render('viewJob', { auth:true, self:true ,title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
+            res.render('viewInProgress', { auth:true, self:true ,title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
           } else {
-            res.render('viewJob', { auth:true, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
+            res.render('viewInProgress', { auth:true, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
           }
         
         } else {
-          res.render('viewJob', { auth:false, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
+          res.render('viewInProgress', { auth:false, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
         }
       });
 

@@ -65,6 +65,20 @@ CREATE TABLE offer_in_progress(
 	primary key (job_id, bid_id)
 );
 
+-- relation set between job req and completed
+CREATE TABLE request_completed(
+	"job_id" int references job_request(job_id),
+	"bid_id" int references request_bids(bid_id),
+	primary key (job_id, bid_id)
+);
+
+-- relation set between job offer and completed
+CREATE TABLE offer_completed(
+	"job_id" int references job_offer(job_id),
+	"bid_id" int references offer_bids(bid_id)
+	primary key (job_id, bid_id)
+);
+
 INSERT INTO public.users (username, email, password)
 VALUES ('dummy1','dummy1@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuML5dCdlDYZoAEYfwVXu/ASZpKiAGPnS');
  INSERT INTO public.users (username, email, password)
