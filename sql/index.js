@@ -30,6 +30,14 @@ sql.query = {
 	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.user=$2',
 	query_offer_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.user=$2',
 
+	// Query job_id from bid
+	query_request_from_bidId: 'SELECT * FROM request_bids WHERE bid_id=$1',
+	query_offer_from_bidId: 'SELECT * FROM offer_bids WHERE bid_id=$1',
+
+	// Query bid from job_id
+	query_bid_from_request: 'SELECT * FROM request_bids WHERE job_id=$1',
+	query_bid_from_offer: 'SELECT * FROM offer_bids WHERE job_id=$1',
+
 	// Insert bids
 	insert_request_bids: 'INSERT INTO request_bids VALUES($1, $2, $3, $4)',
 	insert_offer_bids: 'INSERT INTO offer_bids VALUES($1, $2, $3, $4)',

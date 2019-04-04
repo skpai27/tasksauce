@@ -20,6 +20,7 @@ var sql_query_getrequestjob = sql_query.query.query_request_job;
 var sql_query_get_bid_request = sql_query.query.query_bids_request;
 var sql_query_insert_bids = sql_query.query.insert_request_bids;
 var sql_query_accept_request_bids = sql_query.query.update_request_bids;
+var sql_query_job_from_bidId = sql_query.query.query_request_from_bidId;
 
 
 router.get('/:jobId', function(req, res, next) {
@@ -63,13 +64,15 @@ router.post('/:jobId', function(req, res, next) {
 })
 
 router.post('/accept/:bidId', function(req, res, next) {
-  pool.query(sql_query_accept_request_bids, [req.params.jobId, req.params.bidId], (err, data) => {
-    if(err){
-      console.log(sql_query);
-      throw err;
-    } 
-    res.redirect('/jobInProgress/$1', [req.params.jobId]);
-   });
+  pool.query(sql_query_job_from_bidId, [req.params.bidId], (err, jobId) => {
+    pool.query(sql_query_accept_request_bids, [jobId.rows[0].job_id, req.params.bidId], (err, bidId) => {
+      if(err){
+        console.log(sql_query);
+        throw err;
+      } 
+      res.redirect('/requestInProgress/' + jobId.rows[0].job_id);
+    });
+  });
 });
 
 module.exports = router;

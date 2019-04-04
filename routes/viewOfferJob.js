@@ -68,7 +68,7 @@ router.post('/accept/:bidId', function(req, res, next) {
       console.log(sql_query);
       throw err;
     } 
-    res.redirect('/jobInProgress/$1', [req.params.jobId]);
+    res.redirect('/offerInProgress/' + req.params.jobId);
    });
 });
 
