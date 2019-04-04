@@ -31,7 +31,10 @@ var selectRouter = require('./routes/select');
 var addJobRouter = require('./routes/addJob');
 /* ---------------------------- */
 
-var viewJob = require('./routes/viewJob')
+var viewRequestJob = require('./routes/viewRequestJob')
+var viewOfferJob = require('./routes/viewOfferJob')
+var requestInProgress = require('./routes/requestInProgress')
+var offerInProgress = require('./routes/offerInProgress')
 var app = express();
 
 /* --- Extra stuff for passport js ---*/
@@ -66,7 +69,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/viewJob',viewJob);
+app.use('/viewRequestJob', viewRequestJob);
+app.use('/viewOfferJob', viewOfferJob);
+app.use('/requestInProgress', requestInProgress);
+app.use('/offerInProgress', offerInProgress);
 app.use('/dashboard', dashboardRouter);
 /* --- V2: A3dding Web Pages --- */
 /* ---------------------------- */

@@ -73,7 +73,7 @@
                     <td><%= requests[i].var%></td>
                     <td><%= requests[i].desc%></td>
                     <td><%= requests[i].user%></td>
-                    <td><a href = "./viewJob/<%= requests[i].job_id %>"> View </a></td>
+                    <td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
 
                   </tr>
                   <% } %>
@@ -110,7 +110,7 @@
                     <td><%= offers[i].var%></td>
                     <td><%= offers[i].desc%></td>
                     <td><%= offers[i].user%></td>
-                    <td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
+                    <td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
 
                   </tr>
                   <% } %>
@@ -124,20 +124,21 @@
   </section>
 
   <!-- Call to Action -->
-  <section class="call-to-action text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-        </div>
-        <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
-          <button class="btn btn-lg btn-primary" onclick="window.location.href='/signuplogin'">Sign up!</button>
+  <% if (!req.isAuthenticated()) { %>
+    <section class="call-to-action text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
+            <button class="btn btn-lg btn-primary" onclick="window.location.href='/signuplogin'">Sign up!</button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </section>
+  <% } %>
   <!-- Footer -->
   <%- include footer.ejs -%>
 
