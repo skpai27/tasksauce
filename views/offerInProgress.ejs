@@ -50,12 +50,12 @@
                 </tr>
               </thead>
               <tbody>
-                <form method = 'POST' action = "#">
+                <form method = 'POST' action = "/offerInProgress/<%= data[i].job_id %>">
                 <tr>
                     <td><%= bid.bid_price%></td>
                     <td><%= bid.bid_user%></td>
                     <td><%= bid.bid_info%></td>
-                    <td><button type="button" class="btn btn-info" value ="Accept">Complete</button></td>
+                    <td><button type="submit" class="btn btn-info" value ="Accept">Complete</button></td>
                 </tr>
                 </form>
               </tbody>

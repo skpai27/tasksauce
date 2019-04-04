@@ -51,10 +51,13 @@ sql.query = {
 	delete_request_IP: 'DELETE FROM request_in_progress WHERE job_id=$1',
 	delete_offer_IP: 'DELETE FROM offer_in_progress WHERE job_id=$1',
 
-	// Insert completed requests
+	// Insert completed
 	insert_completed_request: 'INSERT INTO request_completed VALUES($1, $2)',
-	insert_completed_offer: 'INSERT INTO offer_completed VALUES($1, $2)'
+	insert_completed_offer: 'INSERT INTO offer_completed VALUES($1, $2)',
 
+	// Query completed 
+	query_request_completed: 'SELECT * FROM job_request WHERE job_request.user=$1 AND EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
+	query_offer_completed: 'SELECT * FROM job_offer WHERE job_offer.user=$1 AND EXISTS (SELECT 1 FROM offer_completed WHERE job_id=job_offer.job_id)'
 
 }
 
