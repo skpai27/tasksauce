@@ -70,7 +70,7 @@ router.post('/accept/:bidId', function(req, res, next) {
         console.log(sql_query);
         throw err;
       } 
-      res.redirect('/requestInProgress/' + jobId.rows[0].job_id);
+      res.redirect('/dashboard');
     });
   });
 });

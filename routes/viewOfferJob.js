@@ -64,12 +64,13 @@ router.post('/:jobId', function(req, res, next) {
 
 router.post('/accept/:bidId', function(req, res, next) {
   pool.query(sql_query_job_from_bidId, [req.params.bidId], (err, jobId) => {
+    console.log(jobId.rows);
     pool.query(sql_query_accept_offer_bids, [jobId.rows[0].job_id, req.params.bidId], (err, bidId) => {
       if(err){
         console.log(sql_query);
         throw err;
       } 
-      res.redirect('/offerInProgress/' + jobId.rows[0].job_id);
+      res.redirect('/dashboard');
     });
   });
 });

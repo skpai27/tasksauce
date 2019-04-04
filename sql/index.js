@@ -36,8 +36,8 @@ sql.query = {
 	query_offer_from_bidId: 'SELECT * FROM offer_bids WHERE bid_id=$1',
 
 	// Query bid from job_id
-	query_bid_from_request: 'SELECT * FROM request_bids WHERE job_id=$1',
-	query_bid_from_offer: 'SELECT * FROM offer_bids WHERE job_id=$1',
+	query_bid_from_request_IP: 'SELECT * FROM request_in_progress WHERE job_id=$1',
+	query_bid_from_offer_IP: 'SELECT * FROM offer_in_progress WHERE job_id=$1',
 
 	// Insert bids
 	insert_request_bids: 'INSERT INTO request_bids VALUES($1, $2, $3, $4)',
