@@ -15,8 +15,8 @@ sql.query = {
 	query_offer_unbid: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id)',
 
 	// Query tasks on user id
-	query_request_user: 'SELECT * FROM job_request WHERE job_request.user=$1',
-	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.user=$1',
+	query_request_user: 'SELECT * FROM job_request WHERE job_request.user=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id)',
+	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.user=$1 AND NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id)',
 
 	// Query tasks on job id
 	query_request_job: 'SELECT * FROM job_request WHERE job_request.job_id=$1',
