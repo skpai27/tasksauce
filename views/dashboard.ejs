@@ -30,6 +30,7 @@
 			
 
 		  <!-- Tables in 2 rows -->
+		  <% if (requests.length !== 0 || requestsIP.length !== 0 || requestC.length !== 0) { %>
 		  <div class="col py-4">
 			<div class="card mx-auto">
 			  <h4 class="card-header">Tasks Requested</h4>
@@ -39,11 +40,11 @@
 				<div style="overflow-x:auto;">
 
 					<!-- Search input form -->
-					<form id="searchRequest" action="dashboard" method="POST">
+					<!-- <form id="searchRequest" action="dashboard" method="POST">
 						<div class="input-group mb-3">
 							<input type="text" id="task_search" name='task_search' class="form-control" placeholder="Search for tasks..." aria-label="Example text with button addon" aria-describedby="button-addon1">
 						</div>
-					</form>
+					</form> -->
 
 					<table class="table table-striped" id="job_request_table">
 					<thead>
@@ -142,8 +143,11 @@
 				</div>
 				</div>
 				</div>
-	
-			<!-- Table for tasks offers -->
+			<% } %>
+
+
+		<!-- Table for tasks offers -->
+		<% if (offers.length !== 0 || offersIP.length !== 0 || offersC.length !== 0) { %>
 		  <div class="col py-4">
 			<div class="card mx-auto">
 			  <h4 class="card-header">Tasks Offered</h4>
@@ -248,6 +252,7 @@
 					</div>
 				</div>
 				</div>
+				<% } %>
 		</div>
 	  </section>
 	  <%- include footer.ejs -%>

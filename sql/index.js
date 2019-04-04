@@ -38,6 +38,8 @@ sql.query = {
 	// Query bid from job_id
 	query_bid_from_request_IP: 'SELECT * FROM request_in_progress WHERE job_id=$1',
 	query_bid_from_offer_IP: 'SELECT * FROM offer_in_progress WHERE job_id=$1',
+	query_bid_from_request_C: 'SELECT * FROM request_completed WHERE job_id=$1',
+	query_bid_from_offer_C: 'SELECT * FROM offer_completed WHERE job_id=$1',
 
 	// Insert bids
 	insert_request_bids: 'INSERT INTO request_bids VALUES($1, $2, $3, $4)',
