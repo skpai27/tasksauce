@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+  
+	<title>Task Sauce</title>
+  
+	<!-- Bootstrap core CSS -->
+	<link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+	<!-- Custom fonts for this template -->
+	<link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  
+	<!-- Custom styles for this template -->
+	<link href="static/css/landing-page.min.css" rel="stylesheet">	
+
+</head>
+<body>
+	<%- include navbar.ejs -%>
+
+
+		<!-- Tables Tasks -->
+	  <section class="tasks text-center bg-light">
+		<div class="container">
+			
+
+		  <!-- Tables in 2 rows -->
+		  <% if (requests.length !== 0) { %>
+		  <div class="col py-4">
+			<div class="card mx-auto">
+			  <h4 class="card-header">LEADERBOARD</h4>
+			  <div class="card-body">
+				<% if (requests.length !== 0) { %>
+				<h5>Top 5 job offerers!</h5>
+				<div style="overflow-x:auto;">
+
+					<!-- Search input form -->
+					<!-- <form id="searchRequest" action="dashboard" method="POST">
+						<div class="input-group mb-3">
+							<input type="text" id="task_search" name='task_search' class="form-control" placeholder="Search for tasks..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+						</div>
+					</form> -->
+
+					<table class="table table-striped" id="top_job_offerers_table">
+					<thead>
+						<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Offer Count</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% for (var i=0; i < requests.length; i++) { %>
+						<tr>
+						<td><%= requests[i].username %></td>
+						<td><%= requests[i].count %></td>
+						</tr>
+						<% } %>
+					</tbody>
+					</table>
+			    </div>
+				<% } %>
+
+				
+				</div>
+				</div>
+				</div>
+			<% } %>
+
+		</div>
+	  </section>
+	  <%- include footer.ejs -%>
+</body>
+</html>
