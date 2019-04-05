@@ -48,7 +48,7 @@ CREATE TABLE job_offer (
 );
 
 CREATE TABLE offer_bids(
-	"job_id" int references job_request(job_id),
+	"job_id" int references job_offer(job_id),
 	"bid_user" char(64) references public.users(username),
 	"bid_price" int,
 	"bid_info" char(1000),
@@ -107,6 +107,7 @@ VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Changi to 
 INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Food Delivery', 'KR', '2019-12-01', '18:30', 'Deliver food from Atlas Cafe to NUS','dummy1');
 
+--job_id 1
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Assemble Furniture', 'AMK', '2019-08-05', '16:30', 'Help to assemble IKEA book shelf','dummy1');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
@@ -121,16 +122,17 @@ INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username")
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d1');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
+--job_id 8 (below)
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
-VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Give you food','d2');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
-VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
-VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
-VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Give you durian','d2');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Eat with you','d3');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver some fruits','d3');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
 
@@ -155,3 +157,22 @@ INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('7', 'd3', '15', 'im hungryyyy too but ill feed you');
 INSERT INTO request_completed ("job_id", "bid_id")
 VALUES ('7', '3');
+
+--offer_bids > offer_completed (the job_offer is already specified above)
+--bid_id 1
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('8', 'd1', '15', 'me want food real bad');
+INSERT INTO offer_completed ("job_id", "bid_id")
+VALUES ('8', '1');
+
+--bid_id 2
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('9', 'd1', '15', 'I need and want food real bad');
+INSERT INTO offer_completed ("job_id", "bid_id")
+VALUES ('9', '2');
+
+--bid_id 3
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('12', 'd1', '15', 'me want food real bad');
+INSERT INTO offer_completed ("job_id", "bid_id")
+VALUES ('12', '3');
