@@ -1,8 +1,12 @@
 DROP TABLE IF EXISTS public.users CASCADE;
 DROP TABLE IF EXISTS job_request CASCADE;
 DROP TABLE IF EXISTS job_offer CASCADE;
-drop table if exists OFFER_BIDS cascade;
-drop table if exists REQUESt_BIDS cascade;
+DROP TABLE IF EXISTS request_bids CASCADE;
+DROP TABLE IF EXISTS offer_bids CASCADE;
+DROP TABLE IF EXISTS request_in_progress CASCADE;
+DROP TABLE IF EXISTS offer_in_progress CASCADE;
+DROP TABLE IF EXISTS request_completed CASCADE;
+DROP TABLE IF EXISTS offer_completed CASCADE;
 
 CREATE TABLE public.users (
 	"username" CHAR(64),
@@ -81,8 +85,16 @@ CREATE TABLE offer_completed(
 
 INSERT INTO public.users (username, email, password)
 VALUES ('dummy1','dummy1@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuML5dCdlDYZoAEYfwVXu/ASZpKiAGPnS');
- INSERT INTO public.users (username, email, password)
+INSERT INTO public.users (username, email, password)
 VALUES ('dummy2','dummy2@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuDrC4GADX0PaHFJ8M08gTnAsBiE2LCwW');
+INSERT INTO public.users (username, email, password)
+VALUES ('d1','d1@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu8fdCWc/gjKRQxQeEn2xSS0Vq6x.RVu2');
+INSERT INTO public.users (username, email, password)
+VALUES ('d2','d2@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu9VpzH09heAebhxKAp5c8kPnJ5ulFSTW');
+INSERT INTO public.users (username, email, password)
+VALUES ('d3','d3@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu0JXiq52DXyEHzAR465mFOPiJyKO.PJa');
+INSERT INTO public.users (username, email, password)
+VALUES ('d4','d4@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu0fbe4TdOMlTAzSazUwXVlN95vQLhRZO');
 
 INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Babysitting', 'AMK', '2019-08-13', '05:30', 'Look after 4yo','dummy1');
@@ -103,4 +115,43 @@ INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username")
 VALUES ('Babysitting', 'BG', '2019-08-25', '19:00', 'Look after my 3yo','dummy2');
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','dummy2');
-insert into REQUEST_BIDS values ('1','dummy1','1','tested bid')
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d1');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d1');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d2');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d3');
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
+
+--bid_id 1
+insert into REQUEST_BIDS values ('1','dummy1','1','tested bid');
+
+--job_request > request_bid > request_completed sets
+--job_id 6
+INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Feeding', 'AMK', '2019-08-13', '05:30', 'feed me pls','d1');
+--bid_id 2
+INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('6', 'd2', '20', 'feed you anyday');
+INSERT INTO request_completed ("job_id", "bid_id")
+VALUES ('6', '2');
+
+--job_id 7
+INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Feed Kids', 'BSH', '2019-07-15', '05:30', 'im hungryy','d1');
+--bid_id 3
+INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('7', 'd3', '15', 'im hungryyyy too but ill feed you');
+INSERT INTO request_completed ("job_id", "bid_id")
+VALUES ('7', '3');
