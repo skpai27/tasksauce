@@ -27,12 +27,12 @@ router.get('/:jobId', function(req, res, next) {
     pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
       pool.query(query_get_bid, [bidID.rows[0].bid_id], (err, bid) => {
         pool.query(query_get_job, [req.params.jobId], (err, job) => {
-          res.render('requestInProgress', {bid: bid.rows[0], data: job.rows});
+          res.render('requestInProgress', {auth: true, bid: bid.rows[0], data: job.rows});
         });
       });
     });
   } else {
-    res.redirect('/signuplogin', { title: 'login'});
+    res.redirect('/signuplogin', {auth:false, title: 'login'});
   }
 })
 

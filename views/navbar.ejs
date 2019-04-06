@@ -6,17 +6,17 @@
 	  </button>
 		<ul class="navbar-nav mr-auto">
 			  <form class="form-inline">
-        <li><a class="btn btn-outline-info" href="/tasks" role="button">All tasks</a></li>
+				<li><a class="btn btn-outline-info" href="/tasks" role="button">All tasks</a></li>
+				<li><a class="btn btn-outline-info" href="/leaderboard" role="button">Leaderboard</a></li>
 			</form>
 		</ul>
-		<ul class="navbar-nav mr-auto">
-			<form class="form-inline">
-			<li><a class="btn btn-outline-info" href="/leaderboard" role="button">Leaderboard</a></li>
-		</form>
-	</ul>
     <ul class="navbar-nav ml-auto">
       <form class="form-inline">
-				<a class="btn btn-outline-success" href="/logout" role="button">Logout</a>		  
+		    <% if (auth) { %>
+					<a class="btn btn-outline-success" href="/logout" role="button">Logout</a>
+				<% } else { %>
+					<a class="btn btn-outline-success" href="/login" role="button">Logout</a>
+			  <% } %>
     </form>
   </ul>
 	</nav>

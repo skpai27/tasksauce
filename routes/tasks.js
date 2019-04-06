@@ -25,7 +25,11 @@ router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
 		if (err) throw err;
 		pool.query(sql_query_offer, (err, offers) => {
-			res.render('tasks', { title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+			if (req.isAuthenticated()) {
+				res.render('tasks', { auth: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+			} else {
+				res.render('tasks', { auth: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+			}
 		})
 	});
 });
