@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS offer_in_progress CASCADE;
 DROP TABLE IF EXISTS request_completed CASCADE;
 DROP TABLE IF EXISTS offer_completed CASCADE;
 
+DROP FUNCTION IF EXISTS offer_bid_accepted_func();
+DROP TRIGGER IF EXISTS offer_bid_accepted_trigger ON offer_in_progress;
+
 CREATE TABLE public.users (
 	"username" CHAR(64),
 	"email" CHAR(128),
@@ -176,3 +179,56 @@ INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('12', 'd1', '15', 'me want food real bad');
 INSERT INTO offer_completed ("job_id", "bid_id")
 VALUES ('12', '3');
+
+--test values for trigger testing
+--job id 14
+INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'bid for me plz','d4');
+--bid id 4, 5, 6
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('14', 'd1', '15', 'me want food real bad');
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('14', 'd2', '20', 'me am d2 mad hungz');
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('14', 'd3', '100', 'me am d3 soooo hungz');
+INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('13', 'd1', '12', 'me am d1 soooo hungz');
+
+
+--TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
+--when a row is inserted into offer_in_progress. Trigger will cause unaccepted
+--bids to be deleted.
+CREATE OR REPLACE FUNCTION offer_bid_accepted_func()
+RETURNS TRIGGER AS $$
+BEGIN
+	DELETE FROM offer_bids ob 
+	WHERE ob.job_id = NEW.job_id
+	AND ob.bid_id != NEW.bid_id;
+	RAISE NOTICE 'new job id = %, new bid id =  %', NEW.job_id, NEW.bid_id;
+	RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER offer_bid_accepted_trigger
+AFTER INSERT ON offer_in_progress
+FOR EACH ROW
+EXECUTE PROCEDURE offer_bid_accepted_func();
+
+--TRIGGER for job requests. Trigger will fire when a job request is accepted:
+--ie when a row is inserted into offer_in_progress. Trigger will cause unaccepted
+--bids to be deleted. 
+CREATE OR REPLACE FUNCTION request_bid_accepted_func()
+RETURNS TRIGGER AS $$
+BEGIN
+	DELETE FROM request_bids rb 
+	WHERE rb.job_id = NEW.job_id
+	AND rb.bid_id != NEW.bid_id;
+	RAISE NOTICE 'new job id = %, new bid id =  %', NEW.job_id, NEW.bid_id;
+	RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER request_bid_accepted_trigger
+AFTER INSERT ON request_in_progress
+FOR EACH ROW
+EXECUTE PROCEDURE request_bid_accepted_func();
