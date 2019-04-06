@@ -23,17 +23,9 @@ var sql_query_offer = sql_query.query.query_offer_user;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.isAuthenticated()) {
-		pool.query(sql_query_request, [req.user.username], (err, requests) => {
-			pool.query(sql_query_offer, [req.user.username], (err, offers) => {
-				if (!err) {
-					res.render('dashboard', { title: 'dashboard', requests: requests.rows, offers: offers.rows });
-				} else {
-					console.log("Sql query failed");
-				}
-			})
-    });  
+		res.redirect('/dashboard');
   } else {
-    res.render('index', { title: 'Express' });
+    res.render('index', {auth: false, title: 'Express' });
   }
 });
 
