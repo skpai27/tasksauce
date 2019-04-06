@@ -13,6 +13,7 @@ var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
+var leaderboardRouter = require('./routes/leaderboard');
 
 /* ---------------------------- */
 
@@ -76,8 +77,6 @@ app.use('/viewOfferJob', viewOfferJob);
 app.use('/requestInProgress', requestInProgress);
 app.use('/offerInProgress', offerInProgress);
 app.use('/dashboard', dashboardRouter);
-/* --- V2: A3dding Web Pages --- */
-/* ---------------------------- */
 
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
@@ -88,6 +87,7 @@ app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
+app.use('/leaderboard', leaderboardRouter)
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);
