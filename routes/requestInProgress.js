@@ -38,10 +38,8 @@ router.get('/:jobId', function(req, res, next) {
 
 router.post('/:jobId', (req, res, next) => {
   pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
-    pool.query(delete_request_IP, [req.params.jobId], (err2, del) => {
-      pool.query(query_insert_completed, [req.params.jobId, bidID.rows[0].bid_id], (err3, insert) => {
-        res.redirect('/dashboard');
-      })
+    pool.query(query_insert_completed, [req.params.jobId, bidID.rows[0].bid_id], (err3, insert) => {
+      res.redirect('/dashboard');
     })
   })
 })

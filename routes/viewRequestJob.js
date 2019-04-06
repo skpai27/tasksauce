@@ -38,7 +38,7 @@ router.get('/:jobId', function(req, res, next) {
 
         if (req.isAuthenticated()) {
 
-          if(req.user.username === data.rows[0].user){
+          if(req.user.username === data.rows[0].username){
             res.render('viewRequestJob', { auth:true, self:true ,title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
           } else {
             res.render('viewRequestJob', { auth:true, self:false, title: 'Database Connect', jobId: req.params.jobId,data: data.rows,data2:data2.rows});
