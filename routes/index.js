@@ -23,7 +23,7 @@ var sql_query_offer = sql_query.query.query_offer_user;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.isAuthenticated()) {
-		res.redirect('/dashboard');
+    res.render('index', {auth: true, title: 'Express' });
   } else {
     res.render('index', {auth: false, title: 'Express' });
   }
