@@ -83,6 +83,30 @@ CREATE TABLE offer_completed(
 	primary key (job_id, bid_id)
 );
 
+CREATE FUNCTION deleteRequestIP()
+RETURNS TRIGGER AS $$
+BEGIN
+DELETE FROM request_in_progress WHERE job_id=NEW.job_id;
+RETURN NEW; END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER deleteRequestIP
+AFTER INSERT ON request_completed
+FOR EACH ROW
+EXECUTE PROCEDURE deleteRequestIP();
+
+CREATE FUNCTION deleteOfferIP()
+RETURNS TRIGGER AS $$
+BEGIN
+DELETE FROM offer_in_progress WHERE job_id=NEW.job_id;
+RETURN NEW; END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER deleteOfferIP
+AFTER INSERT ON offer_completed
+FOR EACH ROW
+EXECUTE PROCEDURE deleteOfferIP();
+
 INSERT INTO public.users (username, email, password)
 VALUES ('dummy1','dummy1@yahoo.com','$2b$10$99cAtaDvYXFAJCMOqGavCuML5dCdlDYZoAEYfwVXu/ASZpKiAGPnS');
 INSERT INTO public.users (username, email, password)

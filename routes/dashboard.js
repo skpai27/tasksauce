@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
 						pool.query(sql_query_request_C, [req.user.username], (err4, requestC) => {
 							pool.query(sql_query_offer_C, [req.user.username], (err5, offersC) => {
 								if (!err) {
-									res.render('dashboard', { title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
+									res.render('dashboard', { auth: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
 								}
 							})
 						})
