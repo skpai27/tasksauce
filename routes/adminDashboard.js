@@ -13,7 +13,7 @@ var sql_query_request = sql_query.query.query_request_user;
 var sql_query_offer = sql_query.query.query_offer_user;
 var sql_query_search_request = sql_query.query.query_request_search;
 var sql_query_search_offer = sql_query.query.query_offer_search;
-var sql_query_is_admin = sql_query.query.is_admin;
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,11 +21,7 @@ router.get('/', function(req, res, next) {
 		pool.query(sql_query_request, [req.user.username], (err, requests) => {
 			pool.query(sql_query_offer, [req.user.username], (err, offers) => {
 				if (!err) {
-					if (sql_query_is_admin) {
-						res.render('adminDashboard', { title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows });
-					} else {
-						res.render('dashboard', { title: 'Task Sauce', requests: requests.rows, offers: offers.rows });
-					}
+					res.render('dashboard', { title: 'Admin', requests: requests.rows, offers: offers.rows });
 				} else {
 					console.log("why?!");
 				}

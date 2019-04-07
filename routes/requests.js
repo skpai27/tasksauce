@@ -10,9 +10,7 @@ const pool = new Pool({
 router.get('/', function(req, res, next) {
 	pool.query(sql_query.query.all_requests, (err, requests) => {
 		if (err) throw err;
-		pool.query(sql_query.query.all_offers, (err, offers) => {
-			res.render('tasks', { title: 'Tasks', requests: requests.rows, offers: offers.rows });
-		})
+		res.render('requests', { title: 'Requests', requests: requests.rows });
 	});
 });
 
