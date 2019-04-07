@@ -21,11 +21,15 @@ router.get('/', function(req, res, next) {
 		pool.query(sql_query_request, [req.user.username], (err, requests) => {
 			pool.query(sql_query_offer, [req.user.username], (err, offers) => {
 				if (!err) {
-					if (sql_query_is_admin) {
-						res.render('adminDashboard', { title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows });
-					} else {
-						res.render('dashboard', { title: 'Task Sauce', requests: requests.rows, offers: offers.rows });
-					}
+					pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
+						if (!err) {
+							if (isAdmin.rows[0].is_admin) {
+								res.render('adminDashboard', { title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows });
+							} else {
+								res.render('dashboard', { title: 'Task Sauce', requests: requests.rows, offers: offers.rows });
+							}
+						}
+					})
 				} else {
 					console.log("why?!");
 				}
