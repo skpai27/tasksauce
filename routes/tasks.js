@@ -7,11 +7,19 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
+/* SQL Query */
+var sql_query_request = sql_query.query.query_request_unbid;
+var sql_query_offer = sql_query.query.query_offer_unbid;
+
 router.get('/', function(req, res, next) {
-	pool.query(sql_query.query.all_requests, (err, requests) => {
+	pool.query(sql_query_request, (err, requests) => {
 		if (err) throw err;
-		pool.query(sql_query.query.all_offers, (err, offers) => {
-			res.render('tasks', { title: 'Tasks', requests: requests.rows, offers: offers.rows });
+		pool.query(sql_query_offer, (err, offers) => {
+			if (req.isAuthenticated()) {
+				res.render('tasks', { auth: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+			} else {
+				res.render('tasks', { auth: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+			}
 		})
 	});
 });

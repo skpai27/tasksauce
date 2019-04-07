@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+  
+	<title>Task Sauce</title>
+  
+	<!-- Bootstrap core CSS -->
+	<link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+	<!-- Custom fonts for this template -->
+	<link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  
+	<!-- Custom styles for this template -->
+	<link href="static/css/landing-page.min.css" rel="stylesheet">	
+
+</head>
+<body>
+	<%- include navbar.ejs -%>
+
+
+		<!-- Tables Tasks -->
+	  <section class="tasks text-center bg-light">
+		<div class="container">
+			
+
+		  <!-- Tables in 2 rows -->
+		  <% if (top_offerers.length !== 0 || top_completers.length !== 0) { %>
+		  <div class="col py-4">
+			<div class="card mx-auto">
+			  <h4 class="card-header">LEADERBOARD</h4>
+			  <div class="card-body">
+				<% if (top_offerers.length !== 0) { %>
+				<h5>Top 5 job offerers!</h5>
+				<div style="overflow-x:auto;">
+					<table class="table table-striped" id="top_job_offerers_table">
+					<thead>
+						<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Offer Count</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% for (var i=0; i < top_offerers.length; i++) { %>
+						<tr>
+						<td><%= top_offerers[i].username %></td>
+						<td><%= top_offerers[i].count %></td>
+						</tr>
+						<% } %>
+					</tbody>
+					</table>
+			    </div>
+                <% } %>
+                
+                <% if (top_completers.length !== 0) { %>
+                    <h5>Top 5 job completers!</h5>
+                    <div style="overflow-x:auto;">
+                        <table class="table table-striped" id="top_job_completers_table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Offers Completed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (var i=0; i < top_completers.length; i++) { %>
+                            <tr>
+                            <td><%= top_completers[i].username %></td>
+                            <td><%= top_completers[i].count %></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                        </table>
+                    </div>
+                    <% } %>
+
+				
+				</div>
+				</div>
+				</div>
+			<% } %>
+
+		</div>
+	  </section>
+	  <%- include footer.ejs -%>
+</body>
+</html>

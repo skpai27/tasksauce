@@ -10,9 +10,11 @@ require('dotenv').config({path: __dirname + '/.env'})
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
 var adminDashboardRouter = require('./routes/adminDashboard');
+var leaderboardRouter = require('./routes/leaderboard');
 
 /* ---------------------------- */
 
@@ -33,7 +35,12 @@ var selectRouter = require('./routes/select');
 var addJobRouter = require('./routes/addJob');
 /* ---------------------------- */
 
-var viewJob = require('./routes/viewJob')
+var viewRequestJob = require('./routes/viewRequestJob')
+var viewOfferJob = require('./routes/viewOfferJob')
+var requestInProgress = require('./routes/requestInProgress')
+var offerInProgress = require('./routes/offerInProgress')
+var requestCompleted = require('./routes/requestCompleted')
+var offerCompleted = require('./routes/offerCompleted')
 var app = express();
 
 /* --- Extra stuff for passport js ---*/
@@ -68,13 +75,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/viewJob',viewJob);
+app.use('/viewRequestJob', viewRequestJob);
+app.use('/viewOfferJob', viewOfferJob);
+app.use('/requestInProgress', requestInProgress);
+app.use('/offerInProgress', offerInProgress);
 app.use('/dashboard', dashboardRouter);
 app.use('/adminDashboard', adminDashboardRouter);
-/* --- V2: A3dding Web Pages --- */
-/* ---------------------------- */
-
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
 app.use('/tasks', tasksRouter);
@@ -82,6 +90,9 @@ app.use('/requests', requestsRouter);
 app.use('/offers', offersRouter);
 app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
+app.use('/requestCompleted', requestCompleted);
+app.use('/offerCompleted', offerCompleted);
+app.use('/leaderboard', leaderboardRouter)
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);

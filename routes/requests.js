@@ -10,7 +10,11 @@ const pool = new Pool({
 router.get('/', function(req, res, next) {
 	pool.query(sql_query.query.all_requests, (err, requests) => {
 		if (err) throw err;
-		res.render('requests', { title: 'Requests', requests: requests.rows });
+		if (req.isAuthenticated()) {
+			res.render('requests', { auth: true, title: 'Requests', requests: requests.rows });
+		} else {
+			res.render('requests', { auth: false, title: 'Requests', requests: requests.rows });
+		}
 	});
 });
 

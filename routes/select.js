@@ -10,12 +10,11 @@ const pool = new Pool({
 });
 
 router.get('/', function(req, res, next) {
-	if(req.isAuthenticated()){
+	if (req.isAuthenticated()){
 		pool.query(sql_query.query.all_requests, (err, data) => {
 			res.render('select', { title: 'Database Connect', data: data.rows });
 		})
-	}
-	else {
+	} else {
 		res.redirect('/signuplogin');
 	};
 });

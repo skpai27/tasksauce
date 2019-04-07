@@ -7,32 +7,44 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
-
 /* SQL Query */
 var sql_query_request = sql_query.query.query_request_user;
 var sql_query_offer = sql_query.query.query_offer_user;
 var sql_query_search_request = sql_query.query.query_request_search;
 var sql_query_search_offer = sql_query.query.query_offer_search;
 var sql_query_is_admin = sql_query.query.is_admin;
+var sql_query_request_IP = sql_query.query.query_request_inprog;
+var sql_query_offer_IP = sql_query.query.query_offer_inprog;
+var sql_query_request_C = sql_query.query.query_request_completed;
+var sql_query_offer_C = sql_query.query.query_offer_completed;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	if (req.isAuthenticated()) {
 		pool.query(sql_query_request, [req.user.username], (err, requests) => {
-			pool.query(sql_query_offer, [req.user.username], (err, offers) => {
-				if (!err) {
-					pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
-						if (!err) {
-							if (isAdmin.rows[0].is_admin) {
-								res.render('adminDashboard', { title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows });
-							} else {
-								res.render('dashboard', { title: 'Task Sauce', requests: requests.rows, offers: offers.rows });
-							}
-						}
+			pool.query(sql_query_offer, [req.user.username], (err1, offers) => {
+				pool.query(sql_query_request_IP, [req.user.username], (err2, requestsIP) => {
+					pool.query(sql_query_offer_IP, [req.user.username], (err3, offersIP) => {
+						pool.query(sql_query_request_C, [req.user.username], (err4, requestC) => {
+							pool.query(sql_query_offer_C, [req.user.username], (err5, offersC) => {
+								if (!err) {
+									pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
+										if (!err) {
+											if (isAdmin) {
+												console.log("Admin [" + req.user.username + "] authorised");
+												res.render('adminDashboard', {auth: true, title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
+											} else {
+												res.render('dashboard', {auth: true, title: 'Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
+											}
+										} else {
+											console.log("Admin check failed");
+										}
+									})
+								}
+							})
+						})
 					})
-				} else {
-					console.log("why?!");
-				}
+				})
 			})
 		});
 	} else {
@@ -46,7 +58,7 @@ router.post('/', function(req, res) {
 		if (!err) {
 			pool.query(sql_query_search_offer, ['%' + req.body.task_search + '%', req.user.username], (err, offers) => {
 				if (!err) {
-					res.render('dashboard', { title: 'Search', requests: search.rows, offers: offers.rows });
+					res.render('dashboard', {auth: true, title: 'Search', requests: search.rows, offers: offers.rows });
 				} else {
 					console.log(err);
 				}

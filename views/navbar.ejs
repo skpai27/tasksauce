@@ -5,7 +5,23 @@
     	<span class="navbar-toggler-icon"></span>
  	</button>
 
- 	<!-- All Tasks button -->
+	<!-- Dashboard button -->
+	<% if (auth) { %>
+		<ul class="navbar-nav mr-auto">
+		  	<form class="form-inline">
+				<li><a class="btn btn-outline-info" href="/dashboard" role="button">Dashboard</a></li>
+			</form>
+		</ul>
+	<% } %>
+
+	<!-- Leaderboard button -->
+	<ul class="navbar-nav mr-auto">
+	  	<form class="form-inline">
+			<li><a class="btn btn-outline-info" href="/leaderboard" role="button">Leaderboard</a></li>
+		</form>
+	</ul>
+
+	<!-- All Tasks button -->
 	<ul class="navbar-nav mr-auto">
 	  	<form class="form-inline">
 			<li><a class="btn btn-outline-info" href="/tasks" role="button">All Tasks</a></li>
@@ -26,10 +42,14 @@
 		</form>
 	</ul>
 
-	<!-- Logout button -->
+	<!-- Login/Logout button -->
 	<ul class="navbar-nav ml-auto">
   		<form class="form-inline">
-			<a class="btn btn-outline-success" href="/signuplogin" role="button">Logout</a>		  
+			<% if (auth) { %>
+					<a class="btn btn-outline-success" href="/logout" role="button">Logout</a>
+				<% } else { %>
+					<a class="btn btn-outline-success" href="/signuplogin" role="button">Login</a>
+			<% } %>	  
 		</form>
 	</ul>
 </nav>
