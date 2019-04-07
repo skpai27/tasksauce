@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 		})
 	}
 	else {
-		res.redirect('/signuplogin');
+		res.redirect('/login');
 	};
 });
 

@@ -60,7 +60,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Req By</th>
+                    <th scope="col">Req By</th>>
                     <th scope="col">View</th>
                   </tr>
                 </thead>
@@ -74,6 +74,7 @@
                     <td><%= requests[i].desc%></td>
                     <td><%= requests[i].user%></td>
                     <td><a href = "./viewJob/<%= requests[i].job_id %>"> View </a></td>
+
                   </tr>
                   <% } %>
                 </tbody>
