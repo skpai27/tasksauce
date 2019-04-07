@@ -34,8 +34,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">Need some help?<br />Or happen to have a little spare time?</h1>
-          <h3 class="mb-5">Browse through our list of tasks offered and requested below!</h3>
+          <h1 class="mb-5">Happen to have a little spare time?</h1>
+          <h3 class="mb-5">Browse through our list of tasks requested below!</h3>
         </div>
       </div> 
     </div>
@@ -74,43 +74,6 @@
                     <td><%= requests[i].desc%></td>
                     <td><%= requests[i].user%></td>
                     <td><a href = "./viewJob/<%= requests[i].job_id %>"> View </a></td>
-                  </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row py-4">
-        <div class="card mx-auto">
-          <div class="card-header">Tasks Offered</div>
-          <div class="card-body">
-            <div style="overflow-x:auto;">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Task</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col"> By</th>
-                    <th scope="col">View</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for(var i=0; i<offers.length; i++) { %>
-                  <tr>
-                    <td><%= offers[i].job%></td>
-                    <td><%= offers[i].loc%></td>
-                    <td><%= offers[i].date.toDateString()%></td>
-                    <td><%= offers[i].time%></td>
-                    <td><%= offers[i].desc%></td>
-                    <td><%= offers[i].user%></td>
-                    <td><a href = "./viewJob/<%= offers[i].job_id %>"> View </a></td>
-
                   </tr>
                   <% } %>
                 </tbody>

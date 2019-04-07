@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
+var adminDashboardRouter = require('./routes/adminDashboard');
 
 /* ---------------------------- */
 
@@ -19,6 +20,8 @@ var dashboardRouter = require('./routes/dashboard');
 /* ---------------------------- */
 var signuploginRouter = require('./routes/signuplogin');
 var tasksRouter = require('./routes/tasks');
+var requestsRouter = require('./routes/requests');
+var offersRouter = require('./routes/offers');
 var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
 
@@ -67,6 +70,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/viewJob',viewJob);
 app.use('/dashboard', dashboardRouter);
+app.use('/adminDashboard', adminDashboardRouter);
 /* --- V2: A3dding Web Pages --- */
 /* ---------------------------- */
 
@@ -74,6 +78,8 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
 app.use('/tasks', tasksRouter);
+app.use('/requests', requestsRouter);
+app.use('/offers', offersRouter);
 app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
 
