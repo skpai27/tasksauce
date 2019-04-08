@@ -76,7 +76,7 @@
 						<td><%= requests[i].loc %></td>
 						<td><%= requests[i].date.toDateString() %></td>
 						<td><%= requests[i].time %></td>
-						<td><%= requests[i].desc %></td>
+						<td><%= requests[i].details %></td>
 						<td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
 						</tr>
 						<% } %>
@@ -109,7 +109,7 @@
 							<td><%= requestsIP[i].loc%></td>
 							<td><%= requestsIP[i].date.toDateString()%></td>
 							<td><%= requestsIP[i].time%></td>
-							<td><%= requestsIP[i].desc%></td>
+							<td><%= requestsIP[i].details%></td>
 							<td><a href = "./requestInProgress/<%= requestsIP[i].job_id %>"> View </a></td>
 		
 							</tr>
@@ -143,7 +143,7 @@
 							<td><%= requestC[i].loc%></td>
 							<td><%= requestC[i].date.toDateString()%></td>
 							<td><%= requestC[i].time%></td>
-							<td><%= requestC[i].desc%></td>
+							<td><%= requestC[i].details%></td>
 							<td><a href = "./requestCompleted/<%= requestC[i].job_id %>"> View </a></td>
 		
 							</tr>
@@ -185,7 +185,7 @@
 								<td><%= offers[i].loc%></td>
 								<td><%= offers[i].date.toDateString()%></td>
 								<td><%= offers[i].time%></td>
-								<td><%= offers[i].desc%></td>
+								<td><%= offers[i].details%></td>
 								<td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
 		
 							</tr>
@@ -219,7 +219,7 @@
 								<td><%= offersIP[i].loc%></td>
 								<td><%= offersIP[i].date.toDateString()%></td>
 								<td><%= offersIP[i].time%></td>
-								<td><%= offersIP[i].desc%></td>
+								<td><%= offersIP[i].details%></td>
 								<td><a href = "./offerInProgress/<%= offersIP[i].job_id %>"> View </a></td>
 								</tr>
 								<% } %>
@@ -252,7 +252,7 @@
 									<td><%= offersC[i].loc%></td>
 									<td><%= offersC[i].date.toDateString()%></td>
 									<td><%= offersC[i].time%></td>
-									<td><%= offersC[i].desc%></td>
+									<td><%= offersC[i].details%></td>
 									<td><a href = "./offerCompleted/<%= offersC[i].job_id %>"> View </a></td>
 									</tr>
 									<% } %>

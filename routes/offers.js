@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 router.get('/', function(req, res, next) {
-	pool.query(sql_query.query.all_offers, (err, offers) => {
+	pool.query(sql_query.query.all_available_offers, (err, offers) => {
 		if (err) throw err;
 		if (req.isAuthenticated()) {
 			res.render('offers', { auth: true, title: 'Offers', offers: offers.rows });

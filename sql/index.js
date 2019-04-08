@@ -13,9 +13,11 @@ sql.query = {
 
 	// Load from job_request
 	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
+	all_available_requests: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) ORDER BY date, time',
 
 	// Load from job_offer
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
+	all_available_offers: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) ORDER BY date, time',
 
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
@@ -61,6 +63,14 @@ sql.query = {
 	delete_request_IP: 'DELETE FROM request_in_progress WHERE job_id=$1',
 	delete_offer_IP: 'DELETE FROM offer_in_progress WHERE job_id=$1',
 
+	// Delete task (Only by Admin)
+	delete_request: 'DELETE FROM job_request WHERE job_request.job_id=$1',
+	delete_offer: 'DELETE FROM job_offer WHERE job_offer.job_id=$1',
+
+	// Edit task (Only by Admin)
+	edit_request: 'UPDATE job_request SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
+	// edit_offer: 
+
 	// Insert completed
 	insert_completed_request: 'INSERT INTO request_completed VALUES($1, $2)',
 	insert_completed_offer: 'INSERT INTO offer_completed VALUES($1, $2)',
@@ -70,9 +80,9 @@ sql.query = {
 	query_offer_completed: 'SELECT * FROM job_offer WHERE job_offer.username=$1 AND EXISTS (SELECT 1 FROM offer_completed WHERE job_id=job_offer.job_id)',
 
 	// Leaderboard queries
-	query_request_top_offerers: 'SELECT username, count(*) FROM job_offer GROUP BY username ORDER BY count desc LIMIT 5',
-	query_request_top_completers: 'SELECT rb.bid_user as username, count(*) FROM request_completed rc INNER JOIN request_bids rb on rc.bid_id = rb.bid_id GROUP BY rb.bid_user ORDER BY count desc LIMIT 5',
-	query_offer_top_completers: 'SELECT jo.username as username, count(*) FROM offer_completed oc INNER JOIN job_offer jo on oc.job_id = jo.job_id GROUP BY jo.username ORDER BY count desc LIMIT 5',
+	query_request_top_offerers: 'SELECT username, count(*) FROM job_offer GROUP BY username ORDER BY count details LIMIT 5',
+	query_request_top_completers: 'SELECT rb.bid_user as username, count(*) FROM request_completed rc INNER JOIN request_bids rb on rc.bid_id = rb.bid_id GROUP BY rb.bid_user ORDER BY count details LIMIT 5',
+	query_offer_top_completers: 'SELECT jo.username as username, count(*) FROM offer_completed oc INNER JOIN job_offer jo on oc.job_id = jo.job_id GROUP BY jo.username ORDER BY count details LIMIT 5',
 }
 
 module.exports = sql

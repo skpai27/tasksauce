@@ -27,7 +27,7 @@ router.get('/:jobId', function(req, res, next) {
     });
   });
 router.post('/:jobId', function(req,res,next){
-  var sql = "INSERT INTO request_bids VALUES('" + req.params.jobId + "','" + req.user.username + "','"  + req.body.price + "','" +req.body.desc +"');";
+  var sql = "INSERT INTO request_bids VALUES('" + req.params.jobId + "','" + req.user.username + "','"  + req.body.price + "','" +req.body.details +"');";
   pool.query(sql,(err,data)=>{
     console.log(sql);
     if(err){

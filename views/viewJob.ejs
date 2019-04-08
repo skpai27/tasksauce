@@ -33,12 +33,12 @@
       <div class="card col-lg-8 offset-2" >
           <div class="card-body">
             <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %></h5>
-            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
+            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].details %></p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Date:</b> <%= data[i].date.toDateString()%></li>
-            <li class="list-group-item"><b>Time:</b> <%= data[i].time%></li>
-            <li class="list-group-item"><b>Location:</b> <%= data[i].loc%></li>
+            <li class="list-group-item"><b>Date: </b> <%= data[i].date.toDateString()%></li>
+            <li class="list-group-item"><b>Time: </b> <%= data[i].time%></li>
+            <li class="list-group-item"><b>Location: </b> <%= data[i].loc%></li>
           </ul>
           <div class="card-body">
               <b>View Current Bids</b>
@@ -49,7 +49,7 @@
                       <th scope="col">Bid User</th>
                       <th scope ="col">Bid details</th>
                       <% if (self){ %>
-                        <th scope = "col"> Accept Bid</th>
+                        <th scope = "col">Accept Bid</th>
                       <% } %>
                     </tr>
                   </thead>
@@ -77,14 +77,14 @@
             <form class="contact-form validate-form" method="POST" action="/viewJob/<%= jobId %>">
 
                 <div class="wrap-input validate-input" data-validate="Price is required">
-                  <span class="label-input">Price:</span>
+                  <span class="label-input">Price: </span>
                   <input class="input" type="number" name="price" id="price">
                   <span class="focus-input"></span>
                 </div>
         
                 <div class="wrap-input validate-input" data-validate = "Additional Details are required">
-                  <span class="label-input">Additional Details:</span>
-                  <textarea  class="form-control input-lg" name="desc" id="desc" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                  <span class="label-input">Additional Details: </span>
+                  <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
                   <span class="focus-input"></span>
                 </div>
         

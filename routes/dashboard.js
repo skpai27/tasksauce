@@ -32,9 +32,9 @@ router.get('/', function(req, res, next) {
 										if (!err) {
 											if (isAdmin) {
 												console.log("Admin [" + req.user.username + "] authorised");
-												res.render('adminDashboard', {auth: true, title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
+												res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
 											} else {
-												res.render('dashboard', {auth: true, title: 'Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
+												res.render('dashboard', {auth: true, admin: false, title: 'Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
 											}
 										} else {
 											console.log("Admin check failed");
@@ -68,5 +68,23 @@ router.post('/', function(req, res) {
 		}
 	});
 });
+
+// /* POST for delete */
+// router.post('/delete/:jobId', function(req, res) {
+// 	pool.query(sql_query_search_request, ['%' + req.body.task_search + '%', req.user.username], (err, search) => {
+// 		if (!err) {
+// 			pool.query(sql_query_search_offer, ['%' + req.body.task_search + '%', req.user.username], (err, offers) => {
+// 				if (!err) {
+// 					res.render('dashboard', {auth: true, title: 'Search', requests: search.rows, offers: offers.rows });
+// 				} else {
+// 					console.log(err);
+// 				}
+// 			})
+// 		} else {
+// 			console.log(err)
+// 		}
+// 	});
+// });
+
 
 module.exports = router;

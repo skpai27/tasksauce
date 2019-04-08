@@ -8,8 +8,8 @@ const pool = new Pool({
 });
 
 /* SQL Query */
-var sql_query_request = sql_query.query.query_request_unbid;
-var sql_query_offer = sql_query.query.query_offer_unbid;
+var sql_query_request = sql_query.query.all_available_requests;
+var sql_query_offer = sql_query.query.all_available_offers;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
