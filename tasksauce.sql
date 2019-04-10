@@ -22,7 +22,7 @@ CREATE TABLE public.users (
 	"username" CHAR(64),
 	"email" CHAR(128),
 	"password" CHAR(60),
-	"is_admin" VARCHAR(10) DEFAULT 'FALSE' CHECK(is_admin IN ('TRUE', 'FALSE')),
+	"is_admin" BOOLEAN DEFAULT FALSE CHECK(is_admin IN (TRUE, FALSE)),
 	CONSTRAINT users_pkey PRIMARY KEY (username)
 );
 
@@ -127,7 +127,7 @@ VALUES ('d3','d3@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu0JXiq52DXyEHzAR465mFOPiJyK
 INSERT INTO public.users (username, email, password)
 VALUES ('d4','d4@d.com','$2b$10$Ou8cxsjo/m5tLOWIaXemtu0fbe4TdOMlTAzSazUwXVlN95vQLhRZO');
 INSERT INTO public.users (username, email, password, is_admin)
-VALUES ('admin1','admin1@gmail.com','$2b$10$.7uMTpD.7SqrerAsb.jJgOr2N60rbUXlE/OO91wESn0KPbPWlRY3S', 'TRUE');
+VALUES ('admin1','admin1@gmail.com','$2b$10$.7uMTpD.7SqrerAsb.jJgOr2N60rbUXlE/OO91wESn0KPbPWlRY3S', TRUE);
 
 INSERT INTO job_request ("job", "loc", "date", "time", "details","username") 
 VALUES ('Babysitting', 'AMK', '2019-08-13', '05:30', 'Look after 4yo','dummy1');
@@ -170,7 +170,7 @@ INSERT INTO job_offer ("job", "loc", "date", "time", "details","username")
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
 
 --bid_id 1
-insert into REQUEST_BIDS values ('1','dummy1','1','tested bid');
+insert into REQUEST_BIDS values ('1','dummy2','1','tested bid');
 
 --job_request > request_bid > request_completed sets
 --job_id 6

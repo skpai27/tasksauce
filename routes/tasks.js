@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 			if (req.isAuthenticated()) {
 				pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {
 					if (!err) {
-						if (isAdmin) {
+						if (isAdmin.rows[0].is_admin) {
 							console.log("Admin [" + req.user.username + "] accessing all tasks");
 							res.render('tasks', { auth: true, admin: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
 						} else {
