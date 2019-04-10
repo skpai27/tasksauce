@@ -37,20 +37,6 @@
 	<section class="tasks text-center bg-light">
 
 		<div class="container">
-			<!-- Search input form -->
-			<div class="row py-4">
-			  	<div class="card mx-auto">
-				  	<div class="card-body">
-					  	<!-- Search input form --> <!-- TODO: Modify to tasks in current page -->
-						<form id="searchRequest" action="dashboard" method="POST">
-							<div class="input-group mt-2">
-								<input type="text" id="task_search" name='task_search' class="form-control" placeholder="Search for tasks..." aria-label="Example text with button addon" aria-describedby="button-addon1">
-						  	</div>
-						</form>
-					</div>
-			  	</div>
-		  	</div>
-
 			<!-- Tables in 2 rows -->
 			<% if (requests.length !== 0 || requestsIP.length !== 0 || requestC.length !== 0) { %>
 			<div class="col py-4">

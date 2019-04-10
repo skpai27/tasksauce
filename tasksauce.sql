@@ -140,7 +140,7 @@ VALUES ('admin1','admin1@gmail.com','$2b$10$.7uMTpD.7SqrerAsb.jJgOr2N60rbUXlE/OO
 INSERT INTO public.users (username, email, password)
 VALUES('p1','p1@p.com','$2b$10$wCGVdKumqUCwBkmj77xxGeLUJQZPzd2wRNj4fd4aSiI9nNA6HD3VS');
 INSERT INTO public.users (username, email, password)
-VALUES('p2','p2@p.com','$2b$10$SegFfQ16EJvwCj.x9HGs1OC.jFwZcEZubtlJbq4.aUylDHBO66V1a')
+VALUES('p2','p2@p.com','$2b$10$SegFfQ16EJvwCj.x9HGs1OC.jFwZcEZubtlJbq4.aUylDHBO66V1a');
 
 INSERT INTO job_request ("job", "loc", "date", "time", "details","username") 
 VALUES ('Babysitting', 'AMK', '2019-08-13', '05:30', 'Look after 4yo','dummy1');
@@ -187,21 +187,21 @@ VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver some fruits','d3');
 INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
 --job_id 14 (below)
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Bugis to Temasek Hall','p1');
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Date with you','p2');
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver some durians','p1');
-INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Pioneer to Kent Ridge','p2');
-INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Fix lights','p1');
-INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Dismantle fan','p2');
-INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
-INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
 
 --bid_id 1
