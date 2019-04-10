@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
 								console.log(sql_combined_bids);
 								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
 									if (!err) {
-										res.render('dashboard', { auth: true, premium: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+										res.render('dashboard', { auth: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 									}
 								})
 							})
@@ -62,7 +62,7 @@ router.post('/', function(req, res) {
 								console.log(sql_combined_bids);
 								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
 									if (!err) {
-										res.render('dashboard', { auth: true, premium: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+										res.render('dashboard', { auth: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 									}
 								})
 							})
