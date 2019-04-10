@@ -69,7 +69,7 @@ sql.query = {
 
 	// Edit task (Only by Admin)
 	edit_request: 'UPDATE job_request SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
-	// edit_offer: 
+	edit_offer: 'UPDATE job_offer SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
 
 	// Insert completed
 	insert_completed_request: 'INSERT INTO request_completed VALUES($1, $2)',

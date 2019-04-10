@@ -60,7 +60,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Req By</th>
+                    <th scope="col">By</th>
                     <th scope="col">View</th>
                   </tr>
                 </thead>
@@ -74,20 +74,7 @@
                     <td><%= requests[i].details%></td>
                     <td><%= requests[i].username%></td>
                     <td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
-
-                    <!-- Modify job button ONLY for Admin -->
-                    <% if (admin) { %>
-                      <td>
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Job</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="./editrequest/<%= requests[i].job_id %>" role="button" value="Edit">Edit</a>
-                          <form method = 'POST' action = "requests/delete/<%= requests[i].job_id %>">
-                            <button class="dropdown-item" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
-                          </form>
-                        </div>
-                      </td>
-                    <% } %>
-
+                    <%- include adminModifyRequestButton.ejs -%>
                   </tr>
                   <% } %>
                 </tbody>

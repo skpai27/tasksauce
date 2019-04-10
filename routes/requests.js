@@ -8,9 +8,9 @@ const pool = new Pool({
 });
 
 /* SQL Queries */
-sql_query_requests = sql_query.query.all_available_requests;
-sql_query_admin = sql_query.query.is_admin;
-sql_query_delete_req = sql_query.query.delete_request;
+var sql_query_requests = sql_query.query.all_available_requests;
+var sql_query_admin = sql_query.query.is_admin;
+var sql_query_delete_req = sql_query.query.delete_request;
 
 
 router.get('/', function(req, res, next) {
@@ -32,19 +32,6 @@ router.get('/', function(req, res, next) {
 		} else {
 			res.render('requests', { auth: false, admin: false, title: 'Requests', requests: requests.rows });
 		}
-	});
-});
-
-/* POST for delete */
-router.post('/delete/:jobId', function(req, res, next) {
-	// console.log(sql_query_delete_req);
-	pool.query(sql_query_delete_req, [req.params.jobId], (err, deletereq) => {
-		if (!err) {
-			console.log("Successfully deleted Request [jobId: " + req.params.jobId + "]");
-		} else {
-			console.log("WAZZ GNG ON");
-		}
-		res.redirect('/requests');
 	});
 });
 

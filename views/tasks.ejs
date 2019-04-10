@@ -60,7 +60,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Req By</th>
+                    <th scope="col">By</th>
                     <th scope="col">View</th>
                   </tr>
                 </thead>
@@ -74,6 +74,7 @@
                     <td><%= requests[i].details%></td>
                     <td><%= requests[i].username%></td>
                     <td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
+                    <%- include adminModifyRequestButton.ejs -%>
                   </tr>
                   <% } %>
                 </tbody>
@@ -96,7 +97,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Offered By</th>
+                    <th scope="col">By</th>
                     <th scope="col">View</th>
                   </tr>
                 </thead>
@@ -110,7 +111,7 @@
                     <td><%= offers[i].details%></td>
                     <td><%= offers[i].username%></td>
                     <td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
-
+                    <%- include adminModifyOfferButton.ejs -%>
                   </tr>
                   <% } %>
                 </tbody>

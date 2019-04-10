@@ -72,8 +72,9 @@
                     <td><%= offers[i].date.toDateString()%></td>
                     <td><%= offers[i].time%></td>
                     <td><%= offers[i].details%></td>
-                    <td><%= offers[i].user%></td>
+                    <td><%= offers[i].username%></td>
                     <td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
+                    <%- include adminModifyOfferButton.ejs -%>
                   </tr>
                   <% } %>
                 </tbody>
