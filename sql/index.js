@@ -19,6 +19,12 @@ sql.query = {
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
 	all_available_offers: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) ORDER BY date, time',
 
+	//Update reviews
+	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_request: 'UPDATE request_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
+	update_review_bidder_offer: 'UPDATE offer_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_offer: 'UPDATE offer_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
+	
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
 	query_offer: 'SELECT * FROM job_offer',

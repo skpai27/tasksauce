@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Tasksauce</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/landing-page.min.css" rel="stylesheet">
+
+  <link href="/static/css/reset.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="/static/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="/static/css/responsive.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="/static/css/better-rating.css" rel="stylesheet" />
+
+    <!--External fonts-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <%- include navbar.ejs -%>
+  <div class="text-center lead">
+      <% for(var i=0; i < data.length; i++) { %>
+      <div class="card col-lg-8 offset-2" >
+          <div class="card-body">
+            <h5 class="font-weight-bold mb-3">Job:<%= data[i].job %>e</h5>
+            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Date: </b><%= data[i].date %></li>
+            <li class="list-group-item"><b>Time:</b><%= data[i].time %></li>
+            <li class="list-group-item"><b>Location:</b><%= data[i].location %></li>
+          </ul>
+          <div class="card-body">
+            <b>Accepted bid</b>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Accepted Price</th>
+                  <th scope="col">Bid User</th>
+                  <th scope ="col">Bid details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td><%= bid.bid_price%></td>
+                    <td><%= bid.bid_user%></td>
+                    <td><%= bid.bid_info%></td>
+                </tr>
+              </tbody>
+              </table>
+              <b>Reviews</b><br>
+              Review by author: <%=bidID.rows[0].author_review%><br>
+              Rating by author: <%=bidID.rows[0].author_rating%>
+              <br>
+              Review by completor:<%=bidID.rows[0].bidder_review%><br>
+              Rating by author: <%=bidID.rows[0].bidder_rating%><br>
+
+
+              <% if(author == 1){ %>
+                Give a review
+                
+                  <form  id="better-rating-form">
+
+                  </form>
+
+                  <form class="contact-form validate-form" method="POST" action="/offerCompleted/<%=data[0].job_id%>" id="better-rating-form">
+
+            
+                    <div class="wrap-input validate-input" data-validate="Rating is required">
+                      <span class="label-input">Rating:</span>
+                      <div class="rating">
+                        <i class="fa fa-star" data-rate="1"></i>
+                        <i class="fa fa-star" data-rate="2"></i>
+                        <i class="fa fa-star" data-rate="3"></i>
+                        <i class="fa fa-star" data-rate="4"></i>
+                        <i class="fa fa-star" data-rate="5"></i>
+                        <input type="hidden" id="rating-count" name="rating_count" value="0">
+                      </div>
+                      <span class="focus-input"></span>
+                    </div>
+            
+                    <div class="wrap-input validate-input" data-validate = "Review is required">
+                      <span class="label-input">Review:</span>
+                      <textarea class="input" name="desc" id="desc" placeholder="Give your honest feedback!"></textarea>
+                      <span class="focus-input"></span>
+                    </div>
+            
+                    <div class="container-contact-form-btn">
+                      <button class="contact-form-btn">
+                        <span>
+                          Submit
+                          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </form>
+                  
+              <!--  Javascript plugins -->
+              <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="/static/javascripts/better-rating.js"></script>
+              <!--  local Javascript file -->
+                <script src="/static/javascripts/main.js"></script>
+              <% } %>
+          </div>
+        </div>
+
+      <% } %>
+
+      
+
+
+
+
+
+  </div>
+  <!-- Footer -->
+  <%- include footer.ejs -%>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
