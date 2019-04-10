@@ -12,6 +12,12 @@ sql.query = {
 	// Update
 	update_info: 'UPDATE username_password SET first_name=$2, last_name=$3 WHERE username=$1',
 	update_pass: 'UPDATE username_password SET password=$2 WHERE username=$1',
+
+	//Update reviews
+	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_request: 'UPDATE request_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
+	update_review_bidder_offer: 'UPDATE offer_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_offer: 'UPDATE offer_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
 	
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',

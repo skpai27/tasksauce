@@ -29,6 +29,7 @@ router.get('/:jobId', function(req, res, next) {
       throw err;
     }
 
+
     pool.query(sql_query_get_bid_offer, [req.params.jobId], (err2,data2) => {
 
       if (err2) {
