@@ -5,20 +5,20 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/css/newtask.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/newtask.css">
 <!--===============================================================================================-->
 </head>
 <body>
 
 	<div class="container-contact">
 		<div class="wrap-contact">
-			<div class="contact-form-title" style="background-image: url(img/bg-01.jpg);">
+			<div class="contact-form-title" style="background-image: url(/static/img/bg-01.jpg);">
 				<span class="contact-form-title-1">
-					Make an Offer
+					Edit Offer
 				</span>
 
 				<span class="contact-form-title-2">
@@ -26,34 +26,34 @@
 				</span>
 			</div>
 
-			<form class="contact-form validate-form" method="POST" action="newoffer">
+			<form class="contact-form validate-form" method="POST" action="/editoffer/<%= offer[0].job_id %>">
 				<div class="wrap-input validate-input" data-validate="Job Description is required">
 					<span class="label-input">Job Title:</span>
-					<input class="input" type="text" name="job" id="job" placeholder="Enter job description">
+					<input class="input" type="text" name="job" id="job" placeholder="Enter job description" value='<%= offer[0].job %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Location is required">
 					<span class="label-input">Location:</span>
-					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location">
+					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location" value='<%= offer[0].loc %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate="Date is required">
 					<span class="label-input">Date:</span>
-					<input class="input" type="date" name="date" id="date">
+					<input class="input" type="date" name="date" id="date" value='<%= offer[0].date.toDateString() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate="Time is required">
 					<span class="label-input">Time:</span>
-					<input class="input" type="time" name="time" id="time">
+					<input class="input" type="time" name="time" id="time" value='<%= offer[0].time %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Job Details are required">
 					<span class="label-input">Job Details:</span>
-					<textarea class="input" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+					<input class="input" name="details" id="details" value='<%= offer[0].details %>' required>
 					<span class="focus-input"></span>
 				</div>
 

@@ -54,7 +54,7 @@ router.get('/:jobId', function(req, res, next) {
 });
 
 router.post('/:jobId', function(req, res, next) {
-  pool.query(sql_query_insert_bids, [req.params.jobId, req.user.username, req.body.price, req.body.desc], (err, data) => {
+  pool.query(sql_query_insert_bids, [req.params.jobId, req.user.username, req.body.price, req.body.details], (err, data) => {
     console.log(sql_query_insert_bids);
     if (err) {
         console.log(err);

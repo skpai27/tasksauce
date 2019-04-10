@@ -12,7 +12,9 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
+var deletejobRouter = require('./routes/deletejob');
 var dashboardRouter = require('./routes/dashboard');
+var adminDashboardRouter = require('./routes/adminDashboard');
 var leaderboardRouter = require('./routes/leaderboard');
 var premiumRouter = require('./routes/premium');
 
@@ -22,8 +24,12 @@ var premiumRouter = require('./routes/premium');
 /* ---------------------------- */
 var signuploginRouter = require('./routes/signuplogin');
 var tasksRouter = require('./routes/tasks');
+var requestsRouter = require('./routes/requests');
+var offersRouter = require('./routes/offers');
 var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
+var editrequestRouter = require('./routes/editrequest');
+var editofferRouter = require('./routes/editoffer');
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -78,14 +84,19 @@ app.use('/viewOfferJob', viewOfferJob);
 app.use('/requestInProgress', requestInProgress);
 app.use('/offerInProgress', offerInProgress);
 app.use('/dashboard', dashboardRouter);
-
+app.use('/adminDashboard', adminDashboardRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
+app.use('/deletejob', deletejobRouter);
 app.use('/tasks', tasksRouter);
+app.use('/requests', requestsRouter);
+app.use('/offers', offersRouter);
 app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
+app.use('/editrequest', editrequestRouter);
+app.use('/editoffer', editofferRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)

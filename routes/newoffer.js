@@ -2,15 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const { Pool } = require('pg')
-/* --- V7: Using Dot Env ---
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: '********',
-  port: 5432,
-})
-*/
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
@@ -35,11 +26,11 @@ router.post('/', function(req, res, next) {
 	var loc = req.body.loc;
 	var date= req.body.date;
 	var time = req.body.time;
-	var desc = req.body.desc;
+	var details = req.body.details;
 	var user = req.user.username;
 	
 	// Construct Specific SQL Query
-	var insert_query = sql_query + "('" + job + "','" + loc + "','" + date + "','" + time +  "','" + desc + "','" + user +"');";
+	var insert_query = sql_query + "('" + job + "','" + loc + "','" + date + "','" + time +  "','" + details + "','" + user +"');";
 	console.log(insert_query);
 	pool.query(insert_query, (err, data) => {
 		if(err)throw err;
