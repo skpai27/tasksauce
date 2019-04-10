@@ -1,5 +1,14 @@
 const sql = {}
 
+util = {
+	query_request_bidsxjobs: "SELECT jr.job AS job, jr.loc AS loc, jr.date AS date, jr.var AS var, rb.bid_price AS bid_price, rb.bid_info AS bid_info, rb.bid_user AS bid_user, 'request' AS bid_type FROM request_bids rb INNER JOIN job_request jr ON rb.job_id = jr.job_id",
+	query_offer_bidsxjobs: "SELECT jo.job AS job, jo.loc AS loc, jo.date AS date, jo.var AS var, ob.bid_price AS bid_price, ob.bid_info AS bid_info, ob.bid_user AS bid_user, 'offer' AS bid_type FROM offer_bids ob INNER JOIN job_offer jo ON ob.job_id = jo.job_id",
+	query_premium_request: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_request: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username NOT IN (SELECT username FROM premium_users)',
+	query_premium_offer: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_offer: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username NOT IN (SELECT username FROM premium_users)'
+}
+
 sql.query = {
 	// Login
 	userpass: 'SELECT * FROM users WHERE username=$1',
@@ -7,12 +16,18 @@ sql.query = {
 	// Update
 	update_info: 'UPDATE username_password SET first_name=$2, last_name=$3 WHERE username=$1',
 	update_pass: 'UPDATE username_password SET password=$2 WHERE username=$1',
+
+	//Update reviews
+	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_request: 'UPDATE request_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
+	update_review_bidder_offer: 'UPDATE offer_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
+	update_review_author_offer: 'UPDATE offer_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
 	
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
 	query_offer: 'SELECT * FROM job_offer',
-	query_request_unbid: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id)',
-	query_offer_unbid: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id)',
+	query_request_unbid: 'SELECT * FROM (' + util.query_premium_request + ') AS premium NATURAL JOIN (' + util.query_normal_request +') as normal',
+	query_offer_unbid: 'SELECT * FROM (' + util.query_premium_offer + ') AS premium NATURAL JOIN (' + util.query_normal_offer +') as normal',
 
 	// Query tasks on user id
 	query_request_user: 'SELECT * FROM job_request WHERE job_request.username=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
@@ -68,7 +83,11 @@ sql.query = {
 
 	// Premium users queries
 	insert_premium_users: 'INSERT INTO premium_users VALUES($1)',
-	query_premium_users: 'SELECT * FROM public.users WHERE username IN (SELECT username FROM premium_users'
+	query_premium_users: 'SELECT * FROM public.users WHERE username IN (SELECT username FROM premium_users',
+
+	// Bids of user queries
+	query_bids_of_user: "WITH rb_marked AS (" + util.query_request_bidsxjobs + "), ob_marked AS (" + util.query_offer_bidsxjobs + "), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE bid_user=$1"
 }
+
 
 module.exports = sql
