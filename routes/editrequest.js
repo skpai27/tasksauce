@@ -16,7 +16,7 @@ var sql_query_edit = sql_query.query.edit_request;
 router.get('/:jobId', function(req, res, next) {
 	pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
 		if (!err) {
-			if (req.isAuthenticated && isAdmin) {
+			if (req.isAuthenticated && isAdmin.rows[0].is_admin) {
 				console.log("Admin [" + req.user.username + "] is going to edit request");
 				pool.query(sql_query_request, [req.params.jobId], (err, request) => {
 					if (!err) {
@@ -25,7 +25,7 @@ router.get('/:jobId', function(req, res, next) {
 						console.log("Failed to retrieve requested task");
 					}
 				})
-			} else if (req.isAuthenticated && !isAdmin) {
+			} else if (req.isAuthenticated && !isAdmin.rows[0].is_admin) {
 				// TODO: Handle non-admin attempt to access
 				res.redirect('../');
 			} else {
