@@ -19,7 +19,6 @@ const pool = new Pool({
 var query_get_bid_id = sql_query.query.query_bid_from_request_IP;
 var query_get_bid = sql_query.query.query_request_from_bidId;
 var query_get_job = sql_query.query.query_request_job;
-var delete_request_IP = sql_query.query.delete_request_IP;
 var query_insert_completed = sql_query.query.insert_completed_request;
 
 router.get('/:jobId', function(req, res, next) {

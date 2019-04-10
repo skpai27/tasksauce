@@ -14,6 +14,7 @@ var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
 var leaderboardRouter = require('./routes/leaderboard');
+var premiumRouter = require('./routes/premium');
 
 /* ---------------------------- */
 
@@ -88,6 +89,7 @@ app.use('/newoffer', newofferRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)
+app.use('/premium', premiumRouter);
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);

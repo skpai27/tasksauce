@@ -139,6 +139,23 @@
       </div>
     </section>
   <% } %>
+
+  <% if (!premium) { %>
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h2 class="mb-4">Want your requests or offers to always appear at the top? Pay $5.99 to become a premium user!</h2>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
+            <button class="btn btn-lg btn-primary" onclick="window.location.href='/premium'">Click here to sign up as one!</button>
+          </div>
+        </div> 
+      </div>
+    </header>
+  <% } %>
+
   <!-- Footer -->
   <%- include footer.ejs -%>
 
