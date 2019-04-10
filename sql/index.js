@@ -43,8 +43,12 @@ sql.query = {
 
 
 	// Query tasks on task name
-	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2',
-	query_offer_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.username=$2',
+	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
+	query_offer_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.username=$2 AND NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND NOT EXISTS (SELECT 1 FROM offer_completed WHERE job_id=job_offer.job_id)',
+	query_requestIP_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2 AND EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id)',
+	query_offerIP_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.username=$2 AND EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id)',
+	query_requestC_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2 AND EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
+	query_offerC_search: 'SELECT * FROM job_offer WHERE LOWER(job_offer.job) LIKE LOWER($1) and job_offer.username=$2 AND EXISTS (SELECT 1 FROM offer_completed WHERE job_id=job_offer.job_id)',
 
 	// Query job_id from bid
 	query_request_from_bidId: 'SELECT * FROM request_bids WHERE bid_id=$1',
