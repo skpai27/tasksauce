@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Tasksauce</title>
+  <title>Task Sauce</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,24 +40,21 @@
             <li class="list-group-item"><b>Location: </b><%= data[i].location %></li>
           </ul>
           <div class="card-body">
-            <b>Accepted bid</b>
+            <b>Accepted Bid</b>
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Accepted Price</th>
                   <th scope="col">Bid User</th>
-                  <th scope ="col">Bid Details</th>
+                  <th scope ="col">Bid details</th>
                 </tr>
               </thead>
               <tbody>
-                <form method = 'POST' action = "/offerInProgress/<%= data[i].job_id %>">
                 <tr>
                     <td><%= bid.bid_price%></td>
                     <td><%= bid.bid_user%></td>
                     <td><%= bid.bid_info%></td>
-                    <td><button type="submit" class="btn btn-info" value ="Accept">Complete</button></td>
                 </tr>
-                </form>
               </tbody>
               </table>
           </div>

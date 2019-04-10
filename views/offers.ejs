@@ -34,8 +34,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">Need some help?<br />Or happen to have a little spare time?</h1>
-          <h3 class="mb-5">Browse through our list of tasks offered and requested below!</h3>
+          <h1 class="mb-5">Need some help?</h1>
+          <h3 class="mb-5">Browse through our list of tasks offered below!</h3>
         </div>
       </div> 
     </div>
@@ -46,44 +46,7 @@
   <section class="tasks text-center bg-light">
     <div class="container">
 
-      <!-- Tables in 2 rows -->
-      <div class="row py-4">
-        <div class="card mx-auto">
-          <div class="card-header">Tasks Requested</div>
-          <div class="card-body">
-            <div style="overflow-x:auto;">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Task</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">By</th>
-                    <th scope="col">View</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for(var i=0; i<requests.length; i++) { %>
-                  <tr>
-                    <td><%= requests[i].job%></td>
-                    <td><%= requests[i].loc%></td>
-                    <td><%= requests[i].date.toDateString()%></td>
-                    <td><%= requests[i].time%></td>
-                    <td><%= requests[i].details%></td>
-                    <td><%= requests[i].username%></td>
-                    <td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
-                    <%- include adminModifyRequestButton.ejs -%>
-                  </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Offers Table -->
       <div class="row py-4">
         <div class="card mx-auto">
           <div class="card-header">Tasks Offered</div>
@@ -138,22 +101,6 @@
         </div>
       </div>
     </section>
-  <% } %>
-
-  <% if (!premium) { %>
-    <header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h2 class="mb-4">Want your requests or offers to always appear at the top? Pay $5.99 to become a premium user!</h2>
-          </div>
-          <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
-            <button class="btn btn-lg btn-primary" onclick="window.location.href='/premium'">Click here to sign up as one!</button>
-          </div>
-        </div> 
-      </div>
-    </header>
   <% } %>
 
   <!-- Footer -->
