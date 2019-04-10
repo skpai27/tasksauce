@@ -1,5 +1,10 @@
 const sql = {}
 
+util = {
+	query_request_bidsxjobs: "SELECT jr.job AS job, jr.loc AS loc, jr.date AS date, jr.var AS var, rb.bid_price AS bid_price, rb.bid_info AS bid_info, rb.bid_user AS bid_user, 'request' AS bid_type FROM request_bids rb INNER JOIN job_request jr ON rb.job_id = jr.job_id",
+	query_offer_bidsxjobs: "SELECT jo.job AS job, jo.loc AS loc, jo.date AS date, jo.var AS var, ob.bid_price AS bid_price, ob.bid_info AS bid_info, ob.bid_user AS bid_user, 'offer' AS bid_type FROM offer_bids ob INNER JOIN job_offer jo ON ob.job_id = jo.job_id"
+}
+
 sql.query = {
 	// Login
 	userpass: 'SELECT * FROM users WHERE username=$1',
@@ -67,7 +72,8 @@ sql.query = {
 	query_offer_top_completers: 'SELECT jo.username as username, count(*) FROM offer_completed oc INNER JOIN job_offer jo on oc.job_id = jo.job_id GROUP BY jo.username ORDER BY count desc LIMIT 5',
 
 	// Bids of user queries
-	query_bids_of_user: "WITH rb_marked AS (SELECT *, 'request' AS bid_type FROM request_bids), ob_marked AS (SELECT *, 'offer' AS bid_type FROM offer_bids), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE username=$1"
+	query_bids_of_user: "WITH rb_marked AS (" + util.query_request_bidsxjobs + "), ob_marked AS (" + util.query_offer_bidsxjobs + "), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE bid_user=$1"
 }
+
 
 module.exports = sql
