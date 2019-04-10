@@ -26,8 +26,8 @@ sql.query = {
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
 	query_offer: 'SELECT * FROM job_offer',
-	query_request_unbid: 'SELECT * FROM (' + util.query_premium_request + ') AS premium NATURAL JOIN (' + util.query_normal_request +') as normal',
-	query_offer_unbid: 'SELECT * FROM (' + util.query_premium_offer + ') AS premium NATURAL JOIN (' + util.query_normal_offer +') as normal',
+	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium',
+	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium',
 
 	// Query tasks on user id
 	query_request_user: 'SELECT * FROM job_request WHERE job_request.username=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
