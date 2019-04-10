@@ -186,23 +186,7 @@ INSERT INTO job_offer ("job", "loc", "date", "time", "details","username")
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver some fruits','d3');
 INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
---job_id 14 (below)
-INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
-VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Bugis to Temasek Hall','p1');
-INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
-VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Date with you','p2');
-INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
-VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver some durians','p1');
-INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
-VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Pioneer to Kent Ridge','p2');
-INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
-VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Fix lights','p1');
-INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
-VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Dismantle fan','p2');
-INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
-VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
-INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
-VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
+
 
 --bid_id 1
 insert into REQUEST_BIDS values ('1','dummy2','1','tested bid');
@@ -249,7 +233,7 @@ VALUES ('12', '3');
 --job id 14
 INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'bid for me plz','d4');
---bid id 4, 5, 6
+--bid id 4, 5, 6, 7
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('14', 'd1', '15', 'me want food real bad');
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
@@ -258,6 +242,34 @@ INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('14', 'd3', '100', 'me am d3 soooo hungz');
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('13', 'd1', '12', 'me am d1 soooo hungz');
+
+--job_id 8
+INSERT INTO job_request ("job", "loc", "date", "time", "details","username") 
+VALUES ('Feed Kids', 'BSH', '2019-05-15', '12:30', 'im hungryy','d1');
+--bid_id 4
+INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('8', 'd4', '22', 'im lovely too but ill feed you with makan');
+INSERT INTO request_completed ("job_id", "bid_id")
+VALUES ('8', '4');
+
+--job_id 15 (below)
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
+VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Bugis to Temasek Hall','p1');
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
+VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Date with you','p2');
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
+VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver some durians','p1');
+INSERT INTO job_offer ("job", "loc", "date", "time", "details","username") 
+VALUES ('Delivery', 'TH', '2019-12-01', '12:30', 'Deliver parcel from Pioneer to Kent Ridge','p2');
+--job_id 9 (below, request)
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
+VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Fix lights','p1');
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
+VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Dismantle fan','p2');
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
+VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
+INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
+VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
 
 --TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
 --when a row is inserted into offer_in_progress. Trigger will cause unaccepted
