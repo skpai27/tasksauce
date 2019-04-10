@@ -65,6 +65,9 @@ sql.query = {
 	query_request_top_offerers: 'SELECT username, count(*) FROM job_offer GROUP BY username ORDER BY count desc LIMIT 5',
 	query_request_top_completers: 'SELECT rb.bid_user as username, count(*) FROM request_completed rc INNER JOIN request_bids rb on rc.bid_id = rb.bid_id GROUP BY rb.bid_user ORDER BY count desc LIMIT 5',
 	query_offer_top_completers: 'SELECT jo.username as username, count(*) FROM offer_completed oc INNER JOIN job_offer jo on oc.job_id = jo.job_id GROUP BY jo.username ORDER BY count desc LIMIT 5',
+
+	// Bids of user queries
+	query_bids_of_user: "WITH rb_marked AS (SELECT *, 'request' AS bid_type FROM request_bids), ob_marked AS (SELECT *, 'offer' AS bid_type FROM offer_bids), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE username=$1"
 }
 
 module.exports = sql
