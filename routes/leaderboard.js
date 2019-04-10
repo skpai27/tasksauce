@@ -12,8 +12,7 @@ const pool = new Pool({
 var sql_query_request_top_offerers = sql_query.query.query_request_top_offerers;
 var sql_query_request_top_completers = sql_query.query.query_request_top_completers;
 var sql_query_offer_top_completers = sql_query.query.query_offer_top_completers;
-var sql_query_total_top_completers = 'with request_completers as (' + sql_query_request_top_completers + '), offer_completers as (' + sql_query_offer_top_completers + ') SELECT rc.username, rc.count + oc.count as count FROM request_completers rc INNER JOIN offer_completers oc ON rc.username = oc.username';
-
+var sql_query_total_top_completers = sql_query.query.query_total_top_completers;
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request_top_offerers, (err, top_offerers) => {

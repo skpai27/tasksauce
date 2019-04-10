@@ -208,7 +208,7 @@ VALUES ('12', '3');
 --job id 14
 INSERT INTO job_offer ("job", "loc", "date", "var", "desc","username") 
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'bid for me plz','d4');
---bid id 4, 5, 6
+--bid id 4, 5, 6, 7
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('14', 'd1', '15', 'me want food real bad');
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
@@ -217,6 +217,17 @@ INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('14', 'd3', '100', 'me am d3 soooo hungz');
 INSERT INTO offer_bids ("job_id", "bid_user", "bid_price", "bid_info")
 VALUES ('13', 'd1', '12', 'me am d1 soooo hungz');
+
+--job_id 8
+INSERT INTO job_request ("job", "loc", "date", "var", "desc","username") 
+VALUES ('Feed Kids', 'BSH', '2019-05-15', '12:30', 'im hungryy','d1');
+--bid_id 4
+INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('8', 'd4', '22', 'im lovely too but ill feed you with makan');
+INSERT INTO request_completed ("job_id", "bid_id")
+VALUES ('8', '4');
+
+
 
 
 --TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
