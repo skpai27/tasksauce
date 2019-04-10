@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Tasksauce</title>
+  <title>Task Sauce</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,13 +32,13 @@
       <% for(var i=0; i < data.length; i++) { %>
       <div class="card col-lg-8 offset-2" >
           <div class="card-body">
-            <h5 class="font-weight-bold mb-3">Job:<%= data[i].job %>e</h5>
-            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
+            <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %></h5>
+            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].details %></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><b>Date: </b><%= data[i].date %></li>
-            <li class="list-group-item"><b>Time:</b><%= data[i].time %></li>
-            <li class="list-group-item"><b>Location:</b><%= data[i].location %></li>
+            <li class="list-group-item"><b>Time: </b><%= data[i].time %></li>
+            <li class="list-group-item"><b>Location: </b><%= data[i].loc %></li>
           </ul>
           <div class="card-body">
               <b>View Current Bids</b>
@@ -47,9 +47,9 @@
                     <tr>
                       <th scope="col">Bid Price</th>
                       <th scope="col">Bid User</th>
-                      <th scope ="col">Bid details</th>
+                      <th scope ="col">Bid Details</th>
                       <% if (self) { %>
-                        <th scope = "col"> Accept Bid</th>
+                        <th scope = "col">Accept Bid</th>
                       <% } %>
                     </tr>
                   </thead>
@@ -62,7 +62,7 @@
                               <td><%= data2[i].bid_user%></td>
                               <td><%= data2[i].bid_info%></td>
                               <% if (self) { %>
-                                <td><button type="submit" class="btn btn-info" value ="Accept"">Accept</button></td>
+                                <td><button type="submit" class="btn btn-info" value ="Accept">Accept</button></td>
                               <% } %>
                             </tr>
                             </form>
@@ -85,7 +85,7 @@
           
                   <div class="wrap-input validate-input" data-validate = "Additional Details are required">
                     <span class="label-input">Additional Details:</span>
-                    <textarea  class="form-control input-lg" name="desc" id="desc" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                    <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
                     <span class="focus-input"></span>
                   </div>
           
