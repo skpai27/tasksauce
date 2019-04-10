@@ -57,10 +57,10 @@ sql.query = {
 	query_offer_from_bidId: 'SELECT * FROM offer_bids WHERE bid_id=$1',
 
 	// Query bid from job_id
-	query_bid_from_request_IP: 'SELECT * FROM request_in_progress WHERE job_id=$1',
-	query_bid_from_offer_IP: 'SELECT * FROM offer_in_progress WHERE job_id=$1',
-	query_bid_from_request_C: 'SELECT * FROM request_completed WHERE job_id=$1',
-	query_bid_from_offer_C: 'SELECT * FROM offer_completed WHERE job_id=$1',
+	query_bid_from_request_IP: 'SELECT * FROM request_in_progress WHERE job_id=$1 ORDER BY bid_price ASC',
+	query_bid_from_offer_IP: 'SELECT * FROM offer_in_progress WHERE job_id=$1 ORDER BY bid_price DESC',
+	query_bid_from_request_C: 'SELECT * FROM request_completed WHERE job_id=$1 ORDER BY bid_price ASC',
+	query_bid_from_offer_C: 'SELECT * FROM offer_completed WHERE job_id=$1 ORDER BY bid_price DESC',
 
 	// Insert bids
 	insert_request_bids: 'INSERT INTO request_bids VALUES($1, $2, $3, $4)',
@@ -74,13 +74,21 @@ sql.query = {
 	delete_request_IP: 'DELETE FROM request_in_progress WHERE job_id=$1',
 	delete_offer_IP: 'DELETE FROM offer_in_progress WHERE job_id=$1',
 
-	// Delete task (Only by Admin)
+	// Delete task (Only by Admin or Self)
 	delete_request: 'DELETE FROM job_request WHERE job_request.job_id=$1',
 	delete_offer: 'DELETE FROM job_offer WHERE job_offer.job_id=$1',
 
-	// Edit task (Only by Admin)
+	// Edit task (Only by Admin or Self)
 	edit_request: 'UPDATE job_request SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
 	edit_offer: 'UPDATE job_offer SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
+
+	// Delete bid (Only by Admin or Self)
+	delete_request_bid: 'DELETE FROM request_bids WHERE job_id=$1 AND bid_id=$2',
+	delete_offer_bid: 'DELETE FROM offer_bids WHERE job_id=$1 AND bid_id=$2',
+
+	// Edit bid (Only by Admin or Self)
+	edit_request_bid: 'UPDATE request_bids SET bid_price=$3, bid_info=$4 WHERE job_id=$1 and bid_id=$2',
+	edit_offer_bid: 'UPDATE offer_bids SET bid_price=$3, bid_info=$4 WHERE job_id=$1 and bid_id=$2',
 
 	// Insert completed
 	insert_completed_request: 'INSERT INTO request_completed VALUES($1, $2)',

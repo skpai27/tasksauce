@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Task Sauce</title>
+  <title>Edit Bid</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,14 +61,12 @@
                               <td><%= data2[i].bid_price%></td>
                               <td><%= data2[i].bid_user%></td>
                               <td><%= data2[i].bid_info%></td>
-                              <td><button type="submit" class="btn btn-info" value ="Accept">Accept</button></td>
-                                <%- include modifyBidRequestButton.ejs -%>
-                              <!-- <% if (self) { %>
+                              <% if (self) { %>
                                 <td><button type="submit" class="btn btn-info" value ="Accept">Accept</button></td>
                                 <%- include modifyBidRequestButton.ejs -%>
                               <% } else if (data2[i].bid_user === currentUser) { %>
                                 <%- include modifyBidRequestButton.ejs -%>
-                              <% } %> -->
+                              <% } %>
                             </tr>
                             </form>
                       <% } %>
@@ -79,17 +77,17 @@
               <b>Login to make a bid</b>
             <% } else if (auth && !self){ %>
             
-              <b>Make a bid for this job!!</b>
-              <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>">
+              <b>Edit your bid for this job</b>
+              <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>/editRequestBid/<%= bidId %>">
                 <div class="wrap-input validate-input" data-validate="Price is required">
                   <span class="label-input">Price:</span>
-                  <input class="input" type="number" name="price" id="price">
+                  <input class="input" type="number" name="price" id="price" value=<%= data2[i].bid_price %>>
                   <span class="focus-input"></span>
                 </div>
         
                 <div class="wrap-input validate-input" data-validate = "Additional Details are required">
                   <span class="label-input">Additional Details:</span>
-                  <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                  <input class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" value=<%= data2[i].bid_info %>></input>
                   <span class="focus-input"></span>
                 </div>
         

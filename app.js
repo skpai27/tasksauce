@@ -13,6 +13,7 @@ var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
 var registerRouter = require('./routes/register');
 var deletejobRouter = require('./routes/deletejob');
+var deletebidRouter = require('./routes/deletebid');
 var dashboardRouter = require('./routes/dashboard');
 var adminDashboardRouter = require('./routes/adminDashboard');
 var leaderboardRouter = require('./routes/leaderboard');
@@ -28,6 +29,8 @@ var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
 var editrequestRouter = require('./routes/editrequest');
 var editofferRouter = require('./routes/editoffer');
+// var editRequestBidRouter = require('./routes/editRequestBid');
+// var editOfferBidRouter = require('./routes/editOfferBid');
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -95,6 +98,8 @@ app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
 app.use('/editrequest', editrequestRouter);
 app.use('/editoffer', editofferRouter);
+// app.use('/editRequestBid', editRequestBidRouter);
+// app.use('/editOfferBid', editOfferBidRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)
