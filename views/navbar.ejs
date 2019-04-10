@@ -42,6 +42,17 @@
     </form>
   </ul>
 
+  <!-- New Task button -->
+  <% if (auth) { %>
+    <ul class="navbar-nav mr-auto">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create Task</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/newoffer" role="button">Create Offer</a>
+        <a class="dropdown-item" href="/newrequest" role="button">Create Request</a>
+      </div>
+    </ul>
+  <% } %>
+
   <!-- Login/Logout button -->
   <ul class="navbar-nav ml-auto">
       <form class="form-inline">

@@ -17,7 +17,7 @@
   <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="/static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> -->
 
 
   <!-- Custom styles for this template -->
@@ -29,8 +29,8 @@
   <link href="/static/css/better-rating.css" rel="stylesheet" />
 
     <!--External fonts-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
 
 </head>
 
@@ -42,13 +42,13 @@
       <% for(var i=0; i < data.length; i++) { %>
       <div class="card col-lg-8 offset-2" >
           <div class="card-body">
-            <h5 class="font-weight-bold mb-3">Job:<%= data[i].job %>e</h5>
+            <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %></h5>
             <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Date: </b><%= data[i].date %></li>
-            <li class="list-group-item"><b>Time:</b><%= data[i].time %></li>
-            <li class="list-group-item"><b>Location:</b><%= data[i].location %></li>
+            <li class="list-group-item"><b>Date: </b><%= data[i].date.toDateString() %></li>
+            <li class="list-group-item"><b>Time: </b><%= data[i].time %></li>
+            <li class="list-group-item"><b>Location: </b><%= data[i].loc %></li>
           </ul>
           <div class="card-body">
             <b>Accepted bid</b>
@@ -57,7 +57,7 @@
                 <tr>
                   <th scope="col">Accepted Price</th>
                   <th scope="col">Bid User</th>
-                  <th scope ="col">Bid details</th>
+                  <th scope ="col">Bid Details</th>
                 </tr>
               </thead>
               <tbody>
