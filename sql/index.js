@@ -65,6 +65,10 @@ sql.query = {
 	query_request_top_offerers: 'SELECT username, count(*) FROM job_offer GROUP BY username ORDER BY count desc LIMIT 5',
 	query_request_top_completers: 'SELECT rb.bid_user as username, count(*) FROM request_completed rc INNER JOIN request_bids rb on rc.bid_id = rb.bid_id GROUP BY rb.bid_user ORDER BY count desc LIMIT 5',
 	query_offer_top_completers: 'SELECT jo.username as username, count(*) FROM offer_completed oc INNER JOIN job_offer jo on oc.job_id = jo.job_id GROUP BY jo.username ORDER BY count desc LIMIT 5',
+
+	// Premium users queries
+	insert_premium_users: 'INSERT INTO premium_users VALUES($1)',
+	query_premium_users: 'SELECT * FROM public.users WHERE username IN (SELECT username FROM premium_users'
 }
 
 module.exports = sql
