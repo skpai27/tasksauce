@@ -17,6 +17,7 @@ var sql_query_request_IP = sql_query.query.query_request_inprog;
 var sql_query_offer_IP = sql_query.query.query_offer_inprog;
 var sql_query_request_C = sql_query.query.query_request_completed;
 var sql_query_offer_C = sql_query.query.query_offer_completed;
+var sql_combined_bids = sql_query.query.query_bids_of_user;
 
 
 /* GET home page. */
@@ -28,9 +29,12 @@ router.get('/', function(req, res, next) {
 					pool.query(sql_query_offer_IP, [req.user.username], (err3, offersIP) => {
 						pool.query(sql_query_request_C, [req.user.username], (err4, requestC) => {
 							pool.query(sql_query_offer_C, [req.user.username], (err5, offersC) => {
-								if (!err) {
-									res.render('dashboard', { auth: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows });
-								}
+								console.log(sql_combined_bids);
+								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
+									if (!err) {
+										res.render('dashboard', { auth: true, title: 'dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+									}
+								})
 							})
 						})
 					})
