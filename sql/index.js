@@ -3,10 +3,10 @@ const sql = {}
 util = {
 	query_request_bidsxjobs: "SELECT jr.job AS job, jr.loc AS loc, jr.date AS date, jr.var AS var, rb.bid_price AS bid_price, rb.bid_info AS bid_info, rb.bid_user AS bid_user, 'request' AS bid_type FROM request_bids rb INNER JOIN job_request jr ON rb.job_id = jr.job_id",
 	query_offer_bidsxjobs: "SELECT jo.job AS job, jo.loc AS loc, jo.date AS date, jo.var AS var, ob.bid_price AS bid_price, ob.bid_info AS bid_info, ob.bid_user AS bid_user, 'offer' AS bid_type FROM offer_bids ob INNER JOIN job_offer jo ON ob.job_id = jo.job_id",
-	query_premium_request: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username IN (SELECT username FROM premium_users)',
-	query_normal_request: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username NOT IN (SELECT username FROM premium_users)',
-	query_premium_offer: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username IN (SELECT username FROM premium_users)',
-	query_normal_offer: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username NOT IN (SELECT username FROM premium_users)'
+	query_premium_request: 'SELECT "job", "loc", "date", "var", "desc","username", 1 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_request: 'SELECT "job", "loc", "date", "var", "desc","username", 2 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND username NOT IN (SELECT username FROM premium_users)',
+	query_premium_offer: 'SELECT "job", "loc", "date", "var", "desc","username", 1 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_offer: 'SELECT "job", "loc", "date", "var", "desc","username", 2 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND username NOT IN (SELECT username FROM premium_users)'
 }
 
 sql.query = {
@@ -26,8 +26,8 @@ sql.query = {
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
 	query_offer: 'SELECT * FROM job_offer',
-	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium',
-	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium',
+	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT "job", "loc", "date", "var", "desc","username" FROM premium ORDER BY filter',
+	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT "job", "loc", "date", "var", "desc","username" FROM premium ORDER BY FILTER',
 
 	// Query tasks on user id
 	query_request_user: 'SELECT * FROM job_request WHERE job_request.username=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',

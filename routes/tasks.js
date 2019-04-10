@@ -23,7 +23,7 @@ var sql_query_offer = sql_query.query.query_offer_unbid;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
-		if (err) throw err;
+		if (err) console.log(sql_query_request);
 		pool.query(sql_query_offer, (err, offers) => {
 			if (req.isAuthenticated()) {
 				res.render('tasks', { auth: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
