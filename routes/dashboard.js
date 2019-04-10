@@ -28,7 +28,6 @@ router.get('/', function(req, res, next) {
 					pool.query(sql_query_offer_IP, [req.user.username], (err3, offersIP) => {
 						pool.query(sql_query_request_C, [req.user.username], (err4, requestC) => {
 							pool.query(sql_query_offer_C, [req.user.username], (err5, offersC) => {
-								console.log(sql_combined_bids);
 								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
 									pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
 										if (!err) {
@@ -71,23 +70,6 @@ router.post('/', function(req, res) {
 		}
 	});
 });
-
-// /* POST for delete */
-// router.post('/delete/:jobId', function(req, res) {
-// 	pool.query(sql_query_search_request, ['%' + req.body.task_search + '%', req.user.username], (err, search) => {
-// 		if (!err) {
-// 			pool.query(sql_query_search_offer, ['%' + req.body.task_search + '%', req.user.username], (err, offers) => {
-// 				if (!err) {
-// 					res.render('dashboard', {auth: true, title: 'Search', requests: search.rows, offers: offers.rows });
-// 				} else {
-// 					console.log(err);
-// 				}
-// 			})
-// 		} else {
-// 			console.log(err)
-// 		}
-// 	});
-// });
 
 
 module.exports = router;

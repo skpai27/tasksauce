@@ -1,12 +1,16 @@
 <!-- Modify job button ONLY for Admin and Self -->
 <% if (admin || currentUser === data2[i].bid_user) { %>
   <td>
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Job</button>
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Bid</button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="./<%= jobId %>/editrequestbid/<%= data2[i].bid_id %>" role="button" value="Edit">Edit</a>
-      <form method = 'POST' action = "deletebid/req/<%= jobId %>/<%= data2[i].bid_id %>">
+      <a class="dropdown-item" href="./<%= jobId %>/edit/<%= data2[i].bid_id %>" role="button" value="Edit">Edit</a>
+      <form method = 'POST' action = "/deletebid/req/<%= jobId %>/<%= data2[i].bid_id %>">
         <button class="dropdown-item" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
       </form>
     </div>
   </td>
+<% } else { %>
+	<td>
+		<button class="btn btn-secondary dropdown-toggle disabled" type="button" id="dropdownMenuButton" data-toggle="dropdown" tabindex="-1" aria-haspopup="true" aria-expanded="false">Modify Bid</button>
+	</td>
 <% } %>

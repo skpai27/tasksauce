@@ -170,7 +170,7 @@ INSERT INTO job_offer ("job", "loc", "date", "time", "details","username")
 VALUES ('Delivery', 'KR', '2019-12-01', '12:30', 'Deliver parcel from Jurong East to Kent Ridge','d4');
 
 --bid_id 1
-insert into REQUEST_BIDS values ('1','dummy2','1','tested bid');
+insert into request_bids values ('1','dummy2','1','tested bid');
 
 --job_request > request_bid > request_completed sets
 --job_id 6

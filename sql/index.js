@@ -45,8 +45,8 @@ sql.query = {
 	// Query tasks on job id
 	query_request_job: 'SELECT * FROM job_request WHERE job_request.job_id=$1',
 	query_offer_job: 'SELECT * FROM job_offer WHERE job_offer.job_id=$1',
-	query_bids_request: 'SELECT * FROM request_bids WHERE job_id=$1',
-	query_bids_offer: 'SELECT * FROM offer_bids WHERE job_id=$1',
+	query_bids_request: 'SELECT * FROM request_bids WHERE job_id=$1 ORDER BY bid_price ASC',
+	query_bids_offer: 'SELECT * FROM offer_bids WHERE job_id=$1 ORDER BY bid_price DESC',
 
 	// Query tasks on task name
 	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2',
@@ -83,8 +83,8 @@ sql.query = {
 	edit_offer: 'UPDATE job_offer SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
 
 	// Delete bid (Only by Admin or Self)
-	delete_request_bid: 'DELETE FROM request_bids WHERE job_id=$1 AND bid_id=$2',
-	delete_offer_bid: 'DELETE FROM offer_bids WHERE job_id=$1 AND bid_id=$2',
+	delete_request_bid: 'DELETE FROM request_bids WHERE bid_id=$1',
+	delete_offer_bid: 'DELETE FROM offer_bids WHERE bid_id=$1',
 
 	// Edit bid (Only by Admin or Self)
 	edit_request_bid: 'UPDATE request_bids SET bid_price=$3, bid_info=$4 WHERE job_id=$1 and bid_id=$2',

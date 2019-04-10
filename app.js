@@ -29,8 +29,6 @@ var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
 var editrequestRouter = require('./routes/editrequest');
 var editofferRouter = require('./routes/editoffer');
-// var editRequestBidRouter = require('./routes/editRequestBid');
-// var editOfferBidRouter = require('./routes/editOfferBid');
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -91,6 +89,7 @@ app.use('/logout', logoutRouter);
 app.use('/register', registerRouter);
 app.use('/signuplogin', signuploginRouter);
 app.use('/deletejob', deletejobRouter);
+app.use('/deletebid', deletebidRouter);
 app.use('/tasks', tasksRouter);
 app.use('/requests', requestsRouter);
 app.use('/offers', offersRouter);
@@ -98,8 +97,6 @@ app.use('/newrequest', newrequestRouter);
 app.use('/newoffer', newofferRouter);
 app.use('/editrequest', editrequestRouter);
 app.use('/editoffer', editofferRouter);
-// app.use('/editRequestBid', editRequestBidRouter);
-// app.use('/editOfferBid', editOfferBidRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)
