@@ -75,15 +75,15 @@ router.get('/:jobId/edit/:bidId', function(req, res, next) {
                 } else {
                   if (req.user.username === data.rows[0].username) {
                     if (isAdmin.rows[0].is_admin) {
-                      res.render('viewOfferJob', { auth:true, admin: true, self:true, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
+                      res.render('viewOfferJob', { auth:true, admin: true, self:true, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, offers: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
                     } else {
-                      res.render('viewOfferJob', { auth:true, admin: false, self:true, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
+                      res.render('viewOfferJob', { auth:true, admin: false, self:true, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, offers: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
                     }
                   } else {
                     if (isAdmin.rows[0].is_admin) {
-                      res.render('viewOfferJob', { auth:true, admin: true, self:false, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
+                      res.render('viewOfferJob', { auth:true, admin: true, self:false, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, offers: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
                     } else {
-                      res.render('viewOfferJob', { auth:true, admin: false, self:false, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
+                      res.render('viewOfferJob', { auth:true, admin: false, self:false, edit: true, title: 'Database Connect', username: req.user.username, jobId: req.params.jobId, offers: data.rows,data2:data2.rows, bidId: req.params.bidId, bid: bid.rows});
                     }
                   }
                 }
@@ -91,7 +91,7 @@ router.get('/:jobId/edit/:bidId', function(req, res, next) {
             }
           });
         } else {
-          res.render('viewOfferJob', { auth:false, self:false, admin:false, edit: false, title: 'Database Connect', username: null, jobId: req.params.jobId, data: data.rows, data2:data2.rows, bidId: req.params.bidId});
+          res.render('viewOfferJob', { auth:false, self:false, admin:false, edit: false, title: 'Database Connect', username: null, jobId: req.params.jobId, offers: data.rows, data2:data2.rows, bidId: req.params.bidId});
         }
       });
     

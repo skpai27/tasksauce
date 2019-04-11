@@ -27,7 +27,7 @@ router.get('/:jobId', function(req, res, next) {
 					res.redirect('../signuplogin');
 				}
 			} else {
-				console.log("Admin & auth check failed");
+				console.log("Admin and/or auth check failed");
 			}
 		})
 	})

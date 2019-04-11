@@ -29,19 +29,36 @@
   <%- include navbar.ejs -%>
 
   <div class="text-center lead my-5">
-      <% for(var i=0; i < data.length; i++) { %>
-      <div class="card col-lg-8 offset-2" >
-          <div class="card-body">
-            <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %></h5>
-            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].details %></p>
+      <% for(var i=0; i < requests.length; i++) { %>
+      <div class="card col-lg-8 offset-2">
+        <div class="card-header">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm"></div>
+              <div class="col-sm">
+                <h3 class="font-weight-bold"><%= requests[i].job %></h3>
+              </div>
+              <div class="col-sm">
+                <%- include modifyJobRequestButton.ejs -%>
+              </div>
+            </div>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Date: </b><%= data[i].date.toDateString() %></li>
-            <li class="list-group-item"><b>Time: </b><%= data[i].time %></li>
-            <li class="list-group-item"><b>Location: </b><%= data[i].loc %></li>
-          </ul>
+        </div>
+          
           <div class="card-body">
-              <b>View Current Bids</b>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Description: </b><%= requests[i].details %></li>
+              <li class="list-group-item"><b>Date: </b><%= requests[i].date.toDateString() %></li>
+              <li class="list-group-item"><b>Time: </b><%= requests[i].time %></li>
+              <li class="list-group-item"><b>Location: </b><%= requests[i].loc %></li>
+            </ul>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+                <b>View Current Bids</b>
+            </div>
+            <div class="card-body">
               <table class="table table-striped">
                   <thead>
                     <tr>
@@ -54,88 +71,97 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% for(var i=0; i<data2.length; i++){ %>
-                        <tr>
-                            <td><%= data2[i].bid_price%></td>
-                            <td><%= data2[i].bid_user%></td>
-                            <td><%= data2[i].bid_info%></td>
-                            <% if (self) { %>
-                              <form method='POST' action="/viewRequestJob/accept/<%= data2[i].bid_id %>">
-                                <td><button type="submit" class="btn btn-info" value ="Accept">Accept</button></td>
-                              </form>
-                            <% } %>
-                            <% if (!edit) { %>
-                              <%- include modifyBidRequestButton.ejs -%>
-                            <% } %>
-                        </tr>
-                    <% } %>
+                      <% for(var i=0; i<data2.length; i++){ %>
+                          <tr>
+                              <td><%= data2[i].bid_price%></td>
+                              <td><%= data2[i].bid_user%></td>
+                              <td><%= data2[i].bid_info%></td>
+                              <% if (self) { %>
+                                <form method = 'POST' action = "/viewRequestJob/accept/<%= data2[i].bid_id %>">
+                                  <td><button type="submit" class="btn btn-info" value ="Accept">Accept</button></td>
+                                </form>
+                              <% } %>
+                              <% if (!edit) { %>
+                                <%- include modifyBidRequestButton.ejs -%>
+                              <% } %>
+                            </tr>
+                      <% } %>
                   </tbody>
               </table>
+            </div>
 
-            <% if (!auth) { %>
-              <b>Login to make a bid</b>
-            <% } else if ((auth && !self) || admin) { %>
+            <div class="card col-lg-6 align-self-center bg-light my-5">
+              <% if (!auth) { %>
+                <div class="align-items-center my-3">
+                  <a class="btn btn-outline-info mr-2" href="/signuplogin" role="button">Login</a>
+                  <b>to make a bid</b>
+                </div>
+              <% } else if ((auth && !self) || admin) { %>
 
-              <% if (edit) { %>
+                <% if (edit) { %>
+                  <div class="card-header">
+                    <b>Edit this Bid</b>
+                  </div>
+                  <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>/edit/<%= bidId %>">
+                    <div class="wrap-input validate-input my-3" data-validate="Price is required">
+                      <span class="label-input">Price:</span>
+                      <input class="input" type="number" name="price" id="price" value=<%= bid[0].bid_price %>>
+                      <span class="focus-input"></span>
+                    </div>
+            
+                    <div class="wrap-input validate-input my-2" data-validate = "Additional Details are required">
+                      <span class="label-input">Additional Details:</span>
+                      <input class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" value=<%= bid[0].bid_info %>></input>
+                      <span class="focus-input"></span>
+                    </div>
+            
+                    <div class="container-contact-form-btn my-3">
+                      <button class="contact-form-btn">
+                        <span>
+                          Submit
+                          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                  </form>
 
-                <b>Edit this Bid</b>
-                <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>/edit/<%= bidId %>">
-                  <div class="wrap-input validate-input" data-validate="Price is required">
-                    <span class="label-input">Price:</span>
-                    <input class="input" type="number" name="price" id="price" value=<%= bid[0].bid_price %>>
-                    <span class="focus-input"></span>
+                <% } else { %>
+                  <div class="card-header">
+                    <b>Make a bid for this job!!</b>
                   </div>
-          
-                  <div class="wrap-input validate-input" data-validate = "Additional Details are required">
-                    <span class="label-input">Additional Details:</span>
-                    <input class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" value=<%= bid[0].bid_info %>></input>
-                    <span class="focus-input"></span>
+                  <div class="card-body">
+                    <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>">
+                      <div class="wrap-input validate-input my-3" data-validate="Price is required">
+                        <span class="label-input">Price:</span>
+                        <input class="input" type="number" name="price" id="price" placeholder=" Price">
+                        <span class="focus-input"></span>
+                      </div>
+              
+                      <div class="wrap-input validate-input my-2" data-validate = "Additional Details are required">
+                        <span class="label-input">Additional Details:</span>
+                        <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                        <span class="focus-input"></span>
+                      </div>
+              
+                      <div class="container-contact-form-btn my-3">
+                        <button class="contact-form-btn">
+                          <span>
+                            Submit
+                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                      </div>
+                    </form>
                   </div>
-          
-                  <div class="container-contact-form-btn">
-                    <button class="contact-form-btn">
-                      <span>
-                        Submit
-                        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                      </span>
-                    </button>
-                  </div>
-                </form>
+                <% } %>
 
               <% } else { %>
-
-                <b>Make a bid for this job!!</b>
-                <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>">
-                  <div class="wrap-input validate-input" data-validate="Price is required">
-                    <span class="label-input">Price:</span>
-                    <input class="input" type="number" name="price" id="price" placeholder=" Price">
-                    <span class="focus-input"></span>
-                  </div>
-          
-                  <div class="wrap-input validate-input" data-validate = "Additional Details are required">
-                    <span class="label-input">Additional Details:</span>
-                    <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
-                    <span class="focus-input"></span>
-                  </div>
-          
-                  <div class="container-contact-form-btn">
-                    <button class="contact-form-btn">
-                      <span>
-                        Submit
-                        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-                      </span>
-                    </button>
-                  </div>
-                </form>
-
+                <b>Can't bid for your own jobs</b>
               <% } %>
-
-            <% } else { %>
-              <b>Can't bid for your own jobs</b>
-            <% } %>
+          </div>
         </div>
       </div>
-     
+       
       <% } %>
 
   </div>

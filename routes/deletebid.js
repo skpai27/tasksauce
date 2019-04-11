@@ -13,8 +13,8 @@ var sql_query_delete_off_bid = sql_query.query.delete_offer_bid;
 
 /* POST for delete requests */
 router.post('/req/:jobId/:bidId', function(req, res, next) {
-		console.log(req.params);
-	pool.query(sql_query_delete_req_bid, [req.params.jobId, req.params.bidId], (err) => {
+	console.log(req.params);
+	pool.query(sql_query_delete_req_bid, [req.params.bidId], (err) => {
 		if (!err) {
 			console.log("Successfully deleted Request bid [bidId: " + req.params.bidId + "]" );
 		} else {
@@ -26,7 +26,7 @@ router.post('/req/:jobId/:bidId', function(req, res, next) {
 
 /* POST for delete offers */
 router.post('/off/:jobId/:bidId', function(req, res, next) {
-	pool.query(sql_query_delete_off_bid, [req.params.jobId, req.params.bidId], (err) => {
+	pool.query(sql_query_delete_off_bid, [req.params.bidId], (err) => {
 		if (!err) {
 			console.log("Successfully deleted Offer bid [bidId: " + req.params.bidId + "]");
 		} else {
