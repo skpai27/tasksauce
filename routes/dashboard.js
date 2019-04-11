@@ -31,11 +31,12 @@ router.get('/', function(req, res, next) {
 								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
 									pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
 										if (!err) {
+											console.log("Username: " + req.user.username);
 											if (isAdmin.rows[0].is_admin == true) {
 												console.log("Admin [" + req.user.username + "] authorised");
-												res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+												res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 											} else {
-												res.render('dashboard', {auth: true, admin: false, title: 'Dashboard', requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+												res.render('dashboard', {auth: true, admin: false, title: 'Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 											}
 										} else {
 											console.log("Admin check failed");
