@@ -362,4 +362,3 @@ CREATE TRIGGER bidOfferTrigger BEFORE insert or update
 ON offer_bids
 FOR EACH ROW EXECUTE PROCEDURE checkOfferBidUserValid(); 
 
-
