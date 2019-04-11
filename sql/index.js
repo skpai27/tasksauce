@@ -22,11 +22,19 @@ sql.query = {
 
 	// Load from job_request
 	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
+<<<<<<< HEAD
+	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium ORDER BY filter, date, time',
+
+	// Load from job_offer
+	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
+	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium ORDER BY filter, date, time',
+=======
 	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium ORDER BY filter',
 
 	// Load from job_offer
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
 	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium ORDER BY filter',
+>>>>>>> bbf8d6e80c9ac11a55d0f7335ea7129d11dd307e
 
 	//Update reviews
 	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
@@ -37,8 +45,8 @@ sql.query = {
 	// Query all tasks
 	query_request: 'SELECT * FROM job_request',
 	query_offer: 'SELECT * FROM job_offer',
-	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter',
-	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter',
+	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter, date, time',
+	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter, date, time',
 
 	// Query tasks on user id
 	query_request_user: 'SELECT * FROM job_request WHERE job_request.username=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
