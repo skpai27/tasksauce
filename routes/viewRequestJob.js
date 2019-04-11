@@ -30,10 +30,13 @@ router.get('/:jobId', function(req, res, next) {
 
         if (req.isAuthenticated()) {
           pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {
-            if (req.user.username === data.rows[0].username) {
+            if (req.user.username.trim() === data.rows[0].username.trim()) {
+              console.log(req.user.username + " is admin? " + isAdmin.rows[0].is_admin);
               if (isAdmin.rows[0].is_admin) {
+                console.log(req.user.username + " is admin? " + isAdmin.rows[0].is_admin + " [true]");
               res.render('viewRequestJob', { auth:true, admin: true, self:true, edit: false, title: 'Database Connect', currentUser: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows});
               } else {
+                console.log(req.user.username + " is admin? " + isAdmin.rows[0].is_admin + " [false]");
                 res.render('viewRequestJob', { auth:true, admin: false, self:true, edit: false, title: 'Database Connect', currentUser: req.user.username, jobId: req.params.jobId, data: data.rows,data2:data2.rows});
               }
             } else {

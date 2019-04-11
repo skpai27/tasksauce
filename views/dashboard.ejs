@@ -54,7 +54,6 @@
 						<div class="card-body">
 							<h5>Tasks in Bidding Stage</h5>
 							<div style="overflow-x:auto;">
-
 								<table class="table table-striped" id="job_request_table">
 									<thead>
 										<tr>
@@ -166,42 +165,42 @@
 			<div class="col py-4">
 				<div class="card mx-auto">
 					<h4 class="card-header">Tasks Offered</h4>
-					<div class="card-body">
-						<% if (offers.length !== 0) { %>
-						<h5>Tasks in Bidding Stage</h5>
-						<div style="overflow-x:auto;">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">Task</th>
-										<th scope="col">Location</th>
-										<th scope="col">Date</th>
-										<th scope="col">Time</th>
-										<th scope="col">Description</th>
-										<th scope="col">View</th>
-									</tr>
-								</thead>
-								<tbody>
-									<% for(var i=0; i<offers.length; i++) { %>
-									<tr>
-										<td><%= offers[i].job%></td>
-										<td><%= offers[i].loc%></td>
-										<td><%= offers[i].date.toDateString()%></td>
-										<td><%= offers[i].time%></td>
-										<td><%= offers[i].details%></td>
-										<td><a href="./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
-										<%- include modifyJobOfferButton.ejs -%>
-									</tr>
-									<% } %>
-								</tbody>
-							</table>
+					<% if (offers.length !== 0) { %>
+						<div class="card-body">
+							<h5>Tasks in Bidding Stage</h5>
+							<div style="overflow-x:auto;">
+								<table class="table table-striped" id="job_offer_table">
+									<thead>
+										<tr>
+											<th scope="col">Task</th>
+											<th scope="col">Location</th>
+											<th scope="col">Date</th>
+											<th scope="col">Time</th>
+											<th scope="col">Description</th>
+											<th scope="col">View</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% for(var i=0; i < offers.length; i++) { %>
+										<tr>
+											<td><%= offers[i].job%></td>
+											<td><%= offers[i].loc%></td>
+											<td><%= offers[i].date.toDateString()%></td>
+											<td><%= offers[i].time%></td>
+											<td><%= offers[i].details%></td>
+											<td><a href="./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
+											<%- include modifyJobOfferButton.ejs -%>
+										</tr>
+										<% } %>
+									</tbody>
+								</table>
+							</div>
+							
+							<!-- New Offer button -->
+							<ul class="navbar-nav mt-3 mr-auto">
+								<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
+							</ul>
 						</div>
-						
-						<!-- New Offer button -->
-						<ul class="navbar-nav mt-3 mr-auto">
-							<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
-						</ul>
-					</div>
 					<% } %>
 
 					<!-- Table for tasks in progress -->
