@@ -102,8 +102,10 @@ CREATE TABLE offer_completed(
 CREATE FUNCTION deleteRequestIP()
 RETURNS TRIGGER AS $$
 BEGIN
-DELETE FROM request_in_progress WHERE job_id=NEW.job_id;
-RETURN NEW; END;
+	DELETE FROM request_in_progress	
+	WHERE job_id=NEW.job_id;
+	RETURN NEW; 
+END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER deleteRequestIP
@@ -114,8 +116,10 @@ EXECUTE PROCEDURE deleteRequestIP();
 CREATE FUNCTION deleteOfferIP()
 RETURNS TRIGGER AS $$
 BEGIN
-DELETE FROM offer_in_progress WHERE job_id=NEW.job_id;
-RETURN NEW; END;
+	DELETE FROM offer_in_progress 
+	WHERE job_id=NEW.job_id;
+	RETURN NEW; 
+END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER deleteOfferIP
