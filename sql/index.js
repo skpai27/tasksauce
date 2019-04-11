@@ -23,11 +23,12 @@ sql.query = {
 	// Load from job_request
 	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
 	all_available_requests: 'SELECT * FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) ORDER BY date, time',
-
+	requests_filter: 'select * from job_request where (job_request.details like  \'%\'  || $1 || \'%\' or  job_request.job like  \'%\'  || $1 || \'%\' or job_request.username like  \'%\'  || $1 || \'%\')and  NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) ORDER BY date, time', 
+	
 	// Load from job_offer
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
 	all_available_offers: 'SELECT * FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) ORDER BY date, time',
-
+	offers_filter:'SELECT * FROM job_offer WHERE (job_offer.details like  \'%\'  || $1 || \'%\' or  job_offer.job like  \'%\'  || $1 || \'%\' or job_offer.username like  \'%\'  || $1 || \'%\')  AND NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) ORDER BY date, time',
 	//Update reviews
 	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
 	update_review_author_request: 'UPDATE request_completed  SET author_review= $1,author_rating = $2 where job_id= $3;',
@@ -39,7 +40,7 @@ sql.query = {
 	query_offer: 'SELECT * FROM job_offer',
 	query_request_unbid: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT "job", "loc", "date", "var", "desc","username" FROM premium ORDER BY filter',
 	query_offer_unbid: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT "job", "loc", "date", "var", "desc","username" FROM premium ORDER BY FILTER',
-
+	
 	// Query tasks on user id
 	query_request_user: 'SELECT * FROM job_request WHERE job_request.username=$1 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
 	query_offer_user: 'SELECT * FROM job_offer WHERE job_offer.username=$1 AND NOT EXISTS (SELECT 1 FROM offer_in_progress WHERE job_id=job_offer.job_id) AND NOT EXISTS (SELECT 1 FROM offer_completed WHERE job_id=job_offer.job_id)',

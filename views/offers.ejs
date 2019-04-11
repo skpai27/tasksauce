@@ -50,6 +50,17 @@
       <div class="row py-4">
         <div class="card mx-auto">
           <div class="card-header">Tasks Offered</div>
+          <br>
+          <form> <label for="name" method = "GET"><b>Search for task:</b></label>
+            <input type="text" id="detail" name="detail">
+            <button type="submit">Go</button>
+            <button type="submit" onclick="change()">Show All</button>
+            <script>
+              function changeText(value) {
+                document.getElementById('detail').value = ''   
+              }
+            </script>
+          </form>
           <div class="card-body">
             <div style="overflow-x:auto;">
               <table class="table table-striped">
