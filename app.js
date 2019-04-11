@@ -31,6 +31,7 @@ var newrequestRouter = require('./routes/newrequest');
 var newofferRouter = require('./routes/newoffer');
 var editrequestRouter = require('./routes/editrequest');
 var editofferRouter = require('./routes/editoffer');
+var profileRouter = require('./routes/profile');
 
 /* --- V4: Database Connect --- */
 var selectRouter = require('./routes/select');
@@ -103,6 +104,7 @@ app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)
 app.use('/premium', premiumRouter);
+app.use('/profile', profileRouter);
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);
