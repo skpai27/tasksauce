@@ -22,19 +22,11 @@ sql.query = {
 
 	// Load from job_request
 	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
-<<<<<<< HEAD
 	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium ORDER BY filter, date, time',
 
 	// Load from job_offer
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
 	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium ORDER BY filter, date, time',
-=======
-	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium ORDER BY filter',
-
-	// Load from job_offer
-	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
-	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium ORDER BY filter',
->>>>>>> bbf8d6e80c9ac11a55d0f7335ea7129d11dd307e
 
 	//Update reviews
 	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
