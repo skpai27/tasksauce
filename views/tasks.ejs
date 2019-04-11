@@ -72,7 +72,7 @@
                     <td><%= requests[i].date.toDateString()%></td>
                     <td><%= requests[i].time%></td>
                     <td><%= requests[i].details%></td>
-                    <td><%= requests[i].username%></td>
+                    <td><a href = "./profile/<%= requests[i].username %>"><%= requests[i].username %></a></td>
                     <td><a href = "./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
                     <%- include adminModifyJobRequestButton.ejs -%>
                   </tr>
@@ -109,7 +109,7 @@
                     <td><%= offers[i].date.toDateString()%></td>
                     <td><%= offers[i].time%></td>
                     <td><%= offers[i].details%></td>
-                    <td><%= offers[i].username%></td>
+                    <td><a href = "./profile/<%= offers[i].username %>"><%= offers[i].username %></a></td>
                     <td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
                     <%- include adminModifyJobOfferButton.ejs -%>
                   </tr>

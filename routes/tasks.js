@@ -15,7 +15,8 @@ var is_premium_user = sql_query.query.is_premium_users;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
-		if (err) console.log(sql_query_request);
+    if (err) {console.log(sql_query_request);
+      console.log(err);}
 		pool.query(sql_query_offer, (err, offers) => {
 			if (req.isAuthenticated()) {
 				pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {

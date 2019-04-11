@@ -8,6 +8,11 @@ DROP TABLE IF EXISTS offer_in_progress CASCADE;
 DROP TABLE IF EXISTS request_completed CASCADE;
 DROP TABLE IF EXISTS offer_completed CASCADE;
 DROP TABLE IF EXISTS premium_users CASCADE;
+drop function if exists checkOfferBidUserValid();
+drop function if exists checkRequestBidUserValid();
+
+drop trigger if exists bidRequestTrigger ON request_bids;
+drop trigger if exists bidOfferTrigger on offer_bids;
 
 DROP FUNCTION IF EXISTS deleteRequestIP();
 DROP TRIGGER IF EXISTS deleteRequestIP ON request_completed;
@@ -88,6 +93,10 @@ CREATE TABLE offer_in_progress(
 CREATE TABLE request_completed(
 	"job_id" int references job_request(job_id) ON DELETE CASCADE,
 	"bid_id" int references request_bids(bid_id) ON DELETE CASCADE,
+		"author_review"  char(1000) default null,
+	"author_rating" int default null,
+	"bidder_review"  char(1000) default null,
+	"bidder_rating" int default null,
 	primary key (job_id, bid_id)
 );
 
@@ -95,6 +104,11 @@ CREATE TABLE request_completed(
 CREATE TABLE offer_completed(
 	"job_id" int references job_offer(job_id) ON DELETE CASCADE,
 	"bid_id" int references offer_bids(bid_id) ON DELETE CASCADE,
+		"author_review"  char(1000) default null,
+	"author_rating" int default null,
+	"bidder_review"  char(1000) default null,
+	"bidder_rating" int default null,
+
 	primary key (job_id, bid_id)
 );
 
@@ -102,8 +116,10 @@ CREATE TABLE offer_completed(
 CREATE FUNCTION deleteRequestIP()
 RETURNS TRIGGER AS $$
 BEGIN
-DELETE FROM request_in_progress WHERE job_id=NEW.job_id;
-RETURN NEW; END;
+	DELETE FROM request_in_progress	
+	WHERE job_id=NEW.job_id;
+	RETURN NEW; 
+END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER deleteRequestIP
@@ -114,8 +130,10 @@ EXECUTE PROCEDURE deleteRequestIP();
 CREATE FUNCTION deleteOfferIP()
 RETURNS TRIGGER AS $$
 BEGIN
-DELETE FROM offer_in_progress WHERE job_id=NEW.job_id;
-RETURN NEW; END;
+	DELETE FROM offer_in_progress 
+	WHERE job_id=NEW.job_id;
+	RETURN NEW; 
+END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER deleteOfferIP
@@ -308,3 +326,39 @@ CREATE TRIGGER request_bid_accepted_trigger
 AFTER INSERT ON request_in_progress
 FOR EACH ROW
 EXECUTE PROCEDURE request_bid_accepted_func();
+
+
+CREATE FUNCTION checkRequestBidUserValid()
+RETURNS TRIGGER AS $$
+declare
+	jobUserName char(64);
+begin
+	jobUserName := (select username from job_request where job_request.username = new.bid_user and job_request.job_id = new.job_id);
+	if new.bid_user = jobUsername then
+		raise exception 'Cant bid for your own job';
+	end if;
+	return new;
+RETURN NEW; END;
+$$ LANGUAGE plpgsql;
+
+CREATE FUNCTION checkOfferBidUserValid()
+RETURNS TRIGGER AS $$
+declare
+	jobUserName char(64);
+begin
+	jobUserName := (select username from job_offer where job_offer.username = new.bid_user and job_offer.job_id = new.job_id);
+	if new.bid_user = jobUsername then
+		raise exception 'Cant bid for your own jobs';
+	end if;
+	return new;
+RETURN NEW; END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER bidRequestTrigger BEFORE insert or update
+ON request_bids
+FOR EACH ROW EXECUTE PROCEDURE checkRequestBidUserValid();
+
+CREATE TRIGGER bidOfferTrigger BEFORE insert or update
+ON offer_bids
+FOR EACH ROW EXECUTE PROCEDURE checkOfferBidUserValid(); 
+

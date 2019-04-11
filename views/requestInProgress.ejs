@@ -32,7 +32,7 @@
       <div class="card col-lg-8 offset-2" >
           <div class="card-body">
             <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %>e</h5>
-            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
+            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].details %></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><b>Date: </b><%= data[i].date %></li>
@@ -40,22 +40,24 @@
             <li class="list-group-item"><b>Location: </b><%= data[i].location %></li>
           </ul>
           <div class="card-body">
-            <b>Accepted Bid</b>
+            <b>Accepted bid</b>
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Accepted Price</th>
                   <th scope="col">Bid User</th>
-                  <th scope ="col">Bid details</th>
+                  <th scope ="col">Bid Details</th>
                 </tr>
               </thead>
               <tbody>
-                <form method='POST' action ="/requestInProgress/<%= data[i].job_id %>">
+                <form method = 'POST' action = "/requestInProgress/<%= data[i].job_id %>">
                 <tr>
                     <td><%= bid.bid_price%></td>
                     <td><%= bid.bid_user%></td>
                     <td><%= bid.bid_info%></td>
-                    <td><button type="submit" class="btn btn-info" value ="Complete">Complete</button></td>
+                    <% if (self) { %>
+                      <td><button type="submit" class="btn btn-info" value ="Accept">Complete</button></td>
+                    <% } %>
                 </tr>
                 </form>
               </tbody>

@@ -50,6 +50,17 @@
       <div class="row py-4">
         <div class="card mx-auto">
           <div class="card-header">Tasks Offered</div>
+          <br>
+          <form> <label for="name" method = "GET"><b>Search for task:</b></label>
+            <input type="text" id="detail" name="detail">
+            <button type="submit">Go</button>
+            <button type="submit" onclick="change()">Show All</button>
+            <script>
+              function changeText(value) {
+                document.getElementById('detail').value = ''   
+              }
+            </script>
+          </form>
           <div class="card-body">
             <div style="overflow-x:auto;">
               <table class="table table-striped">
@@ -72,7 +83,7 @@
                     <td><%= offers[i].date.toDateString()%></td>
                     <td><%= offers[i].time%></td>
                     <td><%= offers[i].details%></td>
-                    <td><%= offers[i].username%></td>
+                    <td><a href = "./profile/<%= offers[i].username %>"><%= offers[i].username %></a></td>
                     <td><a href = "./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
                     <%- include adminModifyJobOfferButton.ejs -%>
                   </tr>
