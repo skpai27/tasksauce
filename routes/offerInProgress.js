@@ -28,6 +28,7 @@ router.get('/:jobId', function(req, res, next) {
 
 router.post('/:jobId', (req, res, next) => {
   pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
+    if(err)throw err;
     pool.query(query_insert_completed, [req.params.jobId, bidID.rows[0].bid_id], (err3, insert) => {
       res.redirect('/dashboard');
     })

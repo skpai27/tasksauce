@@ -49,6 +49,10 @@
         <div class="col-lg-6 order-lg-1 my-auto showcase-text">
           <h2>Request Tasks</h2>
           <p class="lead mb-0">Post a request on tasks you are looking for people to do for you!</p>
+          <!-- Requested Tasks button -->
+          <ul class="navbar-nav mr-auto mt-3">
+              <li><a class="btn btn-info btn-lg" href="/requests" role="button">Requested Tasks</a></li>
+          </ul>
         </div>
       </div>
       <div class="row no-gutters">
@@ -56,6 +60,10 @@
         <div class="col-lg-6 my-auto showcase-text">
           <h2>Offer Tasks</h2>
           <p class="lead mb-0">Offer tasks that you are willing to do for people!</p>
+          <!-- Offered Tasks button -->
+          <ul class="navbar-nav mr-auto mt-3">
+              <li><a class="btn btn-info btn-lg" href="/offers" role="button">Offered Tasks</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -101,7 +109,7 @@
               <h2 class="mb-4">Ready to get started? Sign up now!</h2>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
-              <button class="btn btn-lg btn-primary" onclick="window.location.href='/signuplogin'">Sign up!</button>
+              <button class="btn btn-lg btn-info" onclick="window.location.href='/signuplogin'">Sign up!</button>
             </div>
           </div>
         <% } else { %>
@@ -110,9 +118,9 @@
               <h2 class="mb-4">Ready to get started?</h2>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-0 mx-auto">
-              <button class="btn btn-lg btn-primary mr-3" onclick="window.location.href='/tasks'">Find available tasks</button>
-              <button class="btn btn-lg btn-primary mx-3" onclick="window.location.href='/newoffer'">Offer a task</button>
-              <button class="btn btn-lg btn-primary ml-3" onclick="window.location.href='/newrequest'">Request for a task</button>
+              <button class="btn btn-lg btn-info mr-3" onclick="window.location.href='/tasks'">Find available tasks</button>
+              <button class="btn btn-lg btn-info mx-3" onclick="window.location.href='/newoffer'">Offer a task</button>
+              <button class="btn btn-lg btn-info ml-3" onclick="window.location.href='/newrequest'">Request for a task</button>
             </div>
           </div>
         <% } %>

@@ -11,12 +11,12 @@ const pool = new Pool({
 var sql_query_request = sql_query.query.all_available_requests;
 var sql_query_offer = sql_query.query.all_available_offers;
 var sql_query_admin = sql_query.query.is_admin;
-var sql_query_delete_req = sql_query.query.delete_request;
 var is_premium_user = sql_query.query.is_premium_users;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
-		if (err) console.log(sql_query_request);
+    if (err) {console.log(sql_query_request);
+      console.log(err);}
 		pool.query(sql_query_offer, (err, offers) => {
 			if (req.isAuthenticated()) {
 				pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {

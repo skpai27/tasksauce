@@ -22,7 +22,7 @@ router.get('/:jobId', function(req, res, next) {
       });
     });
   } else {
-    res.redirect('/signuplogin', {auth:false, title: 'login'});
+    res.redirect('/signuplogin');
   }
 })
 

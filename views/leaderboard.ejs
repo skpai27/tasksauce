@@ -32,61 +32,63 @@
 		  <!-- Tables in 2 rows -->
 		  <% if (top_offerers.length !== 0 || top_completers.length !== 0) { %>
 		  <div class="col py-4">
-			<div class="card mx-auto">
-			  <h4 class="card-header">LEADERBOARD</h4>
-			  <div class="card-body">
-				<% if (top_offerers.length !== 0) { %>
-				<h5>Top 5 job offerers!</h5>
-				<div style="overflow-x:auto;">
-					<table class="table table-striped" id="top_job_offerers_table">
-					<thead>
-						<tr>
-						<th scope="col">Name</th>
-						<th scope="col">Offer Count</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for (var i=0; i < top_offerers.length; i++) { %>
-						<tr>
-						<td><%= top_offerers[i].username %></td>
-						<td><%= top_offerers[i].count %></td>
-						</tr>
-						<% } %>
-					</tbody>
-					</table>
-			    </div>
-                <% } %>
-                
-                <% if (top_completers.length !== 0) { %>
-                    <h5>Top 5 job completers!</h5>
-                    <div style="overflow-x:auto;">
-                        <table class="table table-striped" id="top_job_completers_table">
-                        <thead>
-                            <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Offers Completed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for (var i=0; i < top_completers.length; i++) { %>
-                            <tr>
-                            <td><%= top_completers[i].username %></td>
-                            <td><%= top_completers[i].count %></td>
-                            </tr>
-                            <% } %>
-                        </tbody>
-                        </table>
-                    </div>
-                    <% } %>
-
-				
-				</div>
-				</div>
+				<div class="card mx-auto">
+					<h4 class="card-header">LEADERBOARD</h4>
+						<div class="card-body">
+							<% if (top_offerers.length !== 0) { %>
+								<h5>Top 5 Job Offerers!</h5>
+								<div style="overflow-x:auto;">
+									<table class="table table-striped" id="top_job_offerers_table">
+										<thead>
+											<tr>
+												<th style="width: 50%" scope="col">Name</th>
+												<th style="width: 50%" scope="col">Offer Count</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for (var i=0; i < top_offerers.length; i++) { %>
+												<tr>
+													<td style="width: 50%"><%= top_offerers[i].username %></td>
+													<td style="width: 50%"><%= top_offerers[i].count %></td>
+												</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
+							<% } %>
+											
+							<% if (top_completers.length !== 0) { %>
+									<h5>Top 5 Job Completers!</h5>
+									<div style="overflow-x:auto;">
+											<table class="table table-striped" id="top_job_completers_table">
+											<thead>
+												<tr>
+													<th style="width: 50%" scope="col">Name</th>
+													<th style="width: 50%" scope="col">Offers Completed</th>
+												</tr>
+											</thead>
+											<tbody>
+												<% for (var i=0; i < top_completers.length; i++) { %>
+													<tr>
+														<td style="width: 50%"><%= top_completers[i].username %></td>
+														<td style="width: 50%"><%= top_completers[i].count %></td>
+													</tr>
+												<% } %>
+											</tbody>
+											</table>
+									</div>
+							<% } %>
+						</div>
+					</div>
 				</div>
 			<% } %>
 
 		</div>
 	  </section>
-	  <%- include footer.ejs -%>
+		<%- include footer.ejs -%>
+		
+		<!-- Bootstrap core JavaScript -->
+		<script src="/static/vendor/jquery/jquery.min.js"></script>
+		<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

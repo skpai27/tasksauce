@@ -1,0 +1,12 @@
+<!-- Modify job button ONLY for Admin -->
+<% if (admin) { %>
+    <td>
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Job</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="../editoffer/<%= offers[i].job_id %>" role="button" value="Edit">Edit</a>
+        <form method = 'POST' action = "deletejob/off/<%= offers[i].job_id %>">
+          <button class="dropdown-item" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+        </form>
+      </div>
+    </td>
+  <% } %>

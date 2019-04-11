@@ -15,6 +15,7 @@ var sql_query_requests_filter = sql_query.query.requests_filter;
 router.get('/', function(req, res, next) {
 	if("detail" in req.query){
 		pool.query(sql_query_requests_filter,[req.query.detail], (err, requests) => {
+			console.log(sql_query_requests_filter);
 			if (err) throw err;
 			if (req.isAuthenticated()) {
 				pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {
