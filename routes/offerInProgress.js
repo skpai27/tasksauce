@@ -17,8 +17,11 @@ router.get('/:jobId', function(req, res, next) {
     pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
       pool.query(query_get_bid, [bidID.rows[0].bid_id], (err, bid) => {
         pool.query(query_get_job, [req.params.jobId], (err, job) => {
-          res.render('offerInProgress', {auth: true, bid: bid.rows[0], data: job.rows});
-        });
+          if (req.user.username === job.rows[0].username) {
+            res.render('offerInProgress', {auth: true, self:true, bid: bid.rows[0], data: job.rows});
+          } else {
+            res.render('offerInProgress', {auth: true, self:false, bid: bid.rows[0], data: job.rows});
+          }        });
       });
     });
   } else {

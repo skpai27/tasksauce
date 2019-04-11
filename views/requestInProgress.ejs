@@ -55,7 +55,9 @@
                     <td><%= bid.bid_price%></td>
                     <td><%= bid.bid_user%></td>
                     <td><%= bid.bid_info%></td>
-                    <td><button type="submit" class="btn btn-info" value ="Accept">Complete</button></td>
+                    <% if (self) { %>
+                      <td><button type="submit" class="btn btn-info" value ="Accept">Complete</button></td>
+                    <% } %>
                 </tr>
                 </form>
               </tbody>
