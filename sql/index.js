@@ -3,10 +3,10 @@ const sql = {}
 util = {
 	query_request_bidsxjobs: "SELECT jr.job AS job, jr.loc AS loc, jr.date AS date, jr.time AS time, rb.bid_price AS bid_price, rb.bid_info AS bid_info, rb.bid_user AS bid_user, 'request' AS bid_type FROM request_bids rb INNER JOIN job_request jr ON rb.job_id = jr.job_id",
 	query_offer_bidsxjobs: "SELECT jo.job AS job, jo.loc AS loc, jo.date AS date, jo.time AS time, ob.bid_price AS bid_price, ob.bid_info AS bid_info, ob.bid_user AS bid_user, 'offer' AS bid_type FROM offer_bids ob INNER JOIN job_offer jo ON ob.job_id = jo.job_id",
-	query_premium_request: 'SELECT "job", "loc", "date", "time", "details","username", 1 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) AND username IN (SELECT username FROM premium_users)',
-	query_normal_request: 'SELECT "job", "loc", "date", "time", "details","username", 2 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) AND username NOT IN (SELECT username FROM premium_users)',
-	query_premium_offer: 'SELECT "job", "loc", "date", "time", "details","username", 1 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) AND username IN (SELECT username FROM premium_users)',
-	query_normal_offer: 'SELECT "job", "loc", "date", "time", "details","username", 2 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) AND username NOT IN (SELECT username FROM premium_users)'
+	query_premium_request: 'SELECT "job", "loc", "date", "time", "details","username", "job_id", 1 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_request: 'SELECT "job", "loc", "date", "time", "details","username", "job_id", 2 as filter FROM job_request WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM request_in_progress UNION select * from request_completed) AS req_unavailable WHERE req_unavailable.job_id=job_request.job_id) AND username NOT IN (SELECT username FROM premium_users)',
+	query_premium_offer: 'SELECT "job", "loc", "date", "time", "details","username", "job_id", 1 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) AND username IN (SELECT username FROM premium_users)',
+	query_normal_offer: 'SELECT "job", "loc", "date", "time", "details","username", "job_id", 2 as filter FROM job_offer WHERE NOT EXISTS (SELECT 1 FROM (SELECT * FROM offer_in_progress UNION select * from offer_completed) AS off_unavailable WHERE off_unavailable.job_id=job_offer.job_id) AND username NOT IN (SELECT username FROM premium_users)'
 }
 
 sql.query = {
@@ -22,11 +22,11 @@ sql.query = {
 
 	// Load from job_request
 	all_requests: 'SELECT * FROM job_request ORDER BY date, time',
-	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter',
+	all_available_requests: 'WITH premium AS (' + util.query_premium_request + ' UNION ' + util.query_normal_request +') SELECT * FROM premium ORDER BY filter',
 
 	// Load from job_offer
 	all_offers: 'SELECT * FROM job_offer ORDER BY date, time',
-	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT "job", "loc", "date", "time", "details","username" FROM premium ORDER BY filter',
+	all_available_offers: 'WITH premium AS (' + util.query_premium_offer + ' UNION ' + util.query_normal_offer +') SELECT * FROM premium ORDER BY filter',
 
 	//Update reviews
 	update_review_bidder_request: 'UPDATE request_completed SET bidder_review= $1,bidder_rating = $2 where job_id= $3;',
@@ -49,8 +49,8 @@ sql.query = {
 	// Query tasks on job id
 	query_request_job: 'SELECT * FROM job_request WHERE job_request.job_id=$1',
 	query_offer_job: 'SELECT * FROM job_offer WHERE job_offer.job_id=$1',
-	query_bids_request: 'SELECT * FROM request_bids WHERE job_id=$1',
-	query_bids_offer: 'SELECT * FROM offer_bids WHERE job_id=$1',
+	query_bids_request: 'SELECT * FROM request_bids WHERE job_id=$1 ORDER BY bid_price ASC',
+	query_bids_offer: 'SELECT * FROM offer_bids WHERE job_id=$1 ORDER BY bid_price DESC',
 
 	// Query tasks on task name
 	query_request_search: 'SELECT * FROM job_request WHERE LOWER(job_request.job) LIKE LOWER($1) and job_request.username=$2 AND NOT EXISTS (SELECT 1 FROM request_in_progress WHERE job_id=job_request.job_id) AND NOT EXISTS (SELECT 1 FROM request_completed WHERE job_id=job_request.job_id)',
@@ -82,13 +82,21 @@ sql.query = {
 	delete_request_IP: 'DELETE FROM request_in_progress WHERE job_id=$1',
 	delete_offer_IP: 'DELETE FROM offer_in_progress WHERE job_id=$1',
 
-	// Delete task (Only by Admin)
+	// Delete task (Only by Admin or Self)
 	delete_request: 'DELETE FROM job_request WHERE job_request.job_id=$1',
 	delete_offer: 'DELETE FROM job_offer WHERE job_offer.job_id=$1',
 
-	// Edit task (Only by Admin)
+	// Edit task (Only by Admin or Self)
 	edit_request: 'UPDATE job_request SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
 	edit_offer: 'UPDATE job_offer SET job=$2, loc=$3, date=$4, time=$5, details=$6 WHERE job_id=$1',
+
+	// Delete bid (Only by Admin or Self)
+	delete_request_bid: 'DELETE FROM request_bids WHERE bid_id=$1',
+	delete_offer_bid: 'DELETE FROM offer_bids WHERE bid_id=$1',
+
+	// Edit bid (Only by Admin or Self)
+	edit_request_bid: 'UPDATE request_bids SET bid_price=$3, bid_info=$4 WHERE job_id=$1 and bid_id=$2',
+	edit_offer_bid: 'UPDATE offer_bids SET bid_price=$3, bid_info=$4 WHERE job_id=$1 and bid_id=$2',
 
 	// Insert completed
 	insert_completed_request: 'INSERT INTO request_completed VALUES($1, $2)',

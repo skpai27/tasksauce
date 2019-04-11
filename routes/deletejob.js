@@ -18,6 +18,7 @@ router.post('/req/:jobId', function(req, res, next) {
 			console.log("Successfully deleted Request [jobId: " + req.params.jobId + "]");
 		} else {
 			console.log("Failed to delete Request [jobId: " + req.params.jobId + "]");
+			throw err;
 		}
 		res.redirect('/requests');
 	});
@@ -25,11 +26,13 @@ router.post('/req/:jobId', function(req, res, next) {
 
 /* POST for delete offers */
 router.post('/off/:jobId', function(req, res, next) {
+	console.log(req.params);
 	pool.query(sql_query_delete_off, [req.params.jobId], (err) => {
 		if (!err) {
 			console.log("Successfully deleted Offer [jobId: " + req.params.jobId + "]");
 		} else {
 			console.log("Failed to delete Offer [jobId: " + req.params.jobId + "]");
+			throw err;
 		}
 		res.redirect('/offers');
 	});
