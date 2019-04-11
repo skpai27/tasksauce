@@ -15,25 +15,21 @@ var sql_query_edit = sql_query.query.edit_offer;
 // GET
 router.get('/:jobId', function(req, res, next) {
 	pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
-		if (!err) {
-			if (req.isAuthenticated && isAdmin.rows[0].is_admin) {
-				console.log("Admin [" + req.user.username + "] is going to edit offer");
-				pool.query(sql_query_offer, [req.params.jobId], (err, offer) => {
-					if (!err) {
-						res.render('editoffer', { title: 'Edit Offer', offer: offer.rows });
-					} else {
-						console.log("Failed to retrieve offered task");
-					}
-				})
-			} else if (req.isAuthenticated && !isAdmin.rows[0].is_admin) {
-				// TODO: Handle non-admin attempt to access
-				res.redirect('../');
+		pool.query(sql_query_offer, [req.params.jobId], (err1, offer) => {
+			if (!err1) {
+				if (req.isAuthenticated && (isAdmin.rows[0].is_admin || offer.rows[0].username === req.user.username)) {
+					console.log("Admin [" + req.user.username + "] is going to edit offer");
+					res.render('editoffer', { title: 'Edit Offer', offer: offer.rows });
+				} else if (req.isAuthenticated && !(isAdmin.rows[0].is_admin || offer.rows[0].username === req.user.username)) {
+					// TODO: Handle non-admin attempt to access
+					res.redirect('../');
+				} else {
+					res.redirect('../signuplogin');
+				}
 			} else {
-				res.redirect('../signuplogin');
+				console.log("Admin and/or auth check failed");
 			}
-		} else {
-			console.log("Admin & auth check failed");
-		}
+		})
 	})
 });
 

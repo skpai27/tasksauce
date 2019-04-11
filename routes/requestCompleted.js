@@ -17,15 +17,18 @@ var author = 0 ;
 router.get('/:jobId', function(req, res, next) {
   if (req.isAuthenticated()) {
     pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
-      pool.query(query_get_bid, [bidID.rows[0].bid_id], (err, bid) => {
-        pool.query(query_get_job, [req.params.jobId], (err, job) => {
-          if(job.rows[0].username.trim() == req.user.username.trim() || bid.rows[0].bid_user.trim() ==req.user.username.trim())
-          {
-            author = 1;
-          } 
-          res.render('viewCompletedJobRequest', {auth: true, author : author,bidID :bidID, bid: bid.rows[0], data: job.rows});
+      if (err) throw err;
+      else {
+        pool.query(query_get_bid, [bidID.rows[0].bid_id], (err, bid) => {
+          pool.query(query_get_job, [req.params.jobId], (err, job) => {
+            if(job.rows[0].username.trim() == req.user.username.trim() || bid.rows[0].bid_user.trim() ==req.user.username.trim())
+            {
+              author = 1;
+            } 
+            res.render('viewCompletedJobRequest', {auth: true, author : author,bidID :bidID, bid: bid.rows[0], data: job.rows});
+          });
         });
-      });
+      }
     });
   } else {
     res.redirect('/signuplogin');
