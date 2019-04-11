@@ -17,6 +17,8 @@ var deletebidRouter = require('./routes/deletebid');
 var dashboardRouter = require('./routes/dashboard');
 var adminDashboardRouter = require('./routes/adminDashboard');
 var leaderboardRouter = require('./routes/leaderboard');
+var premiumRouter = require('./routes/premium');
+
 /* ---------------------------- */
 
 /* --- V3: Basic Template   --- */
@@ -100,6 +102,7 @@ app.use('/editoffer', editofferRouter);
 app.use('/requestCompleted', requestCompleted);
 app.use('/offerCompleted', offerCompleted);
 app.use('/leaderboard', leaderboardRouter)
+app.use('/premium', premiumRouter);
 
 /* --- Create job page --- */
 app.use('/select', selectRouter);

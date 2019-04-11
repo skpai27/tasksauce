@@ -12,26 +12,37 @@ var sql_query_request = sql_query.query.all_available_requests;
 var sql_query_offer = sql_query.query.all_available_offers;
 var sql_query_admin = sql_query.query.is_admin;
 var sql_query_delete_req = sql_query.query.delete_request;
+var is_premium_user = sql_query.query.is_premium_users;
 
 router.get('/', function(req, res, next) {
 	pool.query(sql_query_request, (err, requests) => {
-		if (err) throw err;
+		if (err) console.log(sql_query_request);
 		pool.query(sql_query_offer, (err, offers) => {
 			if (req.isAuthenticated()) {
 				pool.query(sql_query_admin, [req.user.username], (err, isAdmin) => {
-					if (!err) {
-						if (isAdmin.rows[0].is_admin) {
-							console.log("Admin [" + req.user.username + "] accessing all tasks");
-							res.render('tasks', { auth: true, admin: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
-						} else {
-							res.render('tasks', { auth: true, admin: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
-						}
-					} else {
-						console.log("Admin check failed");
-					}
+          pool.query(is_premium_user, [req.user.username], (err, premium) => {
+            if (!err) {
+              if (isAdmin.rows[0].is_admin) {
+                console.log("Admin [" + req.user.username + "] accessing all tasks");
+                if (premium.rows.length !== 0) {
+                  res.render('tasks', { auth: true, admin: true, premium: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+                } else {
+                  res.render('tasks', { auth: true, admin: true, premium: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+                }
+              } else {
+                if (premium.rows.length !== 0) {
+                  res.render('tasks', { auth: true, admin: false, premium: true, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+                } else {
+                  res.render('tasks', { auth: true, admin: false, premium: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+                }
+              }
+            } else {
+              console.log("Admin check failed");
+            }
+          })
 				})
 			} else {
-				res.render('tasks', { auth: false, admin: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
+				res.render('tasks', { auth: false, premium: false, admin: false, title: 'Tasks', requests: requests.rows, offers: offers.rows, req:req });
 			}
 		})
 	});
