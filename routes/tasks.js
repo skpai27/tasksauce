@@ -11,7 +11,6 @@ const pool = new Pool({
 var sql_query_request = sql_query.query.all_available_requests;
 var sql_query_offer = sql_query.query.all_available_offers;
 var sql_query_admin = sql_query.query.is_admin;
-var sql_query_delete_req = sql_query.query.delete_request;
 var is_premium_user = sql_query.query.is_premium_users;
 
 router.get('/', function(req, res, next) {
