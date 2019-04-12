@@ -297,9 +297,6 @@ VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
 INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
 
-<<<<<<< HEAD
-insert into user_comments values ('dummy1','dummy2','you suck');
-=======
 --job_id 13
 INSERT INTO job_request ("job", "loc", "date", "time", "details","username") 
 VALUES ('Feed Kids1', 'BSH', '2019-05-15', '12:30', 'im hungryy','d1');
@@ -309,7 +306,8 @@ VALUES ('13', 'd4', '22', 'im lovely too but ill feed you with makan1');
 INSERT INTO request_in_progress ("job_id", "bid_id")
 VALUES ('13', '5');
 
->>>>>>> b934005718a82c9a02f8d9a908da86f083354f10
+insert into user_comments values ('dummy1','dummy2','you suck');
+
 --TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
 --when a row is inserted into offer_in_progress. Trigger will cause unaccepted
 --bids to be deleted.
