@@ -97,8 +97,6 @@ CREATE TABLE request_completed(
 	"bid_id" INT REFERENCES request_bids(bid_id) ON DELETE CASCADE,
 	"author_review"  CHAR(1000) DEFAULT NULL,
 	"author_rating" INT DEFAULT NULL,
-	"bidder_review"  CHAR(1000) DEFAULT NULL,
-	"bidder_rating" INT DEFAULT NULL,
 	PRIMARY KEY (job_id, bid_id)
 );
 
@@ -108,8 +106,6 @@ CREATE TABLE offer_completed(
 	"bid_id" INT REFERENCES offer_bids(bid_id) ON DELETE CASCADE,
 	"author_review"  CHAR(1000) DEFAULT NULL,
 	"author_rating" INT DEFAULT NULL,
-	"bidder_review"  CHAR(1000) DEFAULT NULL,
-	"bidder_rating" INT DEFAULT NULL,
 	PRIMARY KEY (job_id, bid_id)
 );
 
