@@ -119,7 +119,8 @@ CREATE table user_comments(
 	primary key (commenter_username,for_username,comment_info)
 );
 
-
+-- On addition of job_request into request_completed, delete job_request from request_in_progress
+-- This satisfies the constraint on job_request can only be in participating in either request_completed or request_in_progress but not both
 CREATE FUNCTION deleteRequestIP()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -134,6 +135,8 @@ AFTER INSERT ON request_completed
 FOR EACH ROW
 EXECUTE PROCEDURE deleteRequestIP();
 
+-- On addition of job_offer into offer_completed, delete job_offer from offer_in_progress
+-- This satisfies the constraint on job_offer can only be in participating in either offer_completed or offer_in_progress but not both
 CREATE FUNCTION deleteOfferIP()
 RETURNS TRIGGER AS $$
 BEGIN
