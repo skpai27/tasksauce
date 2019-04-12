@@ -8,7 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Tasksauce</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/img/tasksauceicon.ico" />
+  <title>TaskSauce</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,12 +42,11 @@
 
   <div class="text-center lead my-5">
       <% for(var i=0; i < data.length; i++) { %>
-      <div class="card col-lg-8 offset-2">
-        <div class="card-header">
-          <h3 class="font-weight-bold"><%= data[i].job %></h3>
-        </div>
-
-        <div class="card-body">
+      <div class="card col-lg-8 offset-2" >
+          <div class="card-body">
+            <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %>e</h5>
+            <li class="list-group-item"><b>By: </b><a href = "/profile/<%= data[i].username %>"><%=data[i].username%></a></li>
+          </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><b>Additional Infomation: </b><%= data[i].desc %></li>
             <li class="list-group-item"><b>Date: </b><%= data[i].date.toDateString() %></li>

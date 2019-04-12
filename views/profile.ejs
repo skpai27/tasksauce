@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
+    <link rel="shortcut icon" type="image/x-icon" href="/static/img/tasksauceicon.ico" />
     <title>Profile Page</title>
 
     <!-- Bootstrap core CSS -->
@@ -26,19 +27,71 @@
 <body>
     <%- include navbar.ejs %>
     <div class="container my-5">    
-      <div class="jumbotron">
-        <div class="row">
-            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
-            </div>
-            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
-                <div class="container" style="border-bottom:1px solid black">
-                  <h2>Username: <%= user.username %></h2>
+        <div class="jumbotron">
+          <div class="row">
+              <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                  <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+              </div>
+              <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                  <div class="container" style="border-bottom:1px solid black">
+                    <h2><%= user.username %></h2>
+                  </div>
+                    <hr>
+                  <ul class="container details">
+                    <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span><%= user.email %></p></li>
+                  </ul>
+
+              </div>
+              <div class ="col-md-12">
+                <h2>Comments left by other users </h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">By</th>
+                      <th scope="col">Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i<comments.length; i++) { %>
+                    <tr>
+                      <td><%= comments[i].commenter_username%></td>
+                      <td><%= comments[i].comment_info%></td>
+                    </tr>
+                    <% } %>
+
+                  </tbody>
+                </table>
+                <div class="container"  style="border-top:1px solid black">
+                <% if(auth){%>
+                 
+                  <% if(locals.errorMsg){ %>
+                  <h2>
+                    <%=errorMsg%>
+                  </h2>
+                
+                 
+
+                  <% } %>
+                  Leave commment for this user:
+                  <form class="contact-form validate-form" method="POST" action="/profile/<%= user.username %>">
+                    
+                  <div class="wrap-input validate-input" data-validate = "Job Details are required">
+                      <span class="label-input">Job Details:</span><br>
+                      <textarea class="input col-md-8" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                      <span class="focus-input"></span>
+                    </div>
+                    
+                  <div class="container-contact-form-btn">
+                      <button class="contact-form-btn">
+                        <span>
+                          Submit
+                          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                <%}%>
                 </div>
-                  <br>
-                <ul class="container details">
-                  <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>Email: <%= user.email %></p></li>
-                </ul>
+              </div>
             </div>
         </div>
       </div>

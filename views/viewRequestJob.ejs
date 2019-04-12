@@ -8,7 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Task Sauce</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/img/tasksauceicon.ico" />
+  <title>TaskSauce</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +21,8 @@
 
   <!-- Custom styles for this template -->
   <link href="/static/css/landing-page.min.css" rel="stylesheet">
+
+  
 
 </head>
 
@@ -48,6 +51,7 @@
           <div class="card-body">
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><b>Description: </b><%= requests[i].details %></li>
+              <li class="list-group-item"><b>By: </b><a href = "/profile/<%= requests[i].username %>"><%=requests[i].username%></a></li>
               <li class="list-group-item"><b>Date: </b><%= requests[i].date.toDateString() %></li>
               <li class="list-group-item"><b>Time: </b><%= requests[i].time %></li>
               <li class="list-group-item"><b>Location: </b><%= requests[i].loc %></li>
@@ -102,21 +106,21 @@
                   <div class="card-header">
                     <b>Edit this Bid</b>
                   </div>
-                  <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>/edit/<%= bidId %>">
+                  <form class="contact-form validate-form" id="newbid" method="POST" action="/viewRequestJob/<%= jobId %>/edit/<%= bidId %>">
                     <div class="wrap-input validate-input my-3" data-validate="Price is required">
                       <span class="label-input">Price:</span>
                       <input class="input" type="number" name="price" id="price" value=<%= bid[0].bid_price %>>
                       <span class="focus-input"></span>
                     </div>
             
-                    <div class="wrap-input validate-input my-2" data-validate = "Additional Details are required">
+                    <div class="wrap-input validate-input my-2" data-validate = "Additional Details are required" required>
                       <span class="label-input">Additional Details:</span>
-                      <input class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" value=<%= bid[0].bid_info.trim() %>></input>
+                      <input class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" value=<%= bid[0].bid_info.trim() %> required>></input>
                       <span class="focus-input"></span>
                     </div>
             
                     <div class="container-contact-form-btn my-3">
-                      <button class="contact-form-btn">
+                      <button class="contact-form-btn" type="submit">
                         <span>
                           Submit
                           <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -130,21 +134,21 @@
                     <b>Make a bid for this job!!</b>
                   </div>
                   <div class="card-body">
-                    <form class="contact-form validate-form" method="POST" action="/viewRequestJob/<%= jobId %>">
+                    <form class="contact-form validate-form" id="newbid" method="POST" action="/viewRequestJob/<%= jobId %>">
                       <div class="wrap-input validate-input my-3" data-validate="Price is required">
                         <span class="label-input">Price:</span>
-                        <input class="input" type="number" name="price" id="price" placeholder=" Price">
+                        <input class="input" type="number" name="price" id="price" placeholder=" Price" required>
                         <span class="focus-input"></span>
                       </div>
               
                       <div class="wrap-input validate-input my-2" data-validate = "Additional Details are required">
                         <span class="label-input">Additional Details:</span>
-                        <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                        <textarea  class="form-control input-lg" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" required></textarea>
                         <span class="focus-input"></span>
                       </div>
               
                       <div class="container-contact-form-btn my-3">
-                        <button class="contact-form-btn">
+                        <button class="contact-form-btn" type="submit">
                           <span>
                             Submit
                             <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -167,6 +171,17 @@
   </div>
   <!-- Footer -->
   <%- include footer.ejs -%>
+
+  <script>
+		(function() {
+			window.addEventListener('load', function() {
+				var forms = [document.getElementById('newbid')];
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', check, false);
+				});
+			}, false);
+		})();
+	</script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/static/vendor/jquery/jquery.min.js"></script>
