@@ -29,20 +29,27 @@ router.post('/', function(req, res) {
     console.log("in post method");
 	var newUsername = req.body.username;
 	var newEmail = req.body.email;
+	var inputPassword = req.body.password;
 	var newPassword = bcrypt.hashSync(req.body.password, salt);
 	var repeatPassword = req.body.confirm_password;
+	var errMsg;
 
-	var register_query = sql_query + "('" + newUsername + "','" + newEmail + "','" + newPassword + "')";
-	
-	console.log(register_query);
-	pool.query(register_query, (err, data) => {
-		if(err){
-			throw err;
-		}
-		res.redirect('/signuplogin');
-		console.log("Successful");
-		
-	})
+	if(inputPassword===repeatPassword){
+		var register_query = sql_query + "('" + newUsername + "','" + newEmail + "','" + newPassword + "')";
+		pool.query(register_query, (err, data) => {
+			if(err){
+				errMsg = "Registration failed! Please enter a different username!";
+				console.log(err);
+			} else {
+				errMsg = "Registration successful! Please log in.";
+				console.log("no error");
+			}
+			res.render('signuplogin', {errMsg:errMsg, title: 'Welcome to TaskSauce!'});		
+		})
+	} else { //should execute if passwords provided do not match.
+		errMsg = "Passwords provided do not match."
+		res.render('signuplogin', {errMsg:errMsg, title: 'Welcome to TaskSauce!'});		
+	}
 		
 })
 
