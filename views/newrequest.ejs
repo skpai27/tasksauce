@@ -5,12 +5,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/css/newtask.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/newtask.css">
 <!--===============================================================================================-->
+	<!-- ADDED JavaScript -->
+	<script src="javascripts/newjobScript.js"></script>
+
 </head>
 <body>
 
@@ -26,39 +29,39 @@
 				</span>
 			</div>
 
-			<form class="contact-form validate-form" method="POST" action="newrequest">
-				<div class="wrap-input validate-input" data-validate="Job Description is required">
+			<form class="contact-form validate-form" id="newjob" method="POST" action="newrequest">
+				<div class="wrap-input validate-input" data-validate="Job Title is required">
 					<span class="label-input">Job Title:</span>
-					<input class="input" type="text" name="job" id="job" placeholder="Enter job description">
+					<input class="input" type="text" name="job" id="job" placeholder="Enter job title" required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Location is required">
 					<span class="label-input">Location:</span>
-					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location">
+					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location" required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate="Date is required">
 					<span class="label-input">Date:</span>
-					<input class="input" type="date" name="date" id="date">
+					<input class="input" type="date" name="date" id="date" required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate="Time is required">
 					<span class="label-input">Time:</span>
-					<input class="input" type="time" name="time" id="time">
+					<input class="input" type="time" name="time" id="time" required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Job Details are required">
 					<span class="label-input">Job Details:</span>
-					<textarea class="input" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+					<textarea class="input" name="details" id="details" placeholder="Don't spare us the knitty gritty details!" required></textarea>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="container-contact-form-btn">
-					<button class="contact-form-btn">
+					<button class="contact-form-btn" type="submit">
 						<span>
 							Submit
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -69,10 +72,18 @@
 		</div>
 	</div>
 
-
-
 	<div id="dropDownSelect1"></div>
 
+	<script>
+		(function() {
+			window.addEventListener('load', function() {
+				var forms = [document.getElementById('newjob')];
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', check, false);
+				});
+			}, false);
+		})();
+	</script>
 
 </body>
 </html>

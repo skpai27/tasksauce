@@ -11,6 +11,9 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/static/css/newtask.css">
 <!--===============================================================================================-->
+	<!-- ADDED JavaScript -->
+	<script src="/static/javascripts/newjobScript.js"></script>
+
 </head>
 <body>
 
@@ -26,10 +29,10 @@
 				</span>
 			</div>
 
-			<form class="contact-form validate-form" method="POST" action="/editrequest/<%= request[0].job_id %>">
-				<div class="wrap-input validate-input" data-validate="Job Description is required">
+			<form class="contact-form validate-form" id="editjob" method="POST" action="/editrequest/<%= request[0].job_id %>">
+				<div class="wrap-input validate-input" data-validate="Job Title is required">
 					<span class="label-input">Job Title:</span>
-					<input class="input" type="text" name="job" id="job" placeholder="Enter job description" value='<%= request[0].job.trim() %>' required>
+					<input class="input" type="text" name="job" id="job" placeholder="Enter job title" value='<%= request[0].job.trim() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
@@ -58,7 +61,7 @@
 				</div>
 
 				<div class="container-contact-form-btn">
-					<button class="contact-form-btn">
+					<button class="contact-form-btn" type="submit">
 						<span>
 							Submit
 							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -71,6 +74,16 @@
 
 	<div id="dropDownSelect1"></div>
 
+	<script>
+		(function() {
+			window.addEventListener('load', function() {
+				var forms = [document.getElementById('editjob')];
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', check, false);
+				});
+			}, false);
+		})();
+	</script>
 
 </body>
 </html>
