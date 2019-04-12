@@ -43,6 +43,7 @@
       <div class="card col-lg-8 offset-2" >
           <div class="card-body">
             <h5 class="font-weight-bold mb-3">Job: <%= data[i].job %></h5>
+            <li class="list-group-item"><b>By: </b><a href = "/profile/<%= data[i].username %>"><%=data[i].username%></a></li>
             <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
           </div>
           <ul class="list-group list-group-flush">

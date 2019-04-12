@@ -48,6 +48,7 @@
           <div class="card-body">
             <ul class="list-group list-group-flush">
               <li class="list-group-item"><b>Description: </b><%= offers[i].details %></li>
+              <li class="list-group-item"><b>By:</b><a href = "/profile/<%= offers[i].username %>"><%=offers[i].username%></a></li>
               <li class="list-group-item"><b>Date: </b><%= offers[i].date.toDateString() %></li>
               <li class="list-group-item"><b>Time: </b><%= offers[i].time %></li>
               <li class="list-group-item"><b>Location: </b><%= offers[i].loc %></li>

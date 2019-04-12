@@ -41,7 +41,7 @@
                   </ul>
 
               </div>
-              <div>
+              <div class ="col-md-12">
                 <h2>Comments left by other users </h2>
                 <table class="table table-striped">
                   <thead>
@@ -57,11 +57,39 @@
                       <td><%= comments[i].comment_info%></td>
                     </tr>
                     <% } %>
-                    <% if(auth){%>
-                      leava commment for this idiot:
-                    <%}%>
+
                   </tbody>
                 </table>
+                <div class="container"  style="border-top:1px solid black">
+                <% if(auth){%>
+                 
+                  <% if(locals.errorMsg){ %>
+                  <h2>
+                    <%=errorMsg%>
+                  </h2>
+                
+                 
+
+                  <% } %>
+                  Leave commment for this user:
+                  <form class="contact-form validate-form" method="POST" action="/profile/<%= user.username %>">
+                    
+                  <div class="wrap-input validate-input" data-validate = "Job Details are required">
+                      <span class="label-input">Job Details:</span><br>
+                      <textarea class="input col-md-8" name="details" id="details" placeholder="Don't spare us the knitty gritty details!"></textarea>
+                      <span class="focus-input"></span>
+                    </div>
+                    
+                  <div class="container-contact-form-btn">
+                      <button class="contact-form-btn">
+                        <span>
+                          Submit
+                          <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                        </span>
+                      </button>
+                    </div>
+                <%}%>
+                </div>
               </div>
             </div>
         </div>

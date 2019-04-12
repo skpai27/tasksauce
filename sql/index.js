@@ -122,7 +122,7 @@ sql.query = {
 
 	//Get Query comments
 	query_user_comments: "SELECT * from user_comments where for_username = $1;",
-	add_user_comments: "Insert into user_comments($1,$2,$3);"
+	add_user_comments: "Insert into user_comments values ($1,$2,$3);"
 }
 
 
