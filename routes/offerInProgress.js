@@ -15,14 +15,19 @@ var query_insert_completed = sql_query.query.insert_completed_offer;
 router.get('/:jobId', function(req, res, next) {
   if (req.isAuthenticated()) {
     pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
-      pool.query(query_get_bid, [bidID.rows[0].bid_id], (err, bid) => {
-        pool.query(query_get_job, [req.params.jobId], (err, job) => {
-          if (req.user.username === job.rows[0].username) {
-            res.render('offerInProgress', {auth: true, self:true, bid: bid.rows[0], data: job.rows});
-          } else {
-            res.render('offerInProgress', {auth: true, self:false, bid: bid.rows[0], data: job.rows});
-          }        });
-      });
+      if (typeof bidID.rows[0] != 'undefined') {
+        pool.query(query_get_bid, [bidID.rows[0].bid_id], (err2, bid) => {
+          pool.query(query_get_job, [req.params.jobId], (err3, job) => {
+            if (req.user.username === job.rows[0].username) {
+              res.render('offerInProgress', {auth: true, self:true, bid: bid.rows[0], data: job.rows});
+            } else {
+              res.render('offerInProgress', {auth: true, self:false, bid: bid.rows[0], data: job.rows});
+            }
+          });
+        });
+      } else {
+        res.redirect('/viewOfferJob/' + req.params.jobId);
+      }
     });
   } else {
     res.redirect('/signuplogin', {auth: false, title: 'login'});
@@ -31,7 +36,6 @@ router.get('/:jobId', function(req, res, next) {
 
 router.post('/:jobId', (req, res, next) => {
   pool.query(query_get_bid_id, [req.params.jobId], (err, bidID) => {
-    if(err)throw err;
     pool.query(query_insert_completed, [req.params.jobId, bidID.rows[0].bid_id], (err3, insert) => {
       res.redirect('/dashboard');
     })
