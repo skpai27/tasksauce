@@ -115,7 +115,7 @@ CREATE TABLE offer_completed(
 --relation set between user and comment
 CREATE table user_comments(
 	"commenter_username" char(64) references public.users(username),
-	"for_username" char(64) references public.users(username),
+	"for_username" char(64) references public.users(username) ON DELETE CASCADE,
 	"comment_info" char(1000),
 	primary key (commenter_username,for_username,comment_info)
 );
