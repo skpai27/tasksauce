@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS offer_in_progress CASCADE;
 DROP TABLE IF EXISTS request_completed CASCADE;
 DROP TABLE IF EXISTS offer_completed CASCADE;
 DROP TABLE IF EXISTS premium_users CASCADE;
+drop table if exists user_comments cascade;
 drop function if exists checkOfferBidUserValid();
 drop function if exists checkRequestBidUserValid();
 
@@ -93,7 +94,7 @@ CREATE TABLE offer_in_progress(
 CREATE TABLE request_completed(
 	"job_id" int references job_request(job_id) ON DELETE CASCADE,
 	"bid_id" int references request_bids(bid_id) ON DELETE CASCADE,
-		"author_review"  char(1000) default null,
+	"author_review"  char(1000) default null,
 	"author_rating" int default null,
 	"bidder_review"  char(1000) default null,
 	"bidder_rating" int default null,
@@ -104,12 +105,19 @@ CREATE TABLE request_completed(
 CREATE TABLE offer_completed(
 	"job_id" int references job_offer(job_id) ON DELETE CASCADE,
 	"bid_id" int references offer_bids(bid_id) ON DELETE CASCADE,
-		"author_review"  char(1000) default null,
+	"author_review"  char(1000) default null,
 	"author_rating" int default null,
 	"bidder_review"  char(1000) default null,
 	"bidder_rating" int default null,
-
 	primary key (job_id, bid_id)
+);
+
+--relation set between user and comment
+CREATE table user_comments(
+	"commenter_username" char(64) references public.users(username),
+	"for_username" char(64) references public.users(username),
+	"comment_info" char(1000),
+	primary key (commenter_username,for_username)
 );
 
 
@@ -289,6 +297,7 @@ VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
 INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
 
+insert into user_comments values ('dummy1','dummy2','you suck');
 --TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
 --when a row is inserted into offer_in_progress. Trigger will cause unaccepted
 --bids to be deleted.
@@ -361,4 +370,5 @@ FOR EACH ROW EXECUTE PROCEDURE checkRequestBidUserValid();
 CREATE TRIGGER bidOfferTrigger BEFORE insert or update
 ON offer_bids
 FOR EACH ROW EXECUTE PROCEDURE checkOfferBidUserValid(); 
+
 

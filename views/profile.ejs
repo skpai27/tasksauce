@@ -39,9 +39,34 @@
                   <ul class="container details">
                     <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span><%= user.email %></p></li>
                   </ul>
+
               </div>
-          </div>
+              <div>
+                <h2>Comments left by other users </h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">By</th>
+                      <th scope="col">Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i<comments.length; i++) { %>
+                    <tr>
+                      <td><%= comments[i].commenter_username%></td>
+                      <td><%= comments[i].comment_info%></td>
+                    </tr>
+                    <% } %>
+                    <% if(auth){%>
+                      leava commment for this idiot:
+                    <%}%>
+                  </tbody>
+                </table>
+              </div>
+            </div>
         </div>
+      </div>
+    </div>
         <%- include footer.ejs %>
 </body>
 

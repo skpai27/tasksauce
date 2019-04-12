@@ -118,7 +118,11 @@ sql.query = {
 	is_premium_users: 'SELECT 1 FROM public.users WHERE username IN (SELECT username FROM premium_users) AND username=$1',
 
 	// Bids of user queries
-	query_bids_of_user: "WITH rb_marked AS (" + util.query_request_bidsxjobs + "), ob_marked AS (" + util.query_offer_bidsxjobs + "), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE bid_user=$1"
+	query_bids_of_user: "WITH rb_marked AS (" + util.query_request_bidsxjobs + "), ob_marked AS (" + util.query_offer_bidsxjobs + "), combined_bids AS (SELECT * FROM rb_marked UNION SELECT * FROM ob_marked) SELECT * FROM combined_bids WHERE bid_user=$1",
+
+	//Get Query comments
+	query_user_comments: "SELECT * from user_comments where for_username = $1;",
+	add_user_comments: "Insert into user_comments($1,$2,$3);"
 }
 
 
