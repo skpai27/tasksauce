@@ -23,14 +23,14 @@
   <!-- Custom styles for this template -->
   <link href="/static/css/landing-page.min.css" rel="stylesheet">
 
-  <link href="/static/css/reset.css" rel="stylesheet" type="text/css" media="screen" />
-  <link href="/static/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
-  <link href="/static/css/responsive.css" rel="stylesheet" type="text/css" media="screen" />
+  <!-- <link href="/static/css/reset.css" rel="stylesheet" type="text/css" media="screen" /> -->
+  <!-- <link href="/static/css/styles.css" rel="stylesheet" type="text/css" media="screen" /> -->
+  <!-- <link href="/static/css/responsive.css" rel="stylesheet" type="text/css" media="screen" /> -->
   <link href="/static/css/better-rating.css" rel="stylesheet" />
 
-    <!--External fonts-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <!--External fonts-->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> -->
 
 </head>
 
@@ -38,57 +38,90 @@
 
   <!-- Navigation -->
   <%- include navbar.ejs -%>
-  <div class="text-center lead">
+
+  <div class="text-center lead my-5">
       <% for(var i=0; i < data.length; i++) { %>
-      <div class="card col-lg-8 offset-2" >
-          <div class="card-body">
-            <h5 class="font-weight-bold mb-3">Job:<%= data[i].job %>e</h5>
-            <p class="mb-0"><b>Additional Infomation: </b><%= data[i].desc %></p>
-          </div>
+      <div class="card col-lg-8 offset-2">
+        <div class="card-header">
+          <h3 class="font-weight-bold"><%= data[i].job %></h3>
+        </div>
+
+        <div class="card-body">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Date: </b><%= data[i].date %></li>
-            <li class="list-group-item"><b>Time:</b><%= data[i].time %></li>
-            <li class="list-group-item"><b>Location:</b><%= data[i].location %></li>
+            <li class="list-group-item"><b>Additional Infomation: </b><%= data[i].desc %></li>
+            <li class="list-group-item"><b>Date: </b><%= data[i].date.toDateString() %></li>
+            <li class="list-group-item"><b>Time: </b><%= data[i].time %></li>
+            <li class="list-group-item"><b>Location: </b><%= data[i].loc %></li>
           </ul>
+        </div>
+
+        <div class="card my-3">
+          <div class="card-header">
+            <b>Accepted Bid</b>
+          </div>
+          <!-- <div class="card-body"> -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Accepted Price</th>
+                <th scope="col">Bid User</th>
+                <th scope ="col">Bid Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td><%= bid.bid_price%></td>
+                  <td><%= bid.bid_user%></td>
+                  <td><%= bid.bid_info%></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- </div> -->
+        </div>
+
+        <div class="card my-3">
+          <div class="card-header">
+            <b>Reviews</b>
+          </div>
           <div class="card-body">
-            <b>Accepted bid</b>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">Accepted Price</th>
-                  <th scope="col">Bid User</th>
-                  <th scope ="col">Bid details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td><%= bid.bid_price%></td>
-                    <td><%= bid.bid_user%></td>
-                    <td><%= bid.bid_info%></td>
-                </tr>
-              </tbody>
+            <div style="overflow-x:auto;">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th style="width: 30%">Review by Author</th>
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=bidID.rows[0].author_review%></td>
+                  </tr>
+
+                  <tr>
+                    <th style="width: 30%">Rating by Author</th>
+                    <td><%=bidID.rows[0].author_rating%></td>
+                  </tr>
+
+                  <tr>
+                    <th style="width: 30%">Review by Completor</th>
+                    <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;"><%=bidID.rows[0].bidder_review%></td>
+                  </tr>
+
+                  <tr>
+                    <th style="width: 30%">Rating by Completor</th>
+                    <td><%=bidID.rows[0].bidder_rating%></td>
+                  </tr>
+                </tbody>
               </table>
-              <b>Reviews</b><br>
-              Review by author: <%=bidID.rows[0].author_review%><br>
-              Rating by author: <%=bidID.rows[0].author_rating%>
-              <br>
-              Review by completor:<%=bidID.rows[0].bidder_review%><br>
-              Rating by author: <%=bidID.rows[0].bidder_rating%><br>
+            </div>
+          </div>
 
-
-              <% if(author == 1){ %>
-                Give a review
+            <% if(author == 1){ %>
+              <div class="card mx-3">
+                <div class="card-header">Give a Review</div>
                 
-                  <form  id="better-rating-form">
-
-                  </form>
+                <div class="card-body">
+                  <form  id="better-rating-form"></form>
 
                   <form class="contact-form validate-form" method="POST" action="/offerCompleted/<%=data[0].job_id%>" id="better-rating-form">
-
-            
-                    <div class="wrap-input validate-input" data-validate="Rating is required">
+                    <div class="wrap-input validate-input" data-validate="Rating is Required">
                       <span class="label-input">Rating:</span>
-                      <div class="rating">
+                      <div class="rating mt-2 mb-3">
                         <i class="fa fa-star" data-rate="1"></i>
                         <i class="fa fa-star" data-rate="2"></i>
                         <i class="fa fa-star" data-rate="3"></i>
@@ -99,14 +132,14 @@
                       <span class="focus-input"></span>
                     </div>
             
-                    <div class="wrap-input validate-input" data-validate = "Review is required">
+                    <div class="wrap-input validate-input my-2" data-validate = "Review is Required">
                       <span class="label-input">Review:</span>
-                      <textarea class="input" name="desc" id="desc" placeholder="Give your honest feedback"></textarea>
+                      <textarea class="input" name="desc" id="desc" placeholder="Give your honest feedback!"></textarea>
                       <span class="focus-input"></span>
                     </div>
             
                     <div class="container-contact-form-btn">
-                      <button class="contact-form-btn">
+                      <button class="btn-outline-info contact-form-btn">
                         <span>
                           Submit
                           <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -114,23 +147,19 @@
                       </button>
                     </div>
                   </form>
-                  
-              <!--  Javascript plugins -->
-              <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                <script src="/static/javascripts/better-rating.js"></script>
-              <!--  local Javascript file -->
-                <script src="/static/javascripts/main.js"></script>
-              <% } %>
+                    
+                  <!--  Javascript plugins -->
+                  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                  <script src="/static/javascripts/better-rating.js"></script>
+                  <!--  local Javascript file -->
+                  <script src="/static/javascripts/main.js"></script>
+                </div>
+              </div>
+            <% } %>
           </div>
         </div>
 
       <% } %>
-
-      
-
-
-
-
 
   </div>
   <!-- Footer -->
