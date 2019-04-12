@@ -26,7 +26,7 @@ router.get('/:jobId', function(req, res, next) {
           });
         });
       } else {
-        res.redirect('/viewReqestJob/' + req.params.jobId);
+        res.redirect('/viewRequestJob/' + req.params.jobId);
       }
     });
   } else {
