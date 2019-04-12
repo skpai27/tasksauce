@@ -213,45 +213,161 @@
 		<div class="container">
 			<h2 class="py-2">My Tasks & Bids</h2>
 			<!-- Tables in 2 rows -->
-			<% if (requests.length !== 0 || requestsIP.length !== 0 || requestC.length !== 0) { %>
+			
 			<div class="col pb-4">
 				<div class="card mx-auto">
 					<h4 class="card-header">Tasks Requested</h4>
-					<% if (requests.length !== 0) { %>
-						<div class="card-body">
-							<h5>Tasks in Bidding Stage</h5>
-							<div style="overflow-x:auto;">
-								<table class="table table-striped" id="job_request_table">
-									<thead>
-										<tr>
-											<th scope="col">Task</th>
-											<th scope="col">Location</th>
-											<th scope="col">Date</th>
-											<th scope="col">Time</th>
-											<th scope="col">Description</th>
-											<th scope="col">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% for (var i=0; i < requests.length; i++) { %>
-										<tr>
-											<td><%= requests[i].job %></td>
-											<td><%= requests[i].loc %></td>
-											<td><%= requests[i].date.toDateString() %></td>
-											<td><%= requests[i].time %></td>
-											<td><%= requests[i].details %></td>
-											<td><a href="./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
-											<%- include modifyJobRequestButton.ejs -%>
-										</tr>
-										<% } %>
-									</tbody>
-								</table>
+					<% if (requests.length !== 0 || requestsIP.length !== 0 || requestC.length !== 0) { %>
+						<% if (requests.length !== 0) { %>
+							<div class="card-body">
+								<h5>Tasks in Bidding Stage</h5>
+								<div style="overflow-x:auto;">
+									<table class="table table-striped" id="job_request_table">
+										<thead>
+											<tr>
+												<th scope="col">Task</th>
+												<th scope="col">Location</th>
+												<th scope="col">Date</th>
+												<th scope="col">Time</th>
+												<th scope="col">Description</th>
+												<th scope="col">View</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for (var i=0; i < requests.length; i++) { %>
+											<tr>
+												<td><%= requests[i].job %></td>
+												<td><%= requests[i].loc %></td>
+												<td><%= requests[i].date.toDateString() %></td>
+												<td><%= requests[i].time %></td>
+												<td><%= requests[i].details %></td>
+												<td><a href="./viewRequestJob/<%= requests[i].job_id %>"> View </a></td>
+												<%- include modifyJobRequestButton.ejs -%>
+											</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
 							</div>
-						</div>
+						<% } %>
+
+						<!-- Table for tasks in progress -->
+						<% if (requestsIP.length !== 0) { %>
+							<div class="card-body">
+								<h5>Work In-Progress</h5>
+								<div style="overflow-x:auto;">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th scope="col">Task</th>
+												<th scope="col">Location</th>
+												<th scope="col">Date</th>
+												<th scope="col">Time</th>
+												<th scope="col">Description</th>
+												<th scope="col">View</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for(var i=0; i < requestsIP.length; i++) { %>
+											<tr>
+												<td><%= requestsIP[i].job%></td>
+												<td><%= requestsIP[i].loc%></td>
+												<td><%= requestsIP[i].date.toDateString()%></td>
+												<td><%= requestsIP[i].time%></td>
+												<td><%= requestsIP[i].details%></td>
+												<td><a href="./requestInProgress/<%= requestsIP[i].job_id %>"> View </a></td>
+
+											</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						<% } %>
+
+						<!-- Table for completed tasks -->
+						<% if (requestC.length !== 0) { %>
+							<div class="card-body">
+								<h5>Work Completed</h5>
+								<div style="overflow-x:auto;">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th scope="col">Task</th>
+												<th scope="col">Location</th>
+												<th scope="col">Date</th>
+												<th scope="col">Time</th>
+												<th scope="col">Description</th>
+												<th scope="col">View</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for(var i=0; i < requestC.length; i++) { %>
+											<tr>
+												<td><%= requestC[i].job%></td>
+												<td><%= requestC[i].loc%></td>
+												<td><%= requestC[i].date.toDateString()%></td>
+												<td><%= requestC[i].time%></td>
+												<td><%= requestC[i].details%></td>
+												<td><a href="./requestCompleted/<%= requestC[i].job_id %>"> View </a></td>
+											</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						<% } %>
 					<% } %>
 
-					<!-- Table for tasks in progress -->
-					<% if (requestsIP.length !== 0) { %>
+					<!-- New Request button -->
+					<div class="card-body">
+						<a class="btn btn-primary btn-lg btn-block" href="/newrequest" role="button">Create Request</a>
+					</div>
+				</div>
+			</div>
+			
+
+			<!-- Table for tasks offers -->
+			
+			<div class="col py-4">
+				<div class="card mx-auto">
+					<h4 class="card-header">Tasks Offered</h4>
+					<% if (offers.length !== 0 || offersIP.length !== 0 || offersC.length !== 0) { %>
+						<% if (offers.length !== 0) { %>
+							<div class="card-body">
+								<h5>Tasks in Bidding Stage</h5>
+								<div style="overflow-x:auto;">
+									<table class="table table-striped" id="job_offer_table">
+										<thead>
+											<tr>
+												<th scope="col">Task</th>
+												<th scope="col">Location</th>
+												<th scope="col">Date</th>
+												<th scope="col">Time</th>
+												<th scope="col">Description</th>
+												<th scope="col">View</th>
+											</tr>
+										</thead>
+										<tbody>
+											<% for(var i=0; i < offers.length; i++) { %>
+											<tr>
+												<td><%= offers[i].job%></td>
+												<td><%= offers[i].loc%></td>
+												<td><%= offers[i].date.toDateString()%></td>
+												<td><%= offers[i].time%></td>
+												<td><%= offers[i].details%></td>
+												<td><a href="./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
+												<%- include modifyJobOfferButton.ejs -%>
+											</tr>
+											<% } %>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						<% } %>
+
+						<!-- Table for tasks in progress -->
+						<% if (offersIP.length !== 0) { %>
 						<div class="card-body">
 							<h5>Work In-Progress</h5>
 							<div style="overflow-x:auto;">
@@ -267,25 +383,24 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% for(var i=0; i < requestsIP.length; i++) { %>
+										<% for(var i=0; i<offersIP.length; i++) { %>
 										<tr>
-											<td><%= requestsIP[i].job%></td>
-											<td><%= requestsIP[i].loc%></td>
-											<td><%= requestsIP[i].date.toDateString()%></td>
-											<td><%= requestsIP[i].time%></td>
-											<td><%= requestsIP[i].details%></td>
-											<td><a href="./requestInProgress/<%= requestsIP[i].job_id %>"> View </a></td>
-
+											<td><%= offersIP[i].job%></td>
+											<td><%= offersIP[i].loc%></td>
+											<td><%= offersIP[i].date.toDateString()%></td>
+											<td><%= offersIP[i].time%></td>
+											<td><%= offersIP[i].details%></td>
+											<td><a href="./offerInProgress/<%= offersIP[i].job_id %>"> View </a></td>
 										</tr>
 										<% } %>
 									</tbody>
 								</table>
 							</div>
 						</div>
-					<% } %>
+						<% } %>
 
-					<!-- Table for completed tasks -->
-					<% if (requestC.length !== 0) { %>
+						<!-- Table for completed tasks -->
+						<% if (offersC.length !== 0) { %>
 						<div class="card-body">
 							<h5>Work Completed</h5>
 							<div style="overflow-x:auto;">
@@ -301,137 +416,31 @@
 										</tr>
 									</thead>
 									<tbody>
-										<% for(var i=0; i < requestC.length; i++) { %>
+										<% for(var i=0; i<offersC.length; i++) { %>
 										<tr>
-											<td><%= requestC[i].job%></td>
-											<td><%= requestC[i].loc%></td>
-											<td><%= requestC[i].date.toDateString()%></td>
-											<td><%= requestC[i].time%></td>
-											<td><%= requestC[i].details%></td>
-											<td><a href="./requestCompleted/<%= requestC[i].job_id %>"> View </a></td>
+											<td><%= offersC[i].job%></td>
+											<td><%= offersC[i].loc%></td>
+											<td><%= offersC[i].date.toDateString()%></td>
+											<td><%= offersC[i].time%></td>
+											<td><%= offersC[i].details%></td>
+											<td><a href="./offerCompleted/<%= offersC[i].job_id %>"> View </a></td>
 										</tr>
 										<% } %>
 									</tbody>
 								</table>
 							</div>
 						</div>
-					<% } %>
-
-					<!-- New Request button -->
-					<a class="btn btn-primary btn-lg btn-block" href="/newrequest" role="button">Create Request</a>
-				</div>
-			</div>
-			<% } %>
-
-			<!-- Table for tasks offers -->
-			<% if (offers.length !== 0 || offersIP.length !== 0 || offersC.length !== 0) { %>
-			<div class="col py-4">
-				<div class="card mx-auto">
-					<h4 class="card-header">Tasks Offered</h4>
-					<% if (offers.length !== 0) { %>
-						<div class="card-body">
-							<h5>Tasks in Bidding Stage</h5>
-							<div style="overflow-x:auto;">
-								<table class="table table-striped" id="job_offer_table">
-									<thead>
-										<tr>
-											<th scope="col">Task</th>
-											<th scope="col">Location</th>
-											<th scope="col">Date</th>
-											<th scope="col">Time</th>
-											<th scope="col">Description</th>
-											<th scope="col">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<% for(var i=0; i < offers.length; i++) { %>
-										<tr>
-											<td><%= offers[i].job%></td>
-											<td><%= offers[i].loc%></td>
-											<td><%= offers[i].date.toDateString()%></td>
-											<td><%= offers[i].time%></td>
-											<td><%= offers[i].details%></td>
-											<td><a href="./viewOfferJob/<%= offers[i].job_id %>"> View </a></td>
-											<%- include modifyJobOfferButton.ejs -%>
-										</tr>
-										<% } %>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					<% } %>
-
-					<!-- Table for tasks in progress -->
-					<% if (offersIP.length !== 0) { %>
-					<div class="card-body">
-						<h5>Work In-Progress</h5>
-						<div style="overflow-x:auto;">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">Task</th>
-										<th scope="col">Location</th>
-										<th scope="col">Date</th>
-										<th scope="col">Time</th>
-										<th scope="col">Description</th>
-										<th scope="col">View</th>
-									</tr>
-								</thead>
-								<tbody>
-									<% for(var i=0; i<offersIP.length; i++) { %>
-									<tr>
-										<td><%= offersIP[i].job%></td>
-										<td><%= offersIP[i].loc%></td>
-										<td><%= offersIP[i].date.toDateString()%></td>
-										<td><%= offersIP[i].time%></td>
-										<td><%= offersIP[i].details%></td>
-										<td><a href="./offerInProgress/<%= offersIP[i].job_id %>"> View </a></td>
-									</tr>
-									<% } %>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<% } %>
-
-					<!-- Table for completed tasks -->
-					<% if (offersC.length !== 0) { %>
-					<div class="card-body">
-						<h5>Work Completed</h5>
-						<div style="overflow-x:auto;">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th scope="col">Task</th>
-										<th scope="col">Location</th>
-										<th scope="col">Date</th>
-										<th scope="col">Time</th>
-										<th scope="col">Description</th>
-										<th scope="col">View</th>
-									</tr>
-								</thead>
-								<tbody>
-									<% for(var i=0; i<offersC.length; i++) { %>
-									<tr>
-										<td><%= offersC[i].job%></td>
-										<td><%= offersC[i].loc%></td>
-										<td><%= offersC[i].date.toDateString()%></td>
-										<td><%= offersC[i].time%></td>
-										<td><%= offersC[i].details%></td>
-										<td><a href="./offerCompleted/<%= offersC[i].job_id %>"> View </a></td>
-									</tr>
-									<% } %>
-								</tbody>
-							</table>
-						</div>
-					</div>
+						<% } %>
 					<% } %>
 
 					<!-- New Offer button -->
-					<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
+					<div class="card-body">
+						<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
+					</div>
+					
 				</div>
+			</div>
 			
-			<% } %>
 
 				<!-- Table for Bids -->
 				<% if (combinedBids.length !== 0) { %>
@@ -494,7 +503,6 @@
 				</div>
 				<% } %>
 			</div>
-		</div>
 	</section>
 
 	<%- include footer.ejs -%>
