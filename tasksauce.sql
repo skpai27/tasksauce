@@ -130,6 +130,7 @@ RETURNS TRIGGER AS $$
 BEGIN
 	DELETE FROM request_in_progress	
 	WHERE job_id=NEW.job_id;
+	RAISE NOTICE 'Deleted bid (%,%) from request_in_progress table', NEW.job_id, NEW.bid_id;
 	RETURN NEW; 
 END;
 $$ LANGUAGE plpgsql;
@@ -146,6 +147,7 @@ RETURNS TRIGGER AS $$
 BEGIN
 	DELETE FROM offer_in_progress 
 	WHERE job_id=NEW.job_id;
+	RAISE NOTICE 'Deleted bid (%,%) from offer_in_progress table', NEW.job_id, NEW.bid_id;
 	RETURN NEW; 
 END;
 $$ LANGUAGE plpgsql;
