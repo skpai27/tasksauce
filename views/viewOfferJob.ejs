@@ -8,7 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Task Sauce</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/img/tasksauceicon.ico" />
+  <title>TaskSauce</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -103,7 +104,7 @@
                   <div class="card-header">
                     <b>Edit this Bid</b>
                   </div>
-                  <form class="contact-form validate-form" method="POST" action="/viewOfferJob/<%= jobId %>/edit/<%= bidId %>">
+                  <form class="contact-form validate-form" id="newbid" method="POST" action="/viewOfferJob/<%= jobId %>/edit/<%= bidId %>">
                     <div class="wrap-input validate-input my-3" data-validate="Price is required">
                       <span class="label-input">Price:</span>
                       <input class="input" type="number" name="price" id="price" value=<%= bid[0].bid_price %>>
@@ -117,7 +118,7 @@
                     </div>
             
                     <div class="container-contact-form-btn my-3">
-                      <button class="contact-form-btn">
+                      <button class="contact-form-btn" type="submit">
                         <span>
                           Submit
                           <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -131,7 +132,7 @@
                     <b>Make a bid for this job!!</b>
                   </div>
                   <div class="card-body">
-                    <form class="contact-form validate-form" method="POST" action="/viewOfferJob/<%= jobId %>">
+                    <form class="contact-form validate-form" id="newbid" method="POST" action="/viewOfferJob/<%= jobId %>">
                       <div class="wrap-input validate-input my-3" data-validate="Price is required">
                         <span class="label-input">Price:</span>
                         <input class="input" type="number" name="price" id="price" placeholder=" Price">
@@ -145,7 +146,7 @@
                       </div>
               
                       <div class="container-contact-form-btn my-3">
-                        <button class="contact-form-btn">
+                        <button class="contact-form-btn" type="submit">
                           <span>
                             Submit
                             <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
@@ -168,6 +169,17 @@
   </div>
   <!-- Footer -->
   <%- include footer.ejs -%>
+
+  <script>
+		(function() {
+			window.addEventListener('load', function() {
+				var forms = [document.getElementById('newbid')];
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', check, false);
+				});
+			}, false);
+		})();
+	</script>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/static/vendor/jquery/jquery.min.js"></script>
