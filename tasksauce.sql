@@ -289,6 +289,15 @@ VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Move cabinet','p1');
 INSERT INTO job_request ("job", "loc", "date", "time", "details", "username") 
 VALUES ('Assemble Furniture', 'TH', '2019-12-01', '12:30', 'Replace floor tiles','p2');
 
+--job_id 13
+INSERT INTO job_request ("job", "loc", "date", "time", "details","username") 
+VALUES ('Feed Kids1', 'BSH', '2019-05-15', '12:30', 'im hungryy','d1');
+--bid_id 5
+INSERT INTO request_bids ("job_id", "bid_user", "bid_price", "bid_info")
+VALUES ('13', 'd4', '22', 'im lovely too but ill feed you with makan1');
+INSERT INTO request_in_progress ("job_id", "bid_id")
+VALUES ('13', '5');
+
 --TRIGGER for job offers. Trigger will fire when a job offer is accepted: i.e.
 --when a row is inserted into offer_in_progress. Trigger will cause unaccepted
 --bids to be deleted.

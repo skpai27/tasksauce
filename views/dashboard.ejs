@@ -26,15 +26,26 @@
 <body>
 	<%- include navbar.ejs -%>
 
-	<!-- Search input form -->
-	<form id="searchRequest" action="dashboard" method="POST">
-		<div class="input-group mb-3">
-			<input type="text" id="task_search" name='task_search' class="form-control" placeholder="Search for tasks..." aria-label="Example text with button addon" aria-describedby="button-addon1">
-		</div>
-	</form>
-
 	<!-- Tables Tasks -->
 	<section class="tasks text-center bg-light">
+
+		<!-- Search input form -->
+		<div class="container">
+			<div class="col py-4">
+				<div class="card align-items-center mx-auto">
+					<form id="searchRequest" action="dashboard" method="POST">
+						<div class="input-group mx-3 my-3">
+							<div class="d-flex justify-content-start align-self-center">
+								<i class="fa fa-search mr-3"></i>
+							</div>
+							<div class="d-flex justify-content-end ">
+								<input type="text" id="task_search" name='task_search' class="form-control" placeholder="Search for tasks..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
 		<div class="container">
 			<!-- Tables in 2 rows -->
@@ -72,11 +83,6 @@
 									</tbody>
 								</table>
 							</div>
-
-							<!-- New Request button -->
-							<ul class="navbar-nav mt-3 mr-auto">
-								<a class="btn btn-primary btn-lg btn-block" href="/newrequest" role="button">Create Request</a>
-							</ul>
 						</div>
 					<% } %>
 
@@ -146,6 +152,9 @@
 							</div>
 						</div>
 					<% } %>
+
+					<!-- New Request button -->
+					<a class="btn btn-primary btn-lg btn-block" href="/newrequest" role="button">Create Request</a>
 				</div>
 			</div>
 			<% } %>
@@ -187,11 +196,6 @@
 									</tbody>
 								</table>
 							</div>
-							
-							<!-- New Offer button -->
-							<ul class="navbar-nav mt-3 mr-auto">
-								<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
-							</ul>
 						</div>
 					<% } %>
 
@@ -258,9 +262,11 @@
 								</tbody>
 							</table>
 						</div>
-						<% } %>
-
 					</div>
+					<% } %>
+
+					<!-- New Offer button -->
+					<a class="btn btn-primary btn-lg btn-block" href="/newoffer" role="button">Create Offer</a>
 				</div>
 			
 			<% } %>
@@ -295,6 +301,27 @@
 										<td><%= combinedBids[i].bid_price%></td>
 										<td><%= combinedBids[i].bid_info%></td>
 										<td><%= combinedBids[i].bid_type%></td>
+										<% if (combinedBids[i].bid_type == "request") { %>
+											<td>
+												<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Bid</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="./viewRequestJob/<%= combinedBids[i].job_id %>/edit/<%= combinedBids[i].bid_id %>" role="button" value="Edit">Edit</a>
+													<form method = 'POST' action = "/deletebid/off/<%= combinedBids[i].job_id %>/<%= combinedBids[i].bid_id %>">
+													<button class="dropdown-item" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+													</form>
+												</div>
+											</td>
+										<% } else { %>
+											<td>
+												<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Modify Bid</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="./viewOfferJob/<%= combinedBids[i].job_id %>/edit/<%= combinedBids[i].bid_id %>" role="button" value="Edit">Edit</a>
+													<form method = 'POST' action = "/deletebid/off/<%= combinedBids[i].job_id %>/<%= combinedBids[i].bid_id %>">
+													<button class="dropdown-item" onclick="return confirm('Are you sure?')" type="submit">Delete</button>
+													</form>
+												</div>
+											</td>
+										<% } %>
 									</tr>
 									<% } %>
 								</tbody>
