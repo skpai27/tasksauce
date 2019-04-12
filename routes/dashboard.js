@@ -10,14 +10,16 @@ const pool = new Pool({
 /* SQL Query */
 var sql_query_request = sql_query.query.query_request_user;
 var sql_query_offer = sql_query.query.query_offer_user;
-var sql_query_search_request = sql_query.query.query_request_search;
-var sql_query_search_offer = sql_query.query.query_offer_search;
 var sql_query_is_admin = sql_query.query.is_admin;
 var sql_query_request_IP = sql_query.query.query_request_inprog;
 var sql_query_offer_IP = sql_query.query.query_offer_inprog;
 var sql_query_request_C = sql_query.query.query_request_completed;
 var sql_query_offer_C = sql_query.query.query_offer_completed;
 var sql_combined_bids = sql_query.query.query_bids_of_user;
+var sql_query_all_requestC = sql_query.query.query_all_requestC;
+var sql_query_all_offerC = sql_query.query.query_all_offerC;
+var sql_query_all_requestIP = sql_query.query.query_all_requestIP;
+var sql_query_all_offerIP = sql_query.query.query_all_offerIP;
 
 var search_request = sql_query.query.query_request_search;
 var search_offer = sql_query.query.query_offer_search;
@@ -25,7 +27,11 @@ var search_RIP = sql_query.query.query_requestIP_search;
 var search_OIP = sql_query.query.query_offerIP_search;
 var search_RC = sql_query.query.query_requestC_search;
 var search_OC = sql_query.query.query_offerC_search;
-
+var search_all_requestC = sql_query.query.query_all_requestC_search;
+var search_all_offerC = sql_query.query.query_all_offerC_search;
+var search_all_requestIP = sql_query.query.query_all_requestIP_search;
+var search_all_offerIP = sql_query.query.query_all_offerIP_search;
+var search_combined_bids = sql_query.query.query_combined_bids_search;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -39,10 +45,19 @@ router.get('/', function(req, res, next) {
 								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
 									pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
 										if (!err) {
-											console.log("Username: " + req.user.username);
 											if (isAdmin.rows[0].is_admin == true) {
-												console.log("Admin [" + req.user.username + "] authorised");
-												res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+												pool.query(sql_query_all_offerC, (err, allOffersC) => {
+													pool.query(sql_query_all_requestC, (err, allRequestsC) => {
+														pool.query(sql_query_all_offerIP, (err, allOffersIP) => {
+															pool.query(sql_query_all_requestIP, (err, allRequestsIP) => {
+																if (!err) {
+																	console.log("Admin [" + req.user.username.trim() + "] authorised");
+																	res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows, allOffersC: allOffersC.rows, allRequestsC: allRequestsC.rows, allOffersIP: allOffersIP.rows, allRequestsIP: allRequestsIP.rows });
+																}
+															})
+														})
+													})
+												})
 											} else {
 												res.render('dashboard', {auth: true, admin: false, title: 'Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 											}
@@ -71,14 +86,26 @@ router.post('/', function(req, res) {
 					pool.query(search_OIP, ['%' + req.body.task_search + '%', req.user.username], (err3, offersIP) => {
 						pool.query(search_RC, ['%' + req.body.task_search + '%', req.user.username], (err4, requestC) => {
 							pool.query(search_OC, ['%' + req.body.task_search + '%', req.user.username], (err5, offersC) => {
-								console.log(sql_combined_bids);
-								pool.query(sql_combined_bids, [req.user.username], (err6, combinedBids) => {
+								pool.query(search_combined_bids, [req.user.username, '%' + req.body.task_search + '%'], (err6, combinedBids) => {
 									pool.query(sql_query_is_admin, [req.user.username], (err, isAdmin) => {
 										if (!err) {
-											console.log("Username: " + req.user.username);
 											if (isAdmin.rows[0].is_admin == true) {
-												console.log("Admin [" + req.user.username + "] authorised");
-												res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
+												pool.query(search_all_offerC, ['%' + req.body.task_search + '%'], (err, allOffersC) => {
+													if (err) throw err;
+													pool.query(search_all_requestC, ['%' + req.body.task_search + '%'], (err, allRequestsC) => {
+														if (err) throw err;
+														pool.query(search_all_offerIP, ['%' + req.body.task_search + '%'], (err, allOffersIP) => {
+															if (err) throw err;
+															pool.query(search_all_requestIP, ['%' + req.body.task_search + '%'], (err, allRequestsIP) => {
+																if (err) throw err;
+																if (!err) {
+																	console.log("Admin [" + req.user.username.trim() + "] authorised");
+																	res.render('adminDashboard', {auth: true, admin: true, title: 'Admin Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows, allOffersC: allOffersC.rows, allRequestsC: allRequestsC.rows, allOffersIP: allOffersIP.rows, allRequestsIP: allRequestsIP.rows });
+																}
+															})
+														})
+													})
+												})
 											} else {
 												res.render('dashboard', {auth: true, admin: false, title: 'Dashboard', username: req.user.username, requests: requests.rows, offers: offers.rows, requestsIP: requestsIP.rows, offersIP: offersIP.rows, requestC:requestC.rows, offersC:offersC.rows, combinedBids:combinedBids.rows });
 											}

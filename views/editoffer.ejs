@@ -29,13 +29,13 @@
 			<form class="contact-form validate-form" method="POST" action="/editoffer/<%= offer[0].job_id %>">
 				<div class="wrap-input validate-input" data-validate="Job Description is required">
 					<span class="label-input">Job Title:</span>
-					<input class="input" type="text" name="job" id="job" placeholder="Enter job description" value='<%= offer[0].job %>' required>
+					<input class="input" type="text" name="job" id="job" placeholder="Enter job description" value='<%= offer[0].job.trim() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Location is required">
 					<span class="label-input">Location:</span>
-					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location" value='<%= offer[0].loc %>' required>
+					<input class="input" type="text" name="loc" id="loc" placeholder="Enter location" value='<%= offer[0].loc.trim() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
@@ -47,13 +47,13 @@
 
 				<div class="wrap-input validate-input" data-validate="Time is required">
 					<span class="label-input">Time:</span>
-					<input class="input" type="time" name="time" id="time" value='<%= offer[0].time %>' required>
+					<input class="input" type="time" name="time" id="time" value='<%= offer[0].time.trim() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
 				<div class="wrap-input validate-input" data-validate = "Job Details are required">
 					<span class="label-input">Job Details:</span>
-					<input class="input" name="details" id="details" value='<%= offer[0].details %>' required>
+					<input class="input" name="details" id="details" value='<%= offer[0].details.trim() %>' required>
 					<span class="focus-input"></span>
 				</div>
 
