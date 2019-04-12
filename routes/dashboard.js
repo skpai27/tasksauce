@@ -126,4 +126,8 @@ router.post('/', function(req, res) {
 	}
 });
 
+router.post('/offer/:job_id', function(req, res) {
+	res.redirect('/offerCompleted/' + req.params.job_id);
+})
+
 module.exports = router;

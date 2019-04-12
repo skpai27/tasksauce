@@ -16,8 +16,27 @@ var sql_query_admin = sql_query.query.is_admin;
 var sql_query_edit_bid_offer = sql_query.query.edit_offer_bid;
 var sql_query_one_off_bid = sql_query.query.query_offer_from_bidId;
 
+var sql_query_offers = sql_query.query.query_job_offers;
+var sql_query_inProg = sql_query.query.query_bid_from_offer_IP;
+
+
 /*** To get the viewOfferJob page for non-editing purposes ***/
 router.get('/:jobId', function(req, res, next) {
+  pool.query(sql_query_offers, [req.params.jobId], (er, offers) => {
+    console.log(typeof offers.rows[0] == 'undefined');
+    if (typeof offers.rows[0] == 'undefined') {
+      console.log('illegal access');
+      pool.query(sql_query_inProg, [req.params.jobId], (er1, offInProg) => {
+        if (typeof offInProg.rows[0] != 'undefined') {
+          console.log('redirect to in prog');
+          res.redirect('/offerInProgress/' + req.params.jobId);
+        } else {
+          console.log('redirect to com');
+          res.redirect('/offerCompleted/' + req.params.jobId);
+        }
+      })
+    } else {
+
     pool.query(sql_query_getofferjob, [req.params.jobId], (err, data) => {
       if (err) {
         throw err;
@@ -48,8 +67,11 @@ router.get('/:jobId', function(req, res, next) {
           res.render('viewOfferJob', { auth:false, self:false, admin:false, edit: false, title: 'Database Connect', username: null, jobId: req.params.jobId, offers: data.rows, data2:data2.rows});
         }
       });
-    
-    });
+
+
+      });
+    }
+  })
 });
 
 /*** To get the viewOfferJob page for editing purposes ***/

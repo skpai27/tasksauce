@@ -16,8 +16,26 @@ var sql_query_admin = sql_query.query.is_admin;
 var sql_query_edit_bid_request = sql_query.query.edit_request_bid;
 var sql_query_one_req_bid = sql_query.query.query_request_from_bidId;
 
+var sql_query_request = sql_query.query.query_job_request;
+var sql_query_inProg = sql_query.query.query_bid_from_request_IP;
+
 /*** To get the viewRequestJob page for non-editing purposes ***/
 router.get('/:jobId', function(req, res, next) {
+    pool.query(sql_query_request, [req.params.jobId], (er, requests) => {
+      if (typeof requests.rows[0] == 'undefined') {
+        console.log('illegal access');
+        pool.query(sql_query_inProg, [req.params.jobId], (er1, reqInProg) => {
+          if (typeof reqInProg.rows[0] != 'undefined') {
+            console.log('redirect to in prog');
+            res.redirect('/requestInProgress/' + req.params.jobId);
+          } else {
+            console.log('redirect to com');
+            res.redirect('/requestCompleted/' + req.params.jobId);
+          }
+        })
+      } else {
+    
+
     pool.query(sql_query_getrequestjob, [req.params.jobId], (err, data) => {
       if (err) {
         throw err;
@@ -50,6 +68,8 @@ router.get('/:jobId', function(req, res, next) {
       });
     
     });
+  }
+})
 });
 
 /*** To get the viewRequestJob page for editing purposes ***/
