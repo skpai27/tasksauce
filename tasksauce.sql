@@ -454,11 +454,3 @@ INSERT INTO user_comments VALUES ('p1','d2','You are a really great guy! Hope to
 INSERT INTO user_comments VALUES ('d2','p1','Thank you!');
 INSERT INTO user_comments VALUES ('d3','d1','Thank you for the amazing service!');
 INSERT INTO user_comments VALUES ('d1','d3','Thank you so much!');
-
-
-
-
-
-
-
-
